@@ -1,22 +1,40 @@
 import React from 'react';
 import { resumeData } from '../../data/resumeData';
-import { GraduationCap, BookOpen, Check } from 'lucide-react';
+import { GraduationCap, Layout, PenTool, Sparkles, Palette } from 'lucide-react';
 
 export const Teaching: React.FC = () => {
   const { teaching } = resumeData;
+  // Feature the 4 core modern disciplines: UI/UX, Figma Mastery, AI Workflows & Prompting, Visual Design
+  const displayCourses = teaching.courses.slice(0, 4);
+
+  const getCourseIcon = (idx: number) => {
+    switch (idx) {
+      case 0:
+        return <Layout size={16} className="text-brand-orange" />;
+      case 1:
+        return <PenTool size={16} className="text-brand-orange" />;
+      case 2:
+        return <Palette size={16} className="text-brand-orange" />;
+      case 3:
+        return <Sparkles size={16} className="text-brand-orange" />;
+      default:
+        return <Layout size={16} className="text-brand-orange" />;
+    }
+  };
 
   return (
     <section className="section-wrapper teaching-section" id="teaching">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header teaching-header">
+          <span className="section-kicker">EDUCATION & MENTORSHIP</span>
           <h2 className="section-title">تجربه تدریس</h2>
           <p className="section-desc">{teaching.philosophy}</p>
         </div>
 
-        {/* Courses Grid */}
+        {/* Courses Grid: 4 columns */}
         <div className="teaching-grid">
-          {teaching.courses.map((course, idx) => (
+          {displayCourses.map((course, idx) => (
             <div key={idx} className="teaching-card card-editorial">
               <div className="teaching-card-top">
                 <span className="teaching-category-pill font-latin">{course.category}</span>
@@ -25,39 +43,36 @@ export const Teaching: React.FC = () => {
 
               <div className="teaching-card-header">
                 <div className="teaching-icon-wrap">
-                  <BookOpen size={20} className="text-brand-orange" />
+                  {getCourseIcon(idx)}
                 </div>
                 <h3 className="teaching-title">{course.title}</h3>
               </div>
 
               <p className="teaching-desc">{course.description}</p>
 
-              <div className="teaching-topics-box">
-                <h4 className="topics-title">سرفصل‌های کلیدی دوره:</h4>
-                <ul className="topics-list">
-                  {course.topics.map((topic, tIdx) => (
-                    <li key={tIdx} className="topic-item">
-                      <Check size={14} className="topic-check text-brand-orange" />
-                      <span>{topic}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="teaching-topics-wrap">
+                {course.topics.slice(0, 3).map((topic, tIdx) => (
+                  <span key={tIdx} className="teaching-topic-chip">
+                    {topic}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Teaching Philosophy Banner */}
-        <div className="teaching-banner card-editorial">
-          <div className="teaching-banner-icon">
-            <GraduationCap size={36} className="text-brand-orange" />
+        {/* Minimal Pedagogy Bar */}
+        <div className="teaching-pedagogy-bar">
+          <div className="teaching-pedagogy-inner">
+            <span className="teaching-pedagogy-icon-wrap">
+              <GraduationCap size={15} className="text-brand-orange" />
+            </span>
+            <span className="teaching-pedagogy-lead">رویکرد انتقال دانش:</span>
+            <span className="teaching-pedagogy-text">
+              آموزش مبتنی بر پروژه‌های واقعی، شبیه‌سازی چالش‌های بازار کار و مهارت حل مسئله در ساخت محصول.
+            </span>
           </div>
-          <div className="teaching-banner-content">
-            <h4 className="banner-title">رویکرد آموزش مبتنی بر پروژه‌های واقعی</h4>
-            <p className="banner-text">
-              در کلاس‌ها و کارگاه‌های من، هنرجویان با شبیه‌سازی شرایط استارت‌آپی و شرکت‌های واقعی، از همان روز اول دست به ابزار می‌شوند و دیزاین را به عنوان ابزاری برای حل مسئله، درآمدزایی و ساخت محصول می‌آموزند.
-            </p>
-          </div>
+          <div className="teaching-pedagogy-tag font-latin">PRACTICE-FIRST MENTORSHIP</div>
         </div>
       </div>
     </section>

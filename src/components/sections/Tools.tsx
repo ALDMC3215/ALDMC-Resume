@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import { aiWorkflowTools } from '../../data';
+import React, { useState } from 'react';
+import { aiWorkflowTools, ToolCategoryGroup, ToolItem } from '../../data';
 import {
   Sparkles,
   ChevronDown,
@@ -17,195 +17,150 @@ export const Tools: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const categoryIcons: Record<string, React.ReactNode> = {
-    'assistants-research': <Cpu size={16} className="text-brand-orange" />,
-    'visual-video': <Wand2 size={16} className="text-brand-orange" />,
-    'music-audio': <Music size={16} className="text-brand-orange" />,
-    'dev-creative-coding': <Code2 size={16} className="text-brand-orange" />,
-    'knowledge-agents': <Boxes size={16} className="text-brand-orange" />,
+    'assistants-research': <Cpu size={14} className="text-brand-orange" />,
+    'visual-video': <Wand2 size={14} className="text-brand-orange" />,
+    'music-audio': <Music size={14} className="text-brand-orange" />,
+    'dev-creative-coding': <Code2 size={14} className="text-brand-orange" />,
+    'knowledge-agents': <Boxes size={14} className="text-brand-orange" />,
   };
 
   return (
     <section className="section-wrapper tools-section" id="tools">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header tools-header">
           <span className="section-kicker font-latin">{aiWorkflowTools.kicker}</span>
           <h2 className="section-title">{aiWorkflowTools.sectionTitle}</h2>
-          <p className="section-desc max-w-2xl">
+          <p className="section-desc">
             {aiWorkflowTools.description}
           </p>
         </div>
 
-        {/* ───────────────────────────────────────────────────────────── */}
-        {/* 1. Core Foundations & Primary Workflow Grid                   */}
-        {/* ───────────────────────────────────────────────────────────── */}
-        <div className="mb-10">
-          {/* Top Bar: Traditional Design Foundations (Figma & Photoshop) */}
-          <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl card-editorial border border-[var(--border-subtle)] bg-[var(--surface-primary)] mb-6">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-brand-orange/10 text-brand-orange flex items-center justify-center">
-                <Layers size={18} />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-[var(--text-primary)] block">
-                  پایه‌های اصلی طراحی و سیستم‌های دیزاین
-                </span>
-                <span className="font-latin text-[11px] text-[var(--text-muted)]">
-                  UI/UX Design, Visual Identity & Tokens Architecture
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {aiWorkflowTools.designFoundations.map((tool) => (
-                <div
-                  key={tool.name}
-                  className="px-3 py-1 rounded-lg border border-[var(--border-subtle)] bg-black/5 dark:bg-white/5 flex items-center gap-2"
-                >
-                  <span className="font-latin text-xs font-bold text-[var(--text-primary)]">
-                    {tool.name}
-                  </span>
-                  <span className="text-[10px] text-brand-orange font-medium">
-                    {tool.tag}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {/* 1. Core Foundations Bar (Figma, Photoshop, Design Tokens) */}
+        <div className="tools-foundations-bar">
+          <div className="tools-foundations-lead">
+            <span className="tools-foundations-icon">
+              <Layers size={14} className="text-brand-orange" />
+            </span>
+            <span className="tools-foundations-title">
+              پایه‌های طراحی و سیستم‌های دیزاین:
+            </span>
           </div>
 
-          {/* Featured Primary AI Workflow (9 Key Tools in 3x3 Grid) */}
-          <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Sparkles size={16} className="text-brand-orange" />
-              <h3 className="text-sm font-bold text-[var(--text-primary)]">
-                جریان کاری منتخب (Primary Workflow)
+          <div className="tools-foundations-tags">
+            {aiWorkflowTools.designFoundations.map((tool) => (
+              <div key={tool.name} className="foundations-tag-item">
+                <span className="foundations-tag-name font-latin">{tool.name}</span>
+                <span className="foundations-tag-badge">{tool.tag}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 2. Featured Primary AI Workflow (9 Key Tools in 3x3 Grid) */}
+        <div className="tools-workflow-wrapper">
+          <div className="tools-workflow-header">
+            <div className="tools-header-label">
+              <Sparkles size={14} className="text-brand-orange" />
+              <h3 className="tools-header-title">
+                جریان کاری منتخب <span className="tools-header-sub font-latin">(Primary Workflow)</span>
               </h3>
             </div>
-            <span className="font-latin text-xs text-[var(--text-muted)]">
+            <span className="tools-header-count font-latin">
               9 Featured Workflow Tools
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+          <div className="tools-primary-grid">
             {aiWorkflowTools.primaryWorkflow.map((tool) => (
               <div
                 key={tool.name}
-                className="group p-4 rounded-xl card-editorial border border-[var(--border-subtle)] hover:border-brand-orange/40 hover:-translate-y-0.5 transition-all flex items-start justify-between gap-3"
+                className="tools-workflow-card card-editorial"
               >
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-latin text-sm font-black text-[var(--text-primary)] group-hover:text-brand-orange transition-colors">
+                <div className="tools-card-body">
+                  <div className="tools-card-top-row">
+                    <span className="tools-name font-latin">
                       {tool.name}
                     </span>
-                    <span className="font-latin text-[10px] px-1.5 py-0.2 rounded bg-brand-orange/10 text-brand-orange font-semibold">
+                    <span className="tools-category-tag font-latin">
                       {tool.category}
                     </span>
                   </div>
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed font-latin">
+                  <p className="tools-role font-latin">
                     {tool.role}
                   </p>
                 </div>
-                <div className="w-6 h-6 rounded-md bg-[var(--surface-primary)] border border-[var(--border-subtle)] flex items-center justify-center text-[var(--text-muted)] group-hover:text-brand-orange group-hover:border-brand-orange/30 transition-colors flex-shrink-0 mt-0.5">
-                  <ArrowUpRight size={13} />
+                <div className="tools-corner-icon">
+                  <ArrowUpRight size={11} />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ───────────────────────────────────────────────────────────── */}
-        {/* 2. Expandable Complete Tool Directory (All 29 Tools)           */}
-        {/* ───────────────────────────────────────────────────────────── */}
-        <div className="p-6 rounded-2xl card-editorial border border-[var(--border-subtle)] bg-[var(--surface-primary)]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-latin text-xs font-bold uppercase tracking-wider text-brand-orange">
-                  FULL DIRECTORY
-                </span>
-                <span className="text-xs text-[var(--text-muted)]">
-                  (۲۹ ابزار تخصصی در ۵ دسته‌بندی)
-                </span>
+        {/* 3. Expandable Directory Bar (All 29 Tools in 5 Categories) */}
+        <div className="tools-directory-bar card-editorial">
+          <div className="tools-directory-bar-main">
+            <div className="tools-directory-meta">
+              <span className="tools-all-badge font-latin">29 AI TOOLS</span>
+              <div className="tools-categories-summary">
+                <span className="tools-cat-summary-item">دستیارها (۱۱)</span>
+                <span className="tools-cat-summary-dot">•</span>
+                <span className="tools-cat-summary-item">تصویر و ویدیو (۸)</span>
+                <span className="tools-cat-summary-dot">•</span>
+                <span className="tools-cat-summary-item">موسیقی و صدا (۳)</span>
+                <span className="tools-cat-summary-dot">•</span>
+                <span className="tools-cat-summary-item">توسعه و کد (۴)</span>
+                <span className="tools-cat-summary-dot">•</span>
+                <span className="tools-cat-summary-item">مدیریت دانش (۳)</span>
               </div>
-              <h4 className="text-base font-bold text-[var(--text-primary)]">
-                فهرست جامع ابزارها و اکوسیستم هوش مصنوعی
-              </h4>
             </div>
 
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="btn btn-secondary btn-sm flex items-center justify-center gap-2 self-start sm:self-auto font-medium"
+              className="tools-expand-pill-btn"
               type="button"
-              aria-expanded={isExpanded}
             >
-              <span>{isExpanded ? 'نمایش کمتر' : 'مشاهده همه ابزارها (۲۹)'}</span>
-              {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              <span>{isExpanded ? 'بستن فهرست' : 'مشاهده تمام ۲۹ ابزار'}</span>
+              {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             </button>
           </div>
 
-          {/* Category Chips Bar (Always visible overview) */}
-          <div className="flex flex-wrap items-center gap-2 pt-4 pb-2">
-            {aiWorkflowTools.categories.map((cat) => (
-              <div
-                key={cat.id}
-                className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] bg-black/5 dark:bg-white/5 flex items-center gap-2 text-xs"
-              >
-                {categoryIcons[cat.id]}
-                <span className="font-semibold text-[var(--text-primary)]">{cat.title}</span>
-                <span className="font-latin text-[11px] text-[var(--text-muted)]">
-                  ({cat.tools.length})
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Expanded 5-Category View */}
+          {/* Expanded 5 Categories View */}
           {isExpanded && (
-            <div className="mt-6 pt-6 border-t border-[var(--border-subtle)] space-y-6 animate-fadeIn">
-              {aiWorkflowTools.categories.map((cat) => (
-                <div key={cat.id} className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      {categoryIcons[cat.id]}
-                      <h5 className="text-sm font-bold text-[var(--text-primary)]">
-                        {cat.title}
-                      </h5>
-                    </div>
-                    <span className="font-latin text-xs text-[var(--text-muted)]">
-                      {cat.titleEn}
-                    </span>
-                  </div>
-
-                  {/* Compact Chips Grid for this category */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-2.5">
-                    {cat.tools.map((t) => (
-                      <div
-                        key={t.name}
-                        className="p-2.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] hover:border-brand-orange/50 transition-colors flex flex-col justify-between"
-                      >
-                        <span className="font-latin text-xs font-bold text-[var(--text-primary)] truncate">
-                          {t.name}
-                        </span>
-                        {t.tag && (
-                          <span className="font-latin text-[10px] text-[var(--text-muted)] truncate mt-1">
-                            {t.tag}
-                          </span>
-                        )}
+            <div className="tools-categories-wrapper">
+              <div className="tools-categories-grid">
+                {aiWorkflowTools.categories.map((category: ToolCategoryGroup) => (
+                  <div
+                    key={category.id}
+                    className="tools-category-box"
+                  >
+                    <div className="tools-cat-header">
+                      <div className="tools-cat-icon-wrap">
+                        {categoryIcons[category.id]}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                      <div>
+                        <h5 className="tools-cat-title">
+                          {category.title}
+                        </h5>
+                        <span className="tools-cat-sub font-latin">
+                          {category.titleEn} · ({category.tools.length})
+                        </span>
+                      </div>
+                    </div>
 
-              <div className="pt-4 flex justify-center">
-                <button
-                  onClick={() => setIsExpanded(false)}
-                  className="btn btn-secondary btn-sm flex items-center gap-2"
-                  type="button"
-                >
-                  <ChevronUp size={14} />
-                  <span>بستن فهرست ابزارها</span>
-                </button>
+                    <div className="tools-badges-cloud">
+                      {category.tools.map((tool: ToolItem) => (
+                        <span
+                          key={tool.name}
+                          className="tools-badge-pill font-latin"
+                        >
+                          {tool.name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

@@ -1,4 +1,4 @@
-﻿export interface ProjectItem {
+export interface ProjectItem {
   id: string;
   title: string;
   subtitle?: string;
@@ -37,7 +37,7 @@ export interface MusicTrackItem {
   genre: string;
   year: string;
   audioUrl: string;
-  coverImage: string;
+  coverImage?: string;
   description?: string;
 }
 

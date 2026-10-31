@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Monogram } from '../ui/Monogram';
 import { ArrowLeft, Sparkles, MapPin, Layers } from 'lucide-react';
 import { resumeData } from '../../data/resumeData';
@@ -8,100 +8,126 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="hero-section" id="hero">
-      {/* Background Architectural Brand Elements */}
+      {/* Background Architectural Brand Monogram Element */}
       <div className="hero-bg-monogram" aria-hidden="true">
         <Monogram width="100%" color="var(--border-subtle)" />
       </div>
 
       <div className="container hero-container">
         <div className="hero-grid">
-          {/* Main Editorial Content Column */}
+          {/* Main Content Column (Right in RTL) */}
           <div className="hero-content">
-            {/* Top Status & Location Bar */}
-            <div className="hero-meta-row">
-              <div className="status-indicator-pill">
-                <span className="status-ping" />
-                <span className="status-text">{personalInfo.availability}</span>
-              </div>
-
-              <div className="hero-location-tag">
-                <MapPin size={14} className="location-icon" />
+            {/* Unified Eyebrow & Status Row */}
+            <div className="hero-eyebrow-row">
+              <span className="hero-kicker-badge font-latin">A/F. DESIGN × AI</span>
+              <div className="hero-meta-chip">
+                <MapPin size={13} className="text-brand-orange flex-shrink-0" />
                 <span>{personalInfo.location}</span>
               </div>
+              <div className="hero-status-chip-inline">
+                <span className="status-ping-sm" />
+                <span className="hero-availability-text">{personalInfo.availability}</span>
+              </div>
             </div>
 
-            {/* Oversized Headline */}
+            {/* Display Headlines */}
             <div className="hero-title-group">
-              <span className="hero-english-kicker font-latin">A/F. DESIGN × AI</span>
               <h1 className="hero-main-title">{personalInfo.name}</h1>
-              <h2 className="hero-subtitle">{personalInfo.title}</h2>
+              <h2 className="hero-subtitle">
+                <span className="hero-subtitle-primary">طراح محصول، UI/UX</span>
+                <span className="hero-subtitle-sep"> و </span>
+                <span className="hero-subtitle-accent">راهکارهای خلاقانه با هوش مصنوعی</span>
+              </h2>
             </div>
 
-            {/* Supporting Thesis Statement */}
-            <blockquote className="hero-thesis">
-              <Sparkles size={18} className="thesis-icon text-brand-orange" />
-              <span>«{personalInfo.supportingStatement}»</span>
-            </blockquote>
+            {/* Refined Editorial Thesis Callout */}
+            <div className="hero-thesis-block">
+              <div className="hero-thesis-content">
+                <Sparkles size={16} className="text-brand-orange flex-shrink-0 mt-0.5" />
+                <span className="hero-thesis-quote">
+                  «{personalInfo.supportingStatement}»
+                </span>
+              </div>
+            </div>
 
             {/* Intro Paragraph */}
             <p className="hero-intro-text">{personalInfo.intro}</p>
 
             {/* Dual CTAs */}
             <div className="hero-cta-group">
-              <a href="#projects" className="btn btn-primary">
+              <a href="#projects" className="btn btn-primary hero-btn-main">
                 <span>مشاهده پروژه‌ها</span>
-                <ArrowLeft size={18} className="cta-arrow" />
+                <ArrowLeft size={16} className="cta-arrow" />
               </a>
-              <a href="#contact" className="btn btn-secondary">
+              <a href="#contact" className="btn btn-secondary hero-btn-sub">
                 <span>ارتباط با من</span>
               </a>
             </div>
 
-            {/* Quick Highlight Badges */}
-            <div className="hero-pills-row">
-              <span className="hero-pill">
-                <Layers size={14} />
-                <span>طراحی محصول و سیستم‌های دیزاین</span>
-              </span>
-              <span className="hero-pill font-latin">
+            {/* Core Capability Strip */}
+            <div className="hero-pillars-strip">
+              <div className="hero-pillar-chip">
+                <Layers size={14} className="text-brand-orange flex-shrink-0" />
+                <span>طراحی محصول و تجربه کاربری</span>
+              </div>
+              <div className="hero-pillar-chip font-latin">
                 <span>Vibe Coding & Rapid Prototyping</span>
-              </span>
-              <span className="hero-pill font-latin">
+              </div>
+              <div className="hero-pillar-chip font-latin">
                 <span>Generative AI Media</span>
-              </span>
+              </div>
             </div>
           </div>
 
-          {/* Asymmetric Visual Signature Card with Real Photo */}
+          {/* Editorial Creator Showcase Profile (Left in RTL) */}
           <div className="hero-visual-col">
-            <div className="hero-signature-card">
-              <div className="signature-card-inner">
-                <div className="signature-card-header">
-                  <div className="signature-avatar-wrapper rounded-xl overflow-hidden border border-brand-orange/40">
-                    <img
-                      src="/brand/avatars/ali-forghani.webp"
-                      alt="Ali Forghani / ALDMC"
-                      className="signature-avatar w-full h-full object-cover"
-                    />
-                  </div>
+            <div className="creator-profile-card card-editorial">
+              {/* Creator Portrait Frame */}
+              <div className="creator-portrait-wrapper">
+                <img
+                  src="/brand/avatars/ali-forghani.webp"
+                  alt="Ali Forghani - علی فرقانی"
+                  className="creator-portrait-img"
+                  loading="eager"
+                />
+
+                {/* Top-Right Floating Live Status Pill */}
+                <div className="creator-status-chip">
+                  <span className="status-ping-sm" />
+                  <span>آماده پروژه‌های منتخب</span>
+                </div>
+
+                {/* Top-Left Monogram Stamp */}
+                <div className="creator-monogram-stamp">
+                  <Monogram width={20} color="var(--brand-orange)" />
+                </div>
+              </div>
+
+              {/* Creator Info Footer */}
+              <div className="creator-card-footer">
+                <div className="creator-name-row">
                   <div>
-                    <h3 className="signature-name font-latin">ALI FORGHANI</h3>
-                    <p className="signature-role font-latin">PRODUCT DESIGNER & AI SPECIALIST</p>
+                    <h3 className="creator-name-fa">علی فرقانی</h3>
+                    <span className="creator-name-en font-latin">ALI FORGHANI</span>
                   </div>
+                  <span className="creator-tag-v6 font-latin">PORTFOLIO · 2026</span>
                 </div>
 
-                <div className="signature-card-quote">
-                  <p>
-                    «از ایده و طراحی رابط در Figma تا پیش بردن نمونه‌های قابل اجرا با کمک AI و بررسی کیفیت اجرا.»
-                  </p>
-                </div>
+                <p className="creator-role-tagline font-latin">
+                  Product Designer · AI Creative Specialist
+                </p>
 
-                <div className="signature-card-footer">
-                  <div className="signature-stamp">
-                    <Monogram width={24} color="var(--brand-orange)" />
-                    <span className="font-latin text-xs">OFFICIAL PORTFOLIO · 2026</span>
-                  </div>
-                  <span className="signature-verified-tag font-latin">SHIRAZ, IR</span>
+                <div className="creator-card-specs">
+                  <span className="creator-spec-pill">
+                    <Sparkles size={11} className="text-brand-orange" />
+                    <span>Product Design & UI/UX</span>
+                  </span>
+                  <span className="creator-spec-pill font-latin">
+                    <span>Vibe Coding</span>
+                  </span>
+                  <span className="creator-spec-pill font-latin">
+                    <span>Next.js</span>
+                  </span>
                 </div>
               </div>
             </div>

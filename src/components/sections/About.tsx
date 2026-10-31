@@ -1,6 +1,6 @@
 import React from 'react';
 import { resumeData } from '../../data/resumeData';
-import { Compass, Cpu, CheckCircle } from 'lucide-react';
+import { Compass, Cpu, CheckCircle, Target, Zap, ShieldCheck } from 'lucide-react';
 
 export const About: React.FC = () => {
   const { personalInfo, coreApproach } = resumeData;
@@ -16,7 +16,7 @@ export const About: React.FC = () => {
       <div className="container">
         {/* Section Header */}
         <div className="section-header">
-          <span className="section-kicker">ABOUT ALDMC</span>
+          <span className="section-kicker">ABOUT ME</span>
           <h2 className="section-title">کمی درباره من</h2>
           <p className="section-desc">طراحی، اجرا و خلاقیت در یک مسیر پیوسته و هدفمند</p>
         </div>
@@ -38,29 +38,45 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* Visual Brand Metaphor Card */}
+          {/* Personal Philosophy & Mindset Card */}
           <div className="about-meta-card card-editorial">
-            <div className="about-meta-badge font-latin">PERSIMMON V6 IDENTITY</div>
-            <h4 className="about-meta-title">طراحی دقیق بر پایه دیزاین سیستم</h4>
-            <p className="about-meta-desc">
-              تمام المان‌های این وبسایت، از تایپوگرافی دوزبانه تا پالت رنگی خرمالویی و ذغالی، بر اساس دیزاین سیستم رسمی <span className="font-latin font-bold">ALDMC Complete Brand Kit v6</span> پیاده‌سازی شده‌اند؛ بدون حدس، بدون شلختگی، با بالاترین استاندارد مهندسی فرانت‌اند.
-            </p>
-            <div className="about-swatches-row">
-              <div className="swatch-item">
-                <span className="swatch-color" style={{ backgroundColor: '#E76338' }} />
-                <span className="swatch-name font-latin">#E76338</span>
+            <div>
+              <div className="about-meta-badge font-latin">MINDSET & VISION</div>
+              <h4 className="about-meta-title">دیدگاه من در خلق محصول</h4>
+              <p className="about-meta-desc">
+                باور دارم دیزاین فراتر از ظاهر آراسته، ابزاری است برای حل مسائل واقعی کاربران و ایجاد تجربه روان و پایدار. با تلفیق درک رفتار کاربر، تسلط بر ساختارهای بومی RTL و شتاب‌دهی توسعه با ابزارهای هوش مصنوعی، تلاش می‌کنم فاصله میان چشم‌انداز خلاقانه تا محصول واقعی و زنده را به حداقل برسانم.
+              </p>
+            </div>
+
+            <div className="about-values-list">
+              <div className="about-value-item">
+                <div className="about-value-icon-box">
+                  <Target size={15} className="text-brand-orange" />
+                </div>
+                <div className="about-value-text">
+                  <span className="about-value-title">کاربردپذیری و تجربه روان</span>
+                  <span className="about-value-sub">تمرکز بر رفع نیاز واقعی کاربر، پایداری تعامل و استانداردهای دسترسی‌پذیری</span>
+                </div>
               </div>
-              <div className="swatch-item">
-                <span className="swatch-color" style={{ backgroundColor: '#27211D' }} />
-                <span className="swatch-name font-latin">#27211D</span>
+
+              <div className="about-value-item">
+                <div className="about-value-icon-box">
+                  <Zap size={15} className="text-brand-orange" />
+                </div>
+                <div className="about-value-text">
+                  <span className="about-value-title">توسعه چابک با هوش مصنوعی</span>
+                  <span className="about-value-sub">ساخت سریع پروتوتایپ‌های زنده، آزمودن فرضیه‌ها و کاهش زمان ورود به بازار</span>
+                </div>
               </div>
-              <div className="swatch-item">
-                <span className="swatch-color" style={{ backgroundColor: '#F6F0E7', border: '1px solid #DFD5C8' }} />
-                <span className="swatch-name font-latin">#F6F0E7</span>
-              </div>
-              <div className="swatch-item">
-                <span className="swatch-color" style={{ backgroundColor: '#F6B393' }} />
-                <span className="swatch-name font-latin">#F6B393</span>
+
+              <div className="about-value-item">
+                <div className="about-value-icon-box">
+                  <ShieldCheck size={15} className="text-brand-orange" />
+                </div>
+                <div className="about-value-text">
+                  <span className="about-value-title">وسواس و تعهد در کیفیت اجرا</span>
+                  <span className="about-value-sub">بازبینی موشکافانه تایپوگرافی، چیدمان، کنتراست نوری و تجربه نسخه موبایل</span>
+                </div>
               </div>
             </div>
           </div>
