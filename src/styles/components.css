@@ -578,11 +578,47 @@
 /* ==========================================================================
    03. ABOUT SECTION
    ========================================================================== */
+.about-section {
+  padding-top: clamp(16px, 2.5vh, 32px);
+  padding-bottom: clamp(16px, 2.5vh, 32px);
+}
+
+@media (min-width: 1025px) {
+  .about-section .about-lead-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .about-section .about-bio-text {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .about-section .about-ownership-bar {
+    padding-top: 10px;
+  }
+  .about-section .about-meta-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .about-section .about-meta-title {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+  .about-section .about-values-list {
+    gap: 6px;
+    padding-top: 8px;
+  }
+  .about-section .about-value-item {
+    padding: 6px 10px;
+  }
+}
+
 .about-main-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: var(--space-6);
-  margin-bottom: clamp(40px, 6vw, 64px);
+  gap: 16px;
+  margin-bottom: clamp(14px, 2vh, 20px);
   align-items: stretch;
 }
 
@@ -709,73 +745,73 @@
   color: var(--muted);
 }
 
-/* Approach / How I Work */
-.about-approach-container {
-  margin-top: clamp(40px, 6vw, 64px);
-}
-
-.approach-header {
-  margin-bottom: var(--space-6);
-}
-
-.approach-title {
-  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-  font-weight: 800;
-  color: var(--fg-strong);
-  margin-bottom: var(--space-2);
-}
-
-.approach-flow-bar {
-  font-size: 0.8125rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--brand-orange);
-}
-
-.approach-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-
-.approach-card {
+/* Streamlined Approach Ribbon */
+.about-approach-ribbon {
+  margin-top: clamp(14px, 2vh, 20px);
+  padding: 12px 18px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
-.approach-card-top {
+.approach-ribbon-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-4);
-}
-
-.approach-num {
-  font-size: 1.75rem;
-  font-weight: 900;
-  color: var(--border-strong);
-  line-height: 1;
-}
-
-.approach-step-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--fg);
-  margin-bottom: 2px;
-}
-
-.approach-step-sub {
+  gap: 8px;
   font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: var(--space-3);
-  display: block;
+  font-weight: 800;
+  color: var(--brand-orange);
+  letter-spacing: 0.05em;
+  border-bottom: 1px dashed var(--border-subtle);
+  padding-bottom: 6px;
 }
 
-.approach-step-desc {
-  font-size: 0.9375rem;
-  line-height: 1.8;
+.approach-ribbon-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.approach-ribbon-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.approach-step-num {
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--brand-orange);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.approach-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.approach-step-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.approach-step-label {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--fg-strong);
+}
+
+.approach-step-mini-desc {
+  font-size: 0.75rem;
+  line-height: 1.45;
   color: var(--muted);
+  margin: 0;
 }
 
 /* ==========================================================================
@@ -1030,6 +1066,53 @@
   flex-wrap: wrap;
   gap: 14px;
   margin-bottom: clamp(12px, 1.8vh, 18px);
+}
+
+.projects-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.projects-mode-tabs {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  gap: 4px;
+}
+
+.mode-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.mode-tab-btn:hover {
+  color: var(--fg-strong);
+}
+
+.mode-tab-btn.active {
+  background-color: var(--bg);
+  color: var(--brand-orange);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.digital-content-wrapper {
+  animation: fadeIn 0.25s ease-in-out;
 }
 
 .project-filter-pills {
@@ -2950,5 +3033,38 @@
 @media (min-width: 769px) {
   .mobile-only {
     display: none !important;
+  }
+}
+
+/* ==========================================================================
+   DESKTOP 100VH UNIFIED LAYOUT WITH EDITORIAL WHITE SPACE
+   ========================================================================== */
+@media (min-width: 1025px) {
+  .hero-section {
+    min-height: calc(100vh - 73px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-margin-top: 73px;
+    padding-top: clamp(24px, 4vh, 48px);
+    padding-bottom: clamp(24px, 4vh, 48px);
+    box-sizing: border-box;
+  }
+
+  .section-wrapper {
+    min-height: calc(100vh - 73px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-margin-top: 73px;
+    box-sizing: border-box;
+  }
+
+  .section-wrapper > .container {
+    width: 100%;
+  }
+
+  .site-footer {
+    min-height: auto;
   }
 }

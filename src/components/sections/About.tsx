@@ -6,9 +6,9 @@ export const About: React.FC = () => {
   const { personalInfo, coreApproach } = resumeData;
 
   const approachIcons = [
-    <Compass className="approach-step-icon text-brand-orange" size={24} />,
-    <Cpu className="approach-step-icon text-brand-orange" size={24} />,
-    <CheckCircle className="approach-step-icon text-brand-orange" size={24} />,
+    <Compass className="approach-step-icon text-brand-orange" size={20} />,
+    <Cpu className="approach-step-icon text-brand-orange" size={20} />,
+    <CheckCircle className="approach-step-icon text-brand-orange" size={20} />,
   ];
 
   return (
@@ -51,7 +51,7 @@ export const About: React.FC = () => {
             <div className="about-values-list">
               <div className="about-value-item">
                 <div className="about-value-icon-box">
-                  <Target size={15} className="text-brand-orange" />
+                  <Target size={14} className="text-brand-orange" />
                 </div>
                 <div className="about-value-text">
                   <span className="about-value-title">کاربردپذیری و تجربه روان</span>
@@ -61,7 +61,7 @@ export const About: React.FC = () => {
 
               <div className="about-value-item">
                 <div className="about-value-icon-box">
-                  <Zap size={15} className="text-brand-orange" />
+                  <Zap size={14} className="text-brand-orange" />
                 </div>
                 <div className="about-value-text">
                   <span className="about-value-title">توسعه چابک با هوش مصنوعی</span>
@@ -71,7 +71,7 @@ export const About: React.FC = () => {
 
               <div className="about-value-item">
                 <div className="about-value-icon-box">
-                  <ShieldCheck size={15} className="text-brand-orange" />
+                  <ShieldCheck size={14} className="text-brand-orange" />
                 </div>
                 <div className="about-value-text">
                   <span className="about-value-title">وسواس و تعهد در کیفیت اجرا</span>
@@ -82,26 +82,23 @@ export const About: React.FC = () => {
           </div>
         </div>
 
-        {/* How I Work / رویکرد کاری */}
-        <div className="about-approach-container">
-          <div className="approach-header">
-            <span className="section-kicker">HOW I WORK</span>
-            <h3 className="approach-title">رویکرد کاری: از ایده تا خروجی نهایی</h3>
-            <div className="approach-flow-bar font-latin">
-              IDEA → DESIGN → RAPID PROTOTYPE → QA & REFINEMENT
-            </div>
+        {/* Streamlined Horizontal Approach Flow Ribbon */}
+        <div className="about-approach-ribbon">
+          <div className="approach-ribbon-title">
+            <span className="font-latin">HOW I WORK:</span>
+            <span>رویکرد کاری از ایده تا خروجی نهایی</span>
           </div>
-
-          <div className="approach-grid">
+          <div className="approach-ribbon-steps">
             {coreApproach.map((item, index) => (
-              <div key={item.step} className="approach-card card-editorial">
-                <div className="approach-card-top">
-                  <span className="approach-num font-latin">{item.step}</span>
-                  {approachIcons[index]}
+              <div key={item.step} className="approach-ribbon-step">
+                <div className="approach-step-num font-latin">{item.step}</div>
+                <div className="approach-step-content">
+                  <div className="approach-step-heading">
+                    {approachIcons[index]}
+                    <span className="approach-step-label">{item.title}</span>
+                  </div>
+                  <p className="approach-step-mini-desc">{item.description}</p>
                 </div>
-                <h4 className="approach-step-title">{item.title}</h4>
-                <span className="approach-step-sub font-latin">{item.titleEn}</span>
-                <p className="approach-step-desc">{item.description}</p>
               </div>
             ))}
           </div>
