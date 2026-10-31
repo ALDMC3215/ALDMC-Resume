@@ -99,6 +99,7 @@
   position: fixed;
   inset: 0;
   z-index: 500;
+  display: none;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -106,6 +107,7 @@
 }
 
 .mobile-nav-drawer.is-open {
+  display: block;
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -202,12 +204,14 @@
 
 .hero-bg-monogram {
   position: absolute;
-  left: -8%;
+  left: 0;
   top: 10%;
   width: min(650px, 55vw);
+  max-width: 100%;
   opacity: 0.04;
   pointer-events: none;
   user-select: none;
+  overflow: hidden;
 }
 
 [data-theme="dark"] .hero-bg-monogram {
@@ -2379,7 +2383,10 @@
    11. CONTACT SECTION
    ========================================================================== */
 .contact-card {
-  padding: clamp(24px, 4vw, 44px);
+  padding: clamp(14px, 4vw, 44px);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .contact-main-grid {
@@ -2803,26 +2810,43 @@
     display: inline-flex !important;
   }
 
+  .experience-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .experience-role-pill {
+    white-space: normal;
+    text-align: right;
+    line-height: 1.4;
+  }
+
   .experience-timeline {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
 
+  .experience-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .projects-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 
   .teaching-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .expertise-editorial-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .digital-content-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .music-list-header {
