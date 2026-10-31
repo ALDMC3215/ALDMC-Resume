@@ -82,24 +82,26 @@ export const Hero: React.FC = () => {
           {/* Editorial Creator Showcase Profile (Left in RTL) */}
           <div className="hero-visual-col">
             <div className="creator-profile-card card-editorial">
-              {/* Creator Portrait Frame */}
-              <div className="creator-portrait-wrapper">
-                <img
-                  src="/brand/avatars/ali-forghani.webp"
-                  alt="Ali Forghani - علی فرقانی"
-                  className="creator-portrait-img"
-                  loading="eager"
-                />
-
-                {/* Top-Right Floating Live Status Pill */}
+              {/* Top Bar with Status and Monogram */}
+              <div className="creator-card-top-bar">
+                <div className="creator-monogram-stamp">
+                  <Monogram width={18} color="var(--brand-orange)" />
+                </div>
                 <div className="creator-status-chip">
                   <span className="status-ping-sm" />
                   <span>آماده پروژه‌های منتخب</span>
                 </div>
+              </div>
 
-                {/* Top-Left Monogram Stamp */}
-                <div className="creator-monogram-stamp">
-                  <Monogram width={20} color="var(--brand-orange)" />
+              {/* Circular Creator Avatar Frame */}
+              <div className="creator-avatar-section">
+                <div className="creator-avatar-ring">
+                  <img
+                    src="/brand/avatars/ali-forghani.webp"
+                    alt="Ali Forghani - علی فرقانی"
+                    className="creator-avatar-img"
+                    loading="eager"
+                  />
                 </div>
               </div>
 
