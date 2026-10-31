@@ -117,7 +117,13 @@ export const Projects: React.FC = () => {
                       {project.category.split('/')[0].trim()}
                     </span>
                     <span className="project-role-badge">
-                      {project.role.split('و')[0].trim()}
+                      {project.id === 'habisa-ai-videos'
+                        ? 'سناریونویسی'
+                        : project.id === 'novin-call-manager'
+                        ? 'طراحی محصول'
+                        : project.id === 'picofy-landing'
+                        ? 'طراحی رابط کاربری'
+                        : project.role.split('،')[0].split('و')[0].trim()}
                     </span>
                   </div>
 
