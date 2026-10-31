@@ -1,0 +1,92 @@
+/* ALDMC PERSIMMON V6 DESIGN SYSTEM TOKENS */
+
+:root {
+  /* Brand Core Palette */
+  --brand-orange: #E76338;
+  --brand-orange-hover: #F17B54;
+  --brand-charcoal: #27211D;
+  --brand-paper: #F6F0E7;
+  --brand-peach: #F6B393;
+  --brand-accent-glow: rgba(231, 99, 56, 0.15);
+
+  /* Typography Stacks */
+  --font-persian: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-latin: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing Scale (8pt grid based) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Radii Scale */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  /* Motion & Transitions */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 450ms;
+
+  /* Light Theme (Default: Paper Foundation) */
+  --bg: #F6F0E7;
+  --fg: #27211D;
+  --fg-strong: #171311;
+  --surface: #EEE7DC;
+  --surface-hover: #E7DECF;
+  --surface-elevated: #FAF6F0;
+  --muted: #74675F;
+  --muted-light: #9B8D83;
+  --border: #DFD5C8;
+  --border-subtle: #E8E0D5;
+  --border-strong: #C4B7A6;
+  --logo-color: #27211D;
+  --on-accent: #27211D;
+  --highlight-badge: rgba(231, 99, 56, 0.12);
+  --highlight-badge-border: rgba(231, 99, 56, 0.25);
+  
+  --shadow-sm: 0 2px 8px -2px rgba(39, 33, 29, 0.05);
+  --shadow-md: 0 6px 20px -3px rgba(39, 33, 29, 0.07), 0 2px 6px -1px rgba(39, 33, 29, 0.04);
+  --shadow-lg: 0 16px 36px -6px rgba(39, 33, 29, 0.10), 0 4px 12px -2px rgba(39, 33, 29, 0.05);
+  --glass-bg: rgba(246, 240, 231, 0.85);
+  --glass-border: rgba(223, 213, 200, 0.7);
+}
+
+/* Dark Theme (Charcoal Foundation) */
+[data-theme="dark"] {
+  --bg: #27211D;
+  --fg: #F6F0E7;
+  --fg-strong: #FFFFFF;
+  --surface: #352D27;
+  --surface-hover: #403730;
+  --surface-elevated: #443B33;
+  --muted: #C9BFB6;
+  --muted-light: #A3968C;
+  --border: #594B40;
+  --border-subtle: #453A31;
+  --border-strong: #786557;
+  --logo-color: #E76338;
+  --on-accent: #27211D;
+  --highlight-badge: rgba(231, 99, 56, 0.2);
+  --highlight-badge-border: rgba(231, 99, 56, 0.4);
+
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.45), 0 2px 8px -1px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.6), 0 6px 16px -2px rgba(0, 0, 0, 0.35);
+  --glass-bg: rgba(39, 33, 29, 0.88);
+  --glass-border: rgba(89, 75, 64, 0.65);
+}
