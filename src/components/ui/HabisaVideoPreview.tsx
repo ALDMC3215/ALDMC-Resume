@@ -1,4 +1,4 @@
-﻿import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 interface HabisaVideoPreviewProps {
   videoSrc: string;
@@ -20,7 +20,6 @@ export const HabisaVideoPreview: React.FC<HabisaVideoPreviewProps> = ({
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Check user preference for reduced motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
@@ -42,21 +41,14 @@ export const HabisaVideoPreview: React.FC<HabisaVideoPreviewProps> = ({
           if (!video) return;
 
           if (entry.isIntersecting) {
-            // Play silently once per page visit
             if (!hasPlayedOnce) {
               video.muted = true;
               video
                 .play()
-                .then(() => {
-                  setIsPlaying(true);
-                })
-                .catch(() => {
-                  // Autoplay blocked by browser policy
-                  setIsPlaying(false);
-                });
+                .then(() => setIsPlaying(true))
+                .catch(() => setIsPlaying(false));
             }
           } else {
-            // Pause when out of view
             if (!video.paused) {
               video.pause();
               setIsPlaying(false);
@@ -95,7 +87,7 @@ export const HabisaVideoPreview: React.FC<HabisaVideoPreviewProps> = ({
   return (
     <div
       ref={containerRef}
-      className="habisa-video-wrapper relative w-full h-full overflow-hidden bg-black flex items-center justify-center cursor-pointer group"
+      className="habisa-video-wrapper"
       onClick={handleManualPlayToggle}
       title="کلیک برای پخش یا توقف ویدیو"
     >
@@ -111,23 +103,23 @@ export const HabisaVideoPreview: React.FC<HabisaVideoPreviewProps> = ({
         onEnded={handleEnded}
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
-        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+        className="habisa-video-element"
         aria-label={title}
       />
 
-      {/* Tasteful watermark overlay */}
-      <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded bg-black/60 backdrop-blur-md border border-white/10 pointer-events-none select-none">
-        <span className="font-latin text-[10px] tracking-wider text-white/80 uppercase font-semibold">
+      {/* Watermark overlay */}
+      <div className="habisa-watermark">
+        <span className="habisa-watermark-text font-latin">
           {watermarkText}
         </span>
       </div>
 
       {/* Subtle play/pause indicator overlay */}
       {!isPlaying && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-all pointer-events-none">
-          <div className="w-12 h-12 rounded-full bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-xl text-white">
+        <div className="habisa-play-overlay">
+          <div className="habisa-play-btn">
             <svg
-              className="w-5 h-5 translate-x-[-1px]"
+              style={{ width: '18px', height: '18px', transform: 'translateX(-1px)' }}
               fill="currentColor"
               viewBox="0 0 24 24"
             >
