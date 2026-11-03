@@ -43,3 +43,7 @@ references/
 # Scratch & Temporary Verification Files
 scratch/
 
+# Trash - Unused/Deprecated Legacy Files (Never push to GitHub)
+Trash/
+
+

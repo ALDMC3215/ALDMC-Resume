@@ -1,165 +1,224 @@
 import React, { useState } from 'react';
-import { resumeData } from '../../data/resumeData';
-import { Logo } from '../ui/Logo';
 import {
   Mail,
-  Github,
-  Instagram,
   Send,
   Phone,
-  MessageCircle,
-  Facebook,
   Copy,
   Check,
-  ArrowUpRight,
-  Sparkles
+  ArrowLeft,
+  ExternalLink,
+  Share2,
 } from 'lucide-react';
 
 export const Contact: React.FC = () => {
-  const { contact, personalInfo } = resumeData;
-  const [copied, setCopied] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(contact.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const emailAddress = 'aldmc4543@gmail.com';
+  const phoneNumber = '09174543813';
+
+  const copyToClipboard = (text: string, key: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2000);
   };
 
-  const socialLinks = [
+  // Structured Contact / Social Matrix
+  const primaryChannels = [
     {
-      name: 'Instagram',
+      id: 'email',
+      label: 'ایمیل مستقیم',
+      labelEn: 'Direct Email',
+      value: emailAddress,
+      href: `mailto:${emailAddress}`,
+      icon: <Mail size={22} className="text-brand-orange" />,
+      actionType: 'copy',
+      copyValue: emailAddress,
+      description: 'مناسب برای ارسال پروپوزال، قرارداد و مستندات پروژه',
+    },
+    {
+      id: 'phone',
+      label: 'تماس تلفنی',
+      labelEn: 'Direct Phone',
+      value: phoneNumber,
+      href: `tel:+989174543813`,
+      icon: <Phone size={22} className="text-brand-orange" />,
+      actionType: 'call',
+      description: 'پاسخگویی سریع در ساعات اداری (شیراز، ایران)',
+    },
+    {
+      id: 'telegram',
+      label: 'تلگرام رسمی',
+      labelEn: 'Telegram',
+      value: '@ALDMC',
+      href: 'https://t.me/ALDMC',
+      icon: <Send size={22} className="text-brand-orange" />,
+      actionType: 'link',
+      description: 'ارتباط سریع برای چت، هماهنگی جلسات و تبادل ایده',
+    },
+  ];
+
+  const socialProfiles = [
+    {
+      platform: 'Instagram',
       handle: '@aldmc_origin',
-      url: 'https://www.instagram.com/aldmc_origin/',
-      icon: <Instagram size={18} />,
+      href: 'https://www.instagram.com/aldmc_origin/',
+      role: 'آرت‌ورک‌ها و فعالیت‌های برند شخصی',
     },
     {
-      name: 'Telegram',
-      handle: '@ALDMC',
-      url: 'https://t.me/ALDMC',
-      icon: <Send size={18} />,
-    },
-    {
-      name: 'WhatsApp',
-      handle: '@aldmc_origin',
-      url: 'https://wa.me/989174543813',
-      icon: <MessageCircle size={18} />,
-    },
-    {
-      name: 'Facebook',
-      handle: '@aldmc_origin',
-      url: 'https://facebook.com/aldmc_origin',
-      icon: <Facebook size={18} />,
-    },
-    {
-      name: 'GitHub',
+      platform: 'GitHub',
       handle: '@ALDMC3215',
-      url: 'https://github.com/ALDMC3215',
-      icon: <Github size={18} />,
+      href: 'https://github.com/ALDMC3215',
+      role: 'مخازن پروژه‌ها و کدهای توسعه محصول',
     },
     {
-      name: 'Phone',
-      handle: '09174543813',
-      url: 'tel:+989174543813',
-      icon: <Phone size={18} />,
+      platform: 'WhatsApp',
+      handle: '@aldmc_origin',
+      href: 'https://wa.me/989174543813',
+      role: 'پیام‌رسان تجاری و کاری',
+    },
+    {
+      platform: 'Facebook',
+      handle: '@aldmc_origin',
+      href: 'https://facebook.com/aldmc_origin',
+      role: 'پروفایل برند سازمانی',
+    },
+    {
+      platform: 'Suno AI',
+      handle: 'ALDMC Music Lab',
+      href: 'https://suno.com',
+      role: 'قطعات صوتی و آهنگسازی با هوش مصنوعی',
     },
   ];
 
   return (
     <section className="section-wrapper contact-section" id="contact">
       <div className="container">
-        <div className="contact-card card-editorial">
-          <div className="contact-main-grid">
-            {/* Main Content Column */}
-            <div className="contact-primary-col">
-              <div className="contact-header-block">
-                <span className="section-kicker">COLLABORATION</span>
-                <h2 className="contact-headline">
-                  ایده هارو با AI زنده میکنم
-                </h2>
-                <p className="contact-subtitle">
-                  {contact.subtitle}
-                </p>
+        {/* Section Header */}
+        <div className="section-header text-center">
+          <div className="section-kicker">GET IN TOUCH &amp; COLLABORATE</div>
+          <h2 className="section-title">
+            ایده‌هارو با <span className="accent-word">AI</span> زنده می‌کنم
+          </h2>
+          <p className="section-desc mx-auto">
+            اگر به دنبال طراحی یک تجربه محصولی متمایز، پروتوتایپینگ پرسرعت با هوش مصنوعی یا توسعه پایدار هستید، از کانال‌های زیر در ارتباط باشید.
+          </p>
+        </div>
+
+        {/* Main 2-Column Desktop Grid for 1920x1080 Rich Presence */}
+        <div className="contact-rich-grid">
+          {/* Right Column (RTL Start): Creator Card & Direct Inquiry */}
+          <div className="contact-creator-card card-editorial">
+            <div className="creator-profile-header">
+              <div className="creator-avatar-wrap">
+                <img
+                  src="/brand/avatars/ali-forghani.webp"
+                  alt="علی فرقانی"
+                  className="creator-avatar-img"
+                />
+                <span className="creator-status-dot" title="آماده همکاری" />
               </div>
 
-              {/* Direct Email Action Bar */}
-              <div className="contact-email-bar">
-                <div className="contact-email-info">
-                  <div className="contact-email-icon">
-                    <Mail size={18} />
-                  </div>
-                  <span className="contact-email-address font-latin">{contact.email}</span>
-                </div>
-
-                <div className="contact-email-actions">
-                  <button
-                    onClick={copyEmail}
-                    className="btn btn-secondary btn-sm"
-                    type="button"
-                    title="کپی آدرس ایمیل"
-                  >
-                    {copied ? <Check size={14} className="text-brand-orange" /> : <Copy size={14} />}
-                    <span>{copied ? 'کپی شد!' : 'کپی ایمیل'}</span>
-                  </button>
-                  <a
-                    href={`mailto:${contact.email}`}
-                    className="btn btn-primary btn-sm"
-                  >
-                    <span>ارسال پیام</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </div>
-              </div>
-
-              {/* Verified Channels Grid (6 Platforms) */}
-              <div className="contact-social-grid">
-                {socialLinks.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-profile-card"
-                  >
-                    <div className="social-card-inner">
-                      <div className="social-icon-wrapper">
-                        {item.icon}
-                      </div>
-                      <div className="social-meta-info">
-                        <span className="social-platform font-latin">{item.name}</span>
-                        <span className="social-handle font-latin">{item.handle}</span>
-                      </div>
-                    </div>
-                    <ArrowUpRight size={14} className="social-card-arrow" />
-                  </a>
-                ))}
+              <div className="creator-meta-info">
+                <h3 className="creator-name">علی فرقانی</h3>
+                <span className="creator-role font-latin">Ali Forghani · Product Designer</span>
+                <span className="creator-badge font-latin">ALDMC STUDIO · SHIRAZ</span>
               </div>
             </div>
 
-            {/* Sidebar Visual / Identity Card */}
-            <div className="contact-meta-col">
-              <div className="contact-meta-box">
-                <div className="contact-meta-logo">
-                  <Logo width={120} />
-                </div>
-                <h3 className="contact-meta-name">{personalInfo.name}</h3>
-                <p className="contact-meta-role font-latin">PRODUCT DESIGNER & AI SPECIALIST</p>
-                <p className="contact-meta-bio">
-                  آماده همکاری در طراحی محصول، خلق تجربیات نوآورانه، تولید محتوای هوش مصنوعی و اتوماسیون جریان‌های کاری.
-                </p>
+            <p className="creator-statement">
+              تمرکز من روی کاهش فاصله میان ایده خلاقانه تا محصول واقعی است. پذیرای همکاری در پروژه‌های منتخب طراحی محصول، هدایت بصری و سیستم‌های هوش مصنوعی هستم.
+            </p>
 
-                <div className="contact-meta-divider" />
+            {/* Quick Email Launcher CTA */}
+            <div className="creator-inquiry-box">
+              <span className="inquiry-lead">ارسال ایمیل فوری با موضوع همکاری:</span>
+              <a
+                href={`mailto:${emailAddress}?subject=ALDMC%20Collaboration%20Inquiry`}
+                className="btn btn-primary btn-pill creator-cta-btn"
+              >
+                <span>شروع گفت‌وگو و ارسال ایمیل</span>
+                <ArrowLeft size={16} />
+              </a>
+            </div>
+          </div>
 
-                <div className="contact-meta-status">
-                  <div className="meta-status-dot" />
-                  <span>{personalInfo.availability}</span>
-                </div>
+          {/* Left Column: Primary Contact Cards + Social Hub */}
+          <div className="contact-channels-column">
+            {/* Primary 3 Channels */}
+            <div className="primary-channels-stack">
+              {primaryChannels.map((ch) => (
+                <div key={ch.id} className="channel-item-card card-editorial">
+                  <div className="channel-icon-col">{ch.icon}</div>
 
-                <div className="contact-meta-features">
-                  <div className="meta-feature-item">
-                    <Sparkles size={13} className="text-brand-orange" />
-                    <span>مستقر در شیراز — امکان همکاری ریموت در سراسر جهان</span>
+                  <div className="channel-info-col">
+                    <div className="channel-label-row">
+                      <span className="channel-label">{ch.label}</span>
+                      <span className="channel-label-en font-latin">{ch.labelEn}</span>
+                    </div>
+                    <span className="channel-value font-latin">{ch.value}</span>
+                    <p className="channel-desc">{ch.description}</p>
+                  </div>
+
+                  <div className="channel-action-col">
+                    {ch.actionType === 'copy' ? (
+                      <button
+                        type="button"
+                        onClick={() => copyToClipboard(ch.copyValue || ch.value, ch.id)}
+                        className="btn btn-secondary btn-sm btn-pill"
+                        title="کپی"
+                      >
+                        {copiedKey === ch.id ? (
+                          <>
+                            <Check size={14} className="text-green-600" />
+                            <span>کپی شد</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={14} />
+                            <span>کپی آدرس</span>
+                          </>
+                        )}
+                      </button>
+                    ) : (
+                      <a
+                        href={ch.href}
+                        target={ch.href.startsWith('http') ? '_blank' : undefined}
+                        rel={ch.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="btn btn-secondary btn-sm btn-pill"
+                      >
+                        <span>ارتباط مستقیم</span>
+                        <ExternalLink size={13} />
+                      </a>
+                    )}
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Social Matrix Hub */}
+            <div className="contact-social-hub card-editorial">
+              <div className="social-hub-header">
+                <Share2 size={16} className="text-brand-orange" />
+                <h4 className="social-hub-title">شبکه‌های اجتماعی و پلتفرم‌های تخصصی</h4>
+              </div>
+
+              <div className="social-profiles-grid">
+                {socialProfiles.map((s, idx) => (
+                  <a
+                    key={idx}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-profile-chip font-latin"
+                  >
+                    <div className="social-chip-head">
+                      <strong className="social-platform">{s.platform}</strong>
+                      <ExternalLink size={11} className="text-muted-light" />
+                    </div>
+                    <span className="social-handle">{s.handle}</span>
+                    <span className="social-desc">{s.role}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

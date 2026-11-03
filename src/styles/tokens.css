@@ -1,17 +1,18 @@
-/* ALDMC PERSIMMON V6 DESIGN SYSTEM TOKENS */
+/* ALDMC PERSIMMON × ORU CODE DESIGN SYSTEM TOKENS */
 
 :root {
   /* Brand Core Palette */
   --brand-orange: #E76338;
-  --brand-orange-hover: #F17B54;
-  --brand-charcoal: #27211D;
-  --brand-paper: #F6F0E7;
+  --brand-orange-hover: #D85429;
+  --brand-charcoal: #111111;
+  --brand-paper: #F4F4F5;
   --brand-peach: #F6B393;
-  --brand-accent-glow: rgba(231, 99, 56, 0.15);
+  --brand-accent-glow: rgba(231, 99, 56, 0.12);
 
-  /* Typography Stacks */
-  --font-persian: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Typography Stacks: Peyda as Primary Persian Typeface, Manrope as Dedicated English/Latin Brand Font */
+  --font-persian: 'Peyda', 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-latin: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Manrope', 'Peyda', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Spacing Scale (8pt grid based) */
   --space-1: 4px;
@@ -28,65 +29,71 @@
   --space-24: 96px;
   --space-32: 128px;
 
-  /* Radii Scale */
+  /* Radii Scale: 20-24px for Cards, 9999px for Pills */
   --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 16px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-pill: 9999px;
 
   /* Motion & Transitions */
-  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 450ms;
 
-  /* Light Theme (Default: Paper Foundation) */
-  --bg: #F6F0E7;
-  --fg: #27211D;
-  --fg-strong: #171311;
-  --surface: #EEE7DC;
-  --surface-hover: #E7DECF;
-  --surface-elevated: #FAF6F0;
-  --muted: #74675F;
-  --muted-light: #9B8D83;
-  --border: #DFD5C8;
-  --border-subtle: #E8E0D5;
-  --border-strong: #C4B7A6;
-  --logo-color: #27211D;
-  --on-accent: #27211D;
-  --highlight-badge: rgba(231, 99, 56, 0.12);
-  --highlight-badge-border: rgba(231, 99, 56, 0.25);
+  /* Container & Content Boundaries */
+  --container-max-width: 1480px;
+  --container-max-width-xl: 1600px;
+  --container-gutter: clamp(20px, 4vw, 56px);
+  --container-gutter-xl: 64px;
+
+  /* Light Theme (Default: ORU CODE Light Grey #F4F4F5 + Pure White Cards) */
+  --bg: #F4F4F5;
+  --fg: #111111;
+  --fg-strong: #000000;
+  --surface: #FFFFFF;
+  --surface-hover: #FAFAFA;
+  --surface-elevated: #FFFFFF;
+  --muted: #3F3F46;
+  --muted-light: #52525B;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --logo-color: #111111;
+  --on-accent: #FFFFFF;
+  --highlight-badge: rgba(231, 99, 56, 0.08);
+  --highlight-badge-border: rgba(231, 99, 56, 0.18);
   
-  --shadow-sm: 0 2px 8px -2px rgba(39, 33, 29, 0.05);
-  --shadow-md: 0 6px 20px -3px rgba(39, 33, 29, 0.07), 0 2px 6px -1px rgba(39, 33, 29, 0.04);
-  --shadow-lg: 0 16px 36px -6px rgba(39, 33, 29, 0.10), 0 4px 12px -2px rgba(39, 33, 29, 0.05);
-  --glass-bg: rgba(246, 240, 231, 0.85);
-  --glass-border: rgba(223, 213, 200, 0.7);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 6px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 8px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 16px 36px -6px rgba(0, 0, 0, 0.08), 0 4px 14px -2px rgba(0, 0, 0, 0.04);
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(0, 0, 0, 0.08);
 }
 
-/* Dark Theme (Charcoal Foundation) */
+/* Dark Theme */
 [data-theme="dark"] {
-  --bg: #27211D;
-  --fg: #F6F0E7;
+  --bg: #0F0F10;
+  --fg: #F4F4F5;
   --fg-strong: #FFFFFF;
-  --surface: #352D27;
-  --surface-hover: #403730;
-  --surface-elevated: #443B33;
-  --muted: #C9BFB6;
-  --muted-light: #A3968C;
-  --border: #594B40;
-  --border-subtle: #453A31;
-  --border-strong: #786557;
+  --surface: #18181B;
+  --surface-hover: #222226;
+  --surface-elevated: #27272A;
+  --muted: #A1A1AA;
+  --muted-light: #71717A;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.15);
   --logo-color: #E76338;
-  --on-accent: #27211D;
-  --highlight-badge: rgba(231, 99, 56, 0.2);
-  --highlight-badge-border: rgba(231, 99, 56, 0.4);
+  --on-accent: #FFFFFF;
+  --highlight-badge: rgba(231, 99, 56, 0.15);
+  --highlight-badge-border: rgba(231, 99, 56, 0.3);
 
-  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.45), 0 2px 8px -1px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.6), 0 6px 16px -2px rgba(0, 0, 0, 0.35);
-  --glass-bg: rgba(39, 33, 29, 0.88);
-  --glass-border: rgba(89, 75, 64, 0.65);
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 2px 8px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.7), 0 6px 16px -2px rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(24, 24, 27, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }

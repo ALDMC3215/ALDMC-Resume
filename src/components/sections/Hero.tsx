@@ -1,139 +1,119 @@
-import React from 'react';
-import { Monogram } from '../ui/Monogram';
-import { ArrowLeft, Sparkles, MapPin, Layers } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ArrowLeft, MessageSquare, MoveDown } from 'lucide-react';
+import { Lanyard } from '../ui/Lanyard';
 import { resumeData } from '../../data/resumeData';
 
 export const Hero: React.FC = () => {
+  const root = useRef<HTMLElement | null>(null);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 1024);
   const { personalInfo } = resumeData;
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReducedMotion) return;
+
+      // Coordinated, high-end opening animation sequence:
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.55 } });
+
+      tl.fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.7 })
+        .fromTo('.hero-headline-name', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+        .fromTo('.hero-positioning', { opacity: 0, y: 14 }, { opacity: 1, y: 0 }, '-=0.35')
+        .fromTo('.hero-cta-group .btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08 }, '-=0.3')
+        .fromTo('.hero-footer-strip', { opacity: 0, y: 8 }, { opacity: 1, y: 0 }, '-=0.2');
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="hero-section" id="hero">
-      {/* Background Architectural Brand Monogram Element */}
-      <div className="hero-bg-monogram" aria-hidden="true">
-        <Monogram width="100%" color="var(--border-subtle)" />
+    <section ref={root} className="hero-section hero-editorial-chapter" id="hero">
+      {/* Full-bleed, boundary-free 3D Lanyard Canvas covering the entire Hero section */}
+      <div className="hero-lanyard-stage" aria-label="کارت آویز هویت دیزاین علی فرقانی (تعاملی)">
+        <Lanyard
+          frontImage="/brand/card-front.webp"
+          backImage="/brand/card-back.png"
+          strapImage="/brand/strap-band.png"
+          cardColor="#F4F4F5"
+          strapColor="#18181B"
+          finish="glossy"
+          metal="silver"
+          orientation="portrait"
+          cornerRadius={0.28}
+          size={isMobile ? 0.38 : 0.48}
+          anchor={isMobile ? 0.5 : 0.24}
+          strapLength={isMobile ? 0.05 : 0.30}
+          gravity={1}
+          elasticity={0.55}
+          damping={0.48}
+          breeze={0.35}
+          interactive={true}
+          intro={true}
+        />
       </div>
 
-      <div className="container hero-container">
-        <div className="hero-grid">
-          {/* Main Content Column (Right in RTL) */}
-          <div className="hero-content">
-            {/* Unified Eyebrow & Status Row */}
-            <div className="hero-eyebrow-row">
-              <span className="hero-kicker-badge font-latin">A/F. DESIGN × AI</span>
-              <div className="hero-meta-chip">
-                <MapPin size={13} className="text-brand-orange flex-shrink-0" />
-                <span>{personalInfo.location}</span>
-              </div>
-              <div className="hero-status-chip-inline">
-                <span className="status-ping-sm" />
-                <span className="hero-availability-text">{personalInfo.availability}</span>
-              </div>
-            </div>
+      <div className="container hero-chapter-container">
+        {/* Main 2-Column Editorial Stage — Connected & Intentionally Balanced */}
+        <div className="hero-main-stage">
+          {/* Right Column: Dominant Typographic Anchor */}
+          <div className="hero-text-anchor">
+            {/* The Main Name is the Immediate Visual Focal Point */}
+            <h1 className="hero-headline-name">
+              {personalInfo.name}
+            </h1>
 
-            {/* Display Headlines */}
-            <div className="hero-title-group">
-              <h1 className="hero-main-title">{personalInfo.name}</h1>
-              <h2 className="hero-subtitle">
-                <span className="hero-subtitle-primary">طراح محصول، UI/UX</span>
-                <span className="hero-subtitle-sep"> و </span>
-                <span className="hero-subtitle-accent">راهکارهای خلاقانه با هوش مصنوعی</span>
-              </h2>
-            </div>
+            {/* Supporting Professional Positioning */}
+            <p className="hero-positioning">
+              طراح محصول - رابط کاربری مدرن و راهکارهای خلاقانه با AI
+            </p>
 
-            {/* Refined Editorial Thesis Callout */}
-            <div className="hero-thesis-block">
-              <div className="hero-thesis-content">
-                <Sparkles size={16} className="text-brand-orange flex-shrink-0 mt-0.5" />
-                <span className="hero-thesis-quote">
-                  «{personalInfo.supportingStatement}»
-                </span>
-              </div>
-            </div>
-
-            {/* Intro Paragraph */}
-            <p className="hero-intro-text">{personalInfo.intro}</p>
-
-            {/* Dual CTAs */}
+            {/* Two Main Functional CTAs */}
             <div className="hero-cta-group">
-              <a href="#projects" className="btn btn-primary hero-btn-main">
-                <span>مشاهده پروژه‌ها</span>
-                <ArrowLeft size={16} className="cta-arrow" />
+              <a href="#projects" className="btn btn-primary btn-pill hero-primary-btn">
+                <span>مشاهده پروژه‌های منتخب</span>
+                <ArrowLeft size={16} />
               </a>
-              <a href="#contact" className="btn btn-secondary hero-btn-sub">
-                <span>ارتباط با من</span>
-              </a>
-            </div>
 
-            {/* Core Capability Strip */}
-            <div className="hero-pillars-strip">
-              <div className="hero-pillar-chip">
-                <Layers size={14} className="text-brand-orange flex-shrink-0" />
-                <span>طراحی محصول و تجربه کاربری</span>
-              </div>
-              <div className="hero-pillar-chip font-latin">
-                <span>Vibe Coding & Rapid Prototyping</span>
-              </div>
-              <div className="hero-pillar-chip font-latin">
-                <span>Generative AI Media</span>
-              </div>
+              <a href="#contact" className="btn btn-secondary btn-pill hero-secondary-btn">
+                <span>شروع همکاری</span>
+                <MessageSquare size={14} />
+              </a>
             </div>
           </div>
 
-          {/* Editorial Creator Showcase Profile (Left in RTL) */}
-          <div className="hero-visual-col">
-            <div className="creator-profile-card card-editorial">
-              {/* Top Bar with Status and Monogram */}
-              <div className="creator-card-top-bar">
-                <div className="creator-monogram-stamp">
-                  <Monogram width={18} color="var(--brand-orange)" />
-                </div>
-                <div className="creator-status-chip">
-                  <span className="status-ping-sm" />
-                  <span>آماده پروژه‌های منتخب</span>
-                </div>
-              </div>
+          {/* Left Column Spacer: reserves exact visual balance for the hanging card */}
+          <div className="hero-visual-spacer" aria-hidden="true" />
+        </div>
 
-              {/* Circular Creator Avatar Frame */}
-              <div className="creator-avatar-section">
-                <div className="creator-avatar-ring">
-                  <img
-                    src="/brand/avatars/ali-forghani.webp"
-                    alt="Ali Forghani - علی فرقانی"
-                    className="creator-avatar-img"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-
-              {/* Creator Info Footer */}
-              <div className="creator-card-footer">
-                <div className="creator-name-row">
-                  <div>
-                    <h3 className="creator-name-fa">علی فرقانی</h3>
-                    <span className="creator-name-en font-latin">ALI FORGHANI</span>
-                  </div>
-                  <span className="creator-tag-v6 font-latin">PORTFOLIO · 2026</span>
-                </div>
-
-                <p className="creator-role-tagline font-latin">
-                  Product Designer · AI Creative Specialist
-                </p>
-
-                <div className="creator-card-specs">
-                  <span className="creator-spec-pill">
-                    <Sparkles size={11} className="text-brand-orange" />
-                    <span>Product Design & UI/UX</span>
-                  </span>
-                  <span className="creator-spec-pill font-latin">
-                    <span>Vibe Coding</span>
-                  </span>
-                  <span className="creator-spec-pill font-latin">
-                    <span>Next.js</span>
-                  </span>
-                </div>
-              </div>
-            </div>
+        {/* Bottom Editorial Footnote & Proof Points */}
+        <div className="hero-footer-strip">
+          <div className="hero-proof-metrics">
+            <span className="proof-item">
+              <strong className="proof-accent">۳+ سال</strong> تجربه طراحی محصول و رابط کاربری
+            </span>
+            <span className="proof-sep">/</span>
+            <span className="proof-item">
+              مدرس مهارت‌های <strong className="proof-accent font-latin">AI</strong> و <strong className="proof-accent font-latin">Design</strong>
+            </span>
+            <span className="proof-sep">/</span>
+            <span className="proof-item">
+              توسعه فرانت‌اند و پروتوتایپینگ زنده با هوش مصنوعی
+            </span>
           </div>
+
+          <a href="#projects" className="hero-scroll-cue font-latin" aria-label="اسکرول به بخش پروژه‌ها">
+            <span>SCROLL TO EXPLORE</span>
+            <MoveDown size={14} className="cue-icon" />
+          </a>
         </div>
       </div>
     </section>

@@ -32,6 +32,24 @@ const aldmcIdentityPlugin: Plugin = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), aldmcIdentityPlugin],
+  resolve: {
+    dedupe: ['react', 'react-dom']
+  },
+  build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-three': ['three'],
+          'vendor-gsap': ['gsap'],
+          'vendor-motion': ['framer-motion', 'lenis'],
+          'vendor-icons': ['lucide-react']
+        }
+      }
+    }
+  },
   server: {
     host: '127.0.0.1',
     port: 5187,

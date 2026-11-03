@@ -1,167 +1,179 @@
 import React, { useState } from 'react';
-import { aiWorkflowTools, ToolCategoryGroup, ToolItem } from '../../data';
-import {
-  Sparkles,
-  ChevronDown,
-  ChevronUp,
-  Cpu,
-  Layers,
-  Wand2,
-  Music,
-  Code2,
-  Boxes,
-  ArrowUpRight
-} from 'lucide-react';
+import { Bot, Terminal, Palette, Sparkles, ChevronDown, ChevronUp, Layers } from 'lucide-react';
 
 export const Tools: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const categoryIcons: Record<string, React.ReactNode> = {
-    'assistants-research': <Cpu size={14} className="text-brand-orange" />,
-    'visual-video': <Wand2 size={14} className="text-brand-orange" />,
-    'music-audio': <Music size={14} className="text-brand-orange" />,
-    'dev-creative-coding': <Code2 size={14} className="text-brand-orange" />,
-    'knowledge-agents': <Boxes size={14} className="text-brand-orange" />,
-  };
+  // Grouped bento by category:
+  // Assistants large panel, Coding / Visual+Audio smaller, Figma/Photoshop foundations band
+  const assistantTools = [
+    { name: 'Gemini', role: 'Multimodal Research & Context', tag: 'Assistants' },
+    { name: 'Claude', role: 'Complex Analysis & Code Architecture', tag: 'Assistants' },
+    { name: 'ChatGPT', role: 'Reasoning & Creative Partner', tag: 'Assistants' },
+  ];
+
+  const codingTools = [
+    { name: 'Google Antigravity', role: 'Agentic Development & IDE', tag: 'Coding' },
+    { name: 'Codex', role: 'AI Code Generation & Execution', tag: 'Coding' },
+    { name: 'Git & GitHub', role: 'Version Control & Workflows', tag: 'Coding' },
+  ];
+
+  const visualAudioTools = [
+    { name: 'Google Flow & Veo', role: 'AI Video Storyboard & Concept', tag: 'Visual & Video' },
+    { name: 'Krea.ai', role: 'Real-Time Generation & Upscaling', tag: 'Visual & Video' },
+    { name: 'ElevenLabs & Suno', role: 'Voice Design & AI Music Lab', tag: 'Audio' },
+  ];
+
+  const designFoundations = [
+    { label: 'Primary UI/UX & Systems', tool: 'Figma' },
+    { label: 'Visual & Graphic Design', tool: 'Adobe Photoshop' },
+    { label: 'Design Systems', tool: 'Design Tokens & CSS' },
+  ];
+
+  // Collapsed 29-tool appendix directory
+  const allToolsList = [
+    'ChatGPT', 'Claude', 'Gemini', 'Perplexity', 'Grok', 'DeepSeek', 'Mistral', 'NotebookLM', 'Google AI Studio', 'Cursor', 'Windsurf',
+    'Google Antigravity IDE', 'v0 by Vercel', 'Bolt.new', 'Lovable', 'Codex', 'Midjourney', 'DALL-E 3', 'Stable Diffusion', 'FLUX.1',
+    'Recraft', 'Magnific AI', 'Krea.ai', 'Runway Gen-3', 'Luma Dream Machine', 'Kling AI', 'Minimax Hailuo', 'Pika 2.0', 'Suno AI',
+    'Udio', 'ElevenLabs', 'Notion AI',
+  ];
 
   return (
     <section className="section-wrapper tools-section" id="tools">
       <div className="container">
         {/* Section Header */}
         <div className="section-header tools-header">
-          <span className="section-kicker font-latin">{aiWorkflowTools.kicker}</span>
-          <h2 className="section-title">{aiWorkflowTools.sectionTitle}</h2>
+          <div className="section-kicker">AI &amp; CREATIVE WORKFLOW</div>
+          <h2 className="section-title">
+            ابزارهای <span className="accent-word">منتخب</span>
+          </h2>
           <p className="section-desc">
-            {aiWorkflowTools.description}
+            از مدل‌های زبانی و دستیارهای کدنویسی تا ابزارهای تولید تصویر، ویدیو و موسیقی؛ برای هر پروژه از ترکیب ابزارهای مناسب استفاده می‌کنم.
           </p>
         </div>
 
-        {/* 1. Core Foundations Bar (Figma, Photoshop, Design Tokens) */}
-        <div className="tools-foundations-bar">
-          <div className="tools-foundations-lead">
-            <span className="tools-foundations-icon">
-              <Layers size={14} className="text-brand-orange" />
-            </span>
-            <span className="tools-foundations-title">
-              پایه‌های طراحی و سیستم‌های دیزاین:
-            </span>
+        {/* 1. Design Foundations Band (Figma, Photoshop, Design Tokens) */}
+        <div className="tools-foundations-band card-editorial">
+          <div className="foundations-band-lead">
+            <Layers size={18} className="text-brand-orange" />
+            <span className="foundations-lead-text">پایه‌های اصلی طراحی و سیستم‌های دیزاین:</span>
           </div>
 
-          <div className="tools-foundations-tags">
-            {aiWorkflowTools.designFoundations.map((tool) => (
-              <div key={tool.name} className="foundations-tag-item">
-                <span className="foundations-tag-name font-latin">{tool.name}</span>
-                <span className="foundations-tag-badge">{tool.tag}</span>
+          <div className="foundations-chips-row font-latin">
+            {designFoundations.map((f, idx) => (
+              <div key={idx} className="foundation-chip">
+                <span className="foundation-label">{f.label}</span>
+                <strong className="foundation-val">{f.tool}</strong>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 2. Featured Primary AI Workflow (9 Key Tools in 3x3 Grid) */}
-        <div className="tools-workflow-wrapper">
-          <div className="tools-workflow-header">
-            <div className="tools-header-label">
-              <Sparkles size={14} className="text-brand-orange" />
-              <h3 className="tools-header-title">
-                جریان کاری منتخب <span className="tools-header-sub font-latin">(Primary Workflow)</span>
-              </h3>
+        {/* 2. Grouped Bento Grid: Assistants Large Panel + Coding & Media Smaller */}
+        <div className="tools-bento-grid">
+          {/* Assistants Large Panel */}
+          <div className="tools-panel card-editorial assistants-large-panel">
+            <div className="tools-panel-header">
+              <div className="tools-panel-icon-box">
+                <Bot size={20} className="text-brand-orange" />
+              </div>
+              <div>
+                <h3 className="tools-panel-title">دستیاران هوشمند و تحلیل (Assistants)</h3>
+                <span className="tools-panel-sub font-latin">Primary Reasoning &amp; Strategy</span>
+              </div>
             </div>
-            <span className="tools-header-count font-latin">
-              9 Featured Workflow Tools
-            </span>
+
+            <div className="tools-cards-stack">
+              {assistantTools.map((t, idx) => (
+                <div key={idx} className="tool-item-card">
+                  <div className="tool-item-header">
+                    <strong className="tool-item-name font-latin">{t.name}</strong>
+                    <span className="tool-item-tag font-latin">{t.tag}</span>
+                  </div>
+                  <span className="tool-item-role font-latin">{t.role}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="tools-primary-grid">
-            {aiWorkflowTools.primaryWorkflow.map((tool) => (
-              <div
-                key={tool.name}
-                className="tools-workflow-card card-editorial"
-              >
-                <div className="tools-card-body">
-                  <div className="tools-card-top-row">
-                    <span className="tools-name font-latin">
-                      {tool.name}
-                    </span>
-                    <span className="tools-category-tag font-latin">
-                      {tool.category}
-                    </span>
-                  </div>
-                  <p className="tools-role font-latin">
-                    {tool.role}
-                  </p>
-                </div>
-                <div className="tools-corner-icon">
-                  <ArrowUpRight size={11} />
-                </div>
+          {/* Coding / Development Panel */}
+          <div className="tools-panel card-editorial coding-panel">
+            <div className="tools-panel-header">
+              <div className="tools-panel-icon-box">
+                <Terminal size={18} className="text-brand-orange" />
               </div>
-            ))}
+              <div>
+                <h3 className="tools-panel-title">کدنویسی و توسعه (Coding)</h3>
+                <span className="tools-panel-sub font-latin">Agentic Prototyping</span>
+              </div>
+            </div>
+
+            <div className="tools-cards-stack">
+              {codingTools.map((t, idx) => (
+                <div key={idx} className="tool-item-card">
+                  <div className="tool-item-header">
+                    <strong className="tool-item-name font-latin">{t.name}</strong>
+                    <span className="tool-item-tag font-latin">{t.tag}</span>
+                  </div>
+                  <span className="tool-item-role font-latin">{t.role}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Visual & Audio Panel */}
+          <div className="tools-panel card-editorial visual-audio-panel">
+            <div className="tools-panel-header">
+              <div className="tools-panel-icon-box">
+                <Palette size={18} className="text-brand-orange" />
+              </div>
+              <div>
+                <h3 className="tools-panel-title">تصویر، ویدیو و صدا (Media Lab)</h3>
+                <span className="tools-panel-sub font-latin">Generative Audio &amp; Video</span>
+              </div>
+            </div>
+
+            <div className="tools-cards-stack">
+              {visualAudioTools.map((t, idx) => (
+                <div key={idx} className="tool-item-card">
+                  <div className="tool-item-header">
+                    <strong className="tool-item-name font-latin">{t.name}</strong>
+                    <span className="tool-item-tag font-latin">{t.tag}</span>
+                  </div>
+                  <span className="tool-item-role font-latin">{t.role}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 3. Expandable Directory Bar (All 29 Tools in 5 Categories) */}
-        <div className="tools-directory-bar card-editorial">
-          <div className="tools-directory-bar-main">
-            <div className="tools-directory-meta">
-              <span className="tools-all-badge font-latin">29 AI TOOLS</span>
-              <div className="tools-categories-summary">
-                <span className="tools-cat-summary-item">دستیارها (۱۱)</span>
-                <span className="tools-cat-summary-dot">•</span>
-                <span className="tools-cat-summary-item">تصویر و ویدیو (۸)</span>
-                <span className="tools-cat-summary-dot">•</span>
-                <span className="tools-cat-summary-item">موسیقی و صدا (۳)</span>
-                <span className="tools-cat-summary-dot">•</span>
-                <span className="tools-cat-summary-item">توسعه و کد (۴)</span>
-                <span className="tools-cat-summary-dot">•</span>
-                <span className="tools-cat-summary-item">مدیریت دانش (۳)</span>
-              </div>
+        {/* 3. Collapsed 29-Tool Directory Bar (Appendix) */}
+        <div className="tools-appendix-bar card-editorial">
+          <button
+            type="button"
+            onClick={() => setExpanded(!expanded)}
+            className="appendix-toggle-btn"
+            aria-expanded={expanded}
+          >
+            <div className="appendix-toggle-label">
+              <Sparkles size={16} className="text-brand-orange" />
+              <span className="font-latin font-bold">29 AI TOOLS DIRECTORY</span>
+              <span className="appendix-sub-label">پایگاه جامع ابزارهای کاری</span>
             </div>
 
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="tools-expand-pill-btn"
-              type="button"
-            >
-              <span>{isExpanded ? 'بستن فهرست' : 'مشاهده تمام ۲۹ ابزار'}</span>
-              {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-            </button>
-          </div>
+            <div className="appendix-toggle-action">
+              <span>{expanded ? 'بستن لیست' : 'مشاهده تمام ۲۹ ابزار'}</span>
+              {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            </div>
+          </button>
 
-          {/* Expanded 5 Categories View */}
-          {isExpanded && (
-            <div className="tools-categories-wrapper">
-              <div className="tools-categories-grid">
-                {aiWorkflowTools.categories.map((category: ToolCategoryGroup) => (
-                  <div
-                    key={category.id}
-                    className="tools-category-box"
-                  >
-                    <div className="tools-cat-header">
-                      <div className="tools-cat-icon-wrap">
-                        {categoryIcons[category.id]}
-                      </div>
-                      <div>
-                        <h5 className="tools-cat-title">
-                          {category.title}
-                        </h5>
-                        <span className="tools-cat-sub font-latin">
-                          {category.titleEn} · ({category.tools.length})
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="tools-badges-cloud">
-                      {category.tools.map((tool: ToolItem) => (
-                        <span
-                          key={tool.name}
-                          className="tools-badge-pill font-latin"
-                        >
-                          {tool.name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {expanded && (
+            <div className="appendix-expanded-tags font-latin">
+              {allToolsList.map((tool, idx) => (
+                <span key={idx} className="appendix-tag">
+                  {tool}
+                </span>
+              ))}
             </div>
           )}
         </div>

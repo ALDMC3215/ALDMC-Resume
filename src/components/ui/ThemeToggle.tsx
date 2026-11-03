@@ -23,7 +23,7 @@ export const ThemeToggle: React.FC = () => {
   const updateThemeColorMeta = (currentTheme: 'light' | 'dark') => {
     const meta = document.getElementById('theme-color-meta');
     if (meta) {
-      meta.setAttribute('content', currentTheme === 'dark' ? '#27211D' : '#F6F0E7');
+      meta.setAttribute('content', currentTheme === 'dark' ? '#0F0F10' : '#F4F4F5');
     }
   };
 
@@ -40,7 +40,7 @@ export const ThemeToggle: React.FC = () => {
       onClick={toggleTheme}
       className="btn-icon theme-toggle-btn"
       aria-label={theme === 'light' ? 'تغییر به تم تیره' : 'تغییر به تم روشن'}
-      title={theme === 'light' ? 'تغییر به حالت تاریک (Charcoal)' : 'تغییر به حالت روشن (Paper)'}
+      title={theme === 'light' ? 'تغییر به حالت تاریک' : 'تغییر به حالت روشن'}
       type="button"
     >
       {theme === 'light' ? (
