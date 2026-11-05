@@ -6,7 +6,7 @@ import { Sparkles, ChevronDown, Target, Zap, ShieldCheck, ArrowLeft } from 'luci
 export const About: React.FC = () => {
   const root = useRef<HTMLElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
   const { personalInfo, coreApproach } = resumeData;
 
   // Entrance animation for initial viewport load

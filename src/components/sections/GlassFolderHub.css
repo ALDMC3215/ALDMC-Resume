@@ -17,7 +17,7 @@
 
 .hub-dock-hint {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--muted);
   text-align: center;
@@ -43,7 +43,7 @@
   border: 1px solid var(--highlight-badge-border, rgba(231, 99, 56, 0.22));
   border-radius: 9999px;
   color: var(--brand-orange, #E76338);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -117,7 +117,7 @@
   background: var(--surface, #FFFFFF);
   border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
   border-radius: 16px;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--muted, #3F3F46);
   box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.04));
   transition: all 0.35s ease;
@@ -154,7 +154,7 @@
   background: var(--surface-hover, #F4F4F5);
   border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--fg, #111111);
 }
@@ -226,7 +226,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--muted-light, #71717A);
 }
 
@@ -284,7 +284,7 @@
   border: 1px solid rgba(231, 99, 56, 0.35);
   border-radius: 12px;
   color: #E76338;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -322,7 +322,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.15rem 0.45rem;
-  font-size: 0.7rem;
+  font-size: var(--fs-2xs);
   font-weight: 700;
   color: #E76338;
   background: rgba(231, 99, 56, 0.08);
@@ -459,7 +459,7 @@
   border: 1px solid rgba(231, 99, 56, 0.25);
   border-radius: 9999px;
   color: #E76338;
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -493,7 +493,7 @@
   background: var(--highlight-badge, rgba(231, 99, 56, 0.08));
   border: 1px solid var(--highlight-badge-border, rgba(231, 99, 56, 0.2));
   color: var(--brand-orange, #E76338);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   margin-bottom: 0.85rem;
 }
@@ -507,7 +507,7 @@
 }
 
 .folder-hero-desc {
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   line-height: 1.7;
   color: var(--muted, #3F3F46);
   margin: 0;
@@ -535,7 +535,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--fg, #111111);
   margin-bottom: 1.5rem;
@@ -606,13 +606,13 @@
 }
 
 .proj-index {
-  font-size: 0.7rem;
+  font-size: var(--fs-2xs);
   color: var(--muted-light, #71717A);
   font-weight: 600;
 }
 
 .proj-category {
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--muted, #3F3F46);
   font-weight: 600;
 }
@@ -625,12 +625,12 @@
   padding: 0.25rem 0.65rem;
   border-radius: 9999px;
   border: 1px solid;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
 }
 
 .proj-card-title {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--fg, #111111);
   margin: 0 0 0.4rem;
@@ -642,14 +642,14 @@
 }
 
 .proj-role-text {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--brand-orange, #E76338);
   font-weight: 600;
   margin: 0 0 0.85rem;
 }
 
 .proj-card-desc {
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
   line-height: 1.7;
   color: var(--muted, #3F3F46);
   margin: 0 0 1.25rem;
@@ -672,7 +672,7 @@
   background: var(--surface-hover, #F4F4F5);
   border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   border-radius: 6px;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--fg, #111111);
   font-weight: 500;
 }
@@ -696,7 +696,7 @@
   border: 1px solid rgba(231, 99, 56, 0.35);
   border-radius: 10px;
   color: #E76338;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -786,7 +786,7 @@
 }
 
 .exp-role-title {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   margin: 0;
 }
@@ -799,7 +799,7 @@
   background: var(--surface-hover, #F4F4F5);
   border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   border-radius: 9999px;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--muted, #3F3F46);
   font-weight: 500;
 }
@@ -811,7 +811,7 @@
 }
 
 .exp-description-text {
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   line-height: 1.7;
   color: var(--muted, #3F3F46);
   margin: 0 0 1.25rem;
@@ -822,7 +822,7 @@
 }
 
 .exp-achieve-label {
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--fg, #111111);
   margin: 0 0 0.6rem;
@@ -845,7 +845,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--muted, #3F3F46);
 }
@@ -874,7 +874,7 @@
   background: var(--surface-hover, #F4F4F5);
   border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   border-radius: 6px;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--fg, #111111);
   font-weight: 500;
 }
@@ -929,13 +929,13 @@
 }
 
 .teach-type-badge {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--brand-orange, #E76338);
 }
 
 .teach-org-name {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted, #3F3F46);
 }
 
@@ -947,12 +947,12 @@
   padding: 0.25rem 0.7rem;
   border-radius: 9999px;
   border: 1px solid;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
 }
 
 .teach-card-title {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--fg, #111111);
   margin: 0 0 0.4rem;
@@ -967,13 +967,13 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--muted-light, #71717A);
   margin-bottom: 1rem;
 }
 
 .teach-card-desc {
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
   line-height: 1.7;
   color: var(--muted, #3F3F46);
   margin: 0 0 1.25rem;
@@ -991,7 +991,7 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--fg, #111111);
   margin-bottom: 0.6rem;
@@ -1014,7 +1014,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-  font-size: 0.84rem;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--muted, #3F3F46);
 }
@@ -1043,7 +1043,7 @@
   background: var(--surface-hover, #F4F4F5);
   border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.06));
   border-radius: 6px;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--fg, #111111);
   font-weight: 500;
 }
@@ -1091,7 +1091,7 @@
   }
   .folder-active-badge {
     padding: 0.35rem 0.65rem;
-    font-size: 0.78rem;
+    font-size: var(--fs-xs);
     white-space: nowrap;
   }
   .folder-active-badge .badge-meta {
@@ -1099,7 +1099,7 @@
   }
   .folder-back-button {
     padding: 0.45rem 0.8rem;
-    font-size: 0.78rem;
+    font-size: var(--fs-xs);
     gap: 0.4rem;
   }
   .folder-back-button .kbd-shortcut {
@@ -1114,7 +1114,7 @@
   }
   .folder-nav-pill-btn {
     padding: 0.4rem 0.7rem;
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
   }
   .folder-nav-pill-btn .nav-btn-icon {
     display: none;
@@ -1332,7 +1332,7 @@
   background: transparent;
   color: var(--muted, #52525b);
   font-family: inherit;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;

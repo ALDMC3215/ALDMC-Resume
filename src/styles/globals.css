@@ -109,7 +109,7 @@ html {
   scroll-behavior: auto;
   scroll-padding-top: 84px;
   -webkit-text-size-adjust: 100%;
-  font-size: 16px;
+  font-size: var(--fs-md);
   background-color: var(--bg);
   color: var(--fg);
   overflow-x: hidden;
@@ -237,7 +237,7 @@ pre {
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-latin);
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -284,7 +284,7 @@ pre {
   padding: 14px 32px;
   border-radius: var(--radius-pill);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -362,7 +362,7 @@ pre {
 
 .btn-sm {
   padding: 9px 20px;
-  font-size: 0.875rem;
+  font-size: var(--fs-sm);
   border-radius: var(--radius-pill);
   min-height: 40px;
 }
@@ -390,7 +390,7 @@ pre {
   gap: 6px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   background-color: var(--surface-hover);
   border: 1px solid var(--border);
