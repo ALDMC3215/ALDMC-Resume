@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ArrowLeft, MessageSquare, MoveDown } from 'lucide-react';
 import { Lanyard } from '../ui/Lanyard';
+import { LiveOrb } from '../ui/LiveOrb';
 import { resumeData } from '../../data/resumeData';
 
 export const Hero: React.FC = () => {
@@ -67,6 +68,7 @@ export const Hero: React.FC = () => {
           {/* Right Column: Dominant Typographic Anchor */}
           <div className="hero-text-anchor">
             {/* The Main Name is the Immediate Visual Focal Point */}
+            <LiveOrb className="hero-live-orb" variant="custom" color="#E76338" eyeColor="#F6F0E7" size={isMobile ? 64 : 120} />
             <h1 className="hero-headline-name">
               {personalInfo.name}
             </h1>

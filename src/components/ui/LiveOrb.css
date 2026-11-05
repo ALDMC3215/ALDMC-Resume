@@ -1,0 +1,68 @@
+.live-orb {
+  width: var(--orb-size, 280px);
+  height: var(--orb-size, 280px);
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+  animation: live-orb-float 5.5s ease-in-out infinite;
+}
+
+.live-orb-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--orb-bg, var(--orb-body));
+  background-size: 140% 140%;
+  box-shadow:
+    inset calc(var(--orb-size) * -0.06) calc(var(--orb-size) * -0.08) calc(var(--orb-size) * 0.14) rgba(0, 0, 0, 0.22),
+    inset calc(var(--orb-size) * 0.05) calc(var(--orb-size) * 0.06) calc(var(--orb-size) * 0.1) rgba(255, 255, 255, 0.35),
+    0 calc(var(--orb-size) * 0.12) calc(var(--orb-size) * 0.22) calc(var(--orb-size) * -0.08) rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  animation: live-orb-breathe 4.2s ease-in-out infinite;
+}
+
+.live-orb.is-fluid .live-orb-body {
+  animation: live-orb-breathe 4.2s ease-in-out infinite, live-orb-flow 9s ease-in-out infinite alternate;
+}
+
+.live-orb-eyes {
+  display: flex;
+  gap: calc(var(--orb-size) * 0.14);
+  will-change: transform;
+}
+
+.live-orb-eye {
+  width: calc(var(--orb-size) * 0.085);
+  height: calc(var(--orb-size) * 0.17);
+  border-radius: 999px;
+  background: var(--orb-eye);
+  transition: transform 0.12s ease;
+  transform-origin: center;
+}
+
+.live-orb-eye.is-blinking {
+  transform: scaleY(0.08);
+}
+
+@keyframes live-orb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(var(--orb-size) * -0.04)); }
+}
+
+@keyframes live-orb-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.025; }
+}
+
+@keyframes live-orb-flow {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-orb,
+  .live-orb-body {
+    animation: none !important;
+  }
+}
