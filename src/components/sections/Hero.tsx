@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowLeft, MessageSquare } from 'lucide-react';
 import { Lanyard } from '../ui/Lanyard';
 import { LiveOrb } from '../ui/LiveOrb';
 import { GlassFolderHub } from './GlassFolderHub';
@@ -29,7 +28,6 @@ export const Hero: React.FC = () => {
 
       tl.fromTo('.hero-headline-name', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 })
         .fromTo('.hero-positioning', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.35')
-        .fromTo('.hero-cta-group .btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.4 }, '-=0.25')
         .fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6 }, '-=0.35')
         .fromTo('.hero-dock', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.2');
     }, root);
@@ -44,14 +42,14 @@ export const Hero: React.FC = () => {
         <Lanyard
           frontImage="/brand/card-front.webp"
           backImage="/brand/card-back.png"
-          strapImage="/brand/strap-band.png"
           cardColor="#F4F4F5"
           strapColor="#18181B"
-          finish="glossy"
+          strapWidth={0.28}
+          finish="matte"
           metal="silver"
           orientation="portrait"
           cornerRadius={0.28}
-          size={isMobile ? 0.38 : 0.48}
+          size={isMobile ? 0.34 : 0.42}
           anchor={isMobile ? 0.5 : 0.24}
           strapLength={isMobile ? 0.05 : 0.30}
           gravity={1}
@@ -78,19 +76,6 @@ export const Hero: React.FC = () => {
             <p className="hero-positioning">
               طراح محصول - رابط کاربری مدرن و راهکارهای خلاقانه با AI
             </p>
-
-            {/* Two Main Functional CTAs */}
-            <div className="hero-cta-group">
-              <a href="#projects" className="btn btn-primary btn-pill hero-primary-btn">
-                <span>مشاهده پروژه‌های منتخب</span>
-                <ArrowLeft size={16} />
-              </a>
-
-              <a href="#contact" className="btn btn-secondary btn-pill hero-secondary-btn">
-                <span>شروع همکاری</span>
-                <MessageSquare size={14} />
-              </a>
-            </div>
           </div>
 
           {/* Left Column Spacer: reserves exact visual balance for the hanging card */}
