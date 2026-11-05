@@ -1120,3 +1120,247 @@
     display: none;
   }
 }
+
+
+/* ==========================================================================
+   KINETICS-INSPIRED MOTION & LAYOUT POLISH
+   spring easing, stagger entrance, bento focus, chip pop, snap rail,
+   keycap press, pulse badge. All motion respects prefers-reduced-motion.
+   ========================================================================== */
+.folder-fullscreen-overlay {
+  --k-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --k-glide: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Compact header + physical folder side by side so content starts in view */
+.folder-content-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  column-gap: 2.5rem;
+  align-items: center;
+}
+
+.folder-content-container > * {
+  grid-column: 1 / -1;
+}
+
+.folder-content-container > .folder-hero-header {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+  margin: 0 0 1.5rem;
+  max-width: none;
+}
+
+.folder-content-container > .folder-interactive-preview-strip {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 1.5rem;
+  max-width: none;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.folder-content-container .folder-preview-label {
+  display: none;
+}
+
+.folder-content-container .folder-preview-desk {
+  min-height: 240px;
+}
+
+.folder-modal-content-shell {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .folder-content-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .folder-content-container > .folder-hero-header,
+  .folder-content-container > .folder-interactive-preview-strip {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    text-align: center;
+  }
+}
+
+/* Stagger Entrance: cards rise in sequence */
+@keyframes k-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.folder-hero-header,
+.folder-interactive-preview-strip,
+.projects-detailed-grid > *,
+.experience-timeline-list > *,
+.teaching-cards-grid > *,
+.scope-item-card,
+.principle-editorial-item,
+.process-timeline-card {
+  animation: k-rise 0.6s var(--k-glide) both;
+}
+
+.folder-interactive-preview-strip { animation-delay: 80ms; }
+:is(.projects-detailed-grid, .experience-timeline-list, .teaching-cards-grid) > :nth-child(1) { animation-delay: 160ms; }
+:is(.projects-detailed-grid, .experience-timeline-list, .teaching-cards-grid) > :nth-child(2) { animation-delay: 250ms; }
+:is(.projects-detailed-grid, .experience-timeline-list, .teaching-cards-grid) > :nth-child(3) { animation-delay: 340ms; }
+:is(.projects-detailed-grid, .experience-timeline-list, .teaching-cards-grid) > :nth-child(4) { animation-delay: 430ms; }
+:is(.projects-detailed-grid, .experience-timeline-list, .teaching-cards-grid) > :nth-child(n+5) { animation-delay: 520ms; }
+
+/* Bento Expand: hover focuses one card, the rest quietly recede */
+.project-detail-card,
+.experience-entry-card .exp-entry-body,
+.teaching-detail-card {
+  transition: transform 0.45s var(--k-spring), opacity 0.3s ease, filter 0.3s ease,
+              border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.projects-detailed-grid:has(.project-detail-card:hover) .project-detail-card:not(:hover),
+.teaching-cards-grid:has(.teaching-detail-card:hover) .teaching-detail-card:not(:hover),
+.experience-timeline-list:has(.exp-entry-body:hover) .exp-entry-body:not(:hover) {
+  opacity: 0.55;
+  filter: saturate(0.75);
+  transform: scale(0.985);
+}
+
+.project-detail-card:hover,
+.teaching-detail-card:hover,
+.experience-timeline-list .exp-entry-body:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Choice Chips: spring pop on hover */
+.proj-tech-chip,
+.exp-tag-pill,
+.teach-badge-pill {
+  transition: transform 0.35s var(--k-spring), background-color 0.2s ease;
+  cursor: default;
+}
+.proj-tech-chip:hover,
+.exp-tag-pill:hover,
+.teach-badge-pill:hover {
+  transform: scale(1.08);
+}
+
+/* Keycap Press: the ESC key depresses on its shadow */
+.kbd-shortcut {
+  border-bottom-width: 3px;
+  transition: transform 0.12s ease, border-bottom-width 0.12s ease;
+}
+.folder-back-button:active .kbd-shortcut {
+  transform: translateY(2px);
+  border-bottom-width: 1px;
+}
+
+/* Push Button: tactile press on nav pills */
+.folder-nav-pill-btn,
+.folder-close-icon-btn {
+  transition: transform 0.18s var(--k-spring), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.folder-nav-pill-btn:active,
+.folder-close-icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* Pulse Badge: live ring on the active folder icon */
+.folder-active-badge .badge-icon {
+  position: relative;
+}
+.folder-active-badge .badge-icon::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  opacity: 0;
+  animation: k-pulse-ring 1.8s ease-out infinite;
+}
+@keyframes k-pulse-ring {
+  0% { transform: scale(0.7); opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* Snap Rail: glide pill follows the active folder */
+.folder-modal-bottom-bar {
+  gap: 1rem;
+}
+
+.folder-rail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.folder-rail::-webkit-scrollbar { display: none; }
+
+[data-theme="dark"] .folder-rail {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.folder-rail-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  transition: left 0.5s var(--k-spring), width 0.5s var(--k-spring), background 0.3s ease;
+  pointer-events: none;
+}
+
+.folder-rail-chip {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--muted, #52525b);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s var(--k-spring);
+}
+.folder-rail-chip:hover { color: var(--fg-strong, #111); transform: translateY(-1px); }
+.folder-rail-chip.is-active { font-weight: 800; }
+.folder-rail-icon { display: grid; place-items: center; }
+.folder-rail-icon svg { width: 16px; height: 16px; }
+
+@media (max-width: 1100px) {
+  .folder-rail-chip:not(.is-active) .folder-rail-label { display: none; }
+}
+@media (max-width: 640px) {
+  .folder-modal-bottom-bar { padding: 0.6rem 0.75rem; }
+  .folder-nav-pill-btn span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folder-hero-header,
+  .folder-interactive-preview-strip,
+  .projects-detailed-grid > *,
+  .experience-timeline-list > *,
+  .teaching-cards-grid > *,
+  .scope-item-card,
+  .principle-editorial-item,
+  .process-timeline-card,
+  .folder-active-badge .badge-icon::after {
+    animation: none !important;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
@@ -11,7 +11,8 @@ import {
   SlidersHorizontalIcon,
   Mail01Icon
 } from '@hugeicons/core-free-icons';
-import { ArrowRight, X, ChevronLeft, ChevronRight, CornerUpLeft } from 'lucide-react';
+import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ScrambleText } from '../ui/ScrambleText';
 import GlassIcons, { GlassIconsItem } from '../ui/GlassIcons';
 
 // View Components
@@ -51,6 +52,8 @@ export const GlassFolderHub: React.FC = () => {
   const [columns, setColumns] = useState<number>(4);
   const [iconSize, setIconSize] = useState<number>(86);
   const [gap, setGap] = useState<number>(54);
+  const railRef = useRef<HTMLDivElement | null>(null);
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
 
   // Reactive theme tracking from documentElement
@@ -265,6 +268,19 @@ export const GlassFolderHub: React.FC = () => {
     return folders.find(f => f.id === activeFolder) ?? null;
   }, [folders, activeFolder]);
 
+  // Snap Rail: the glide pill measures the active chip before moving
+  useLayoutEffect(() => {
+    const rail = railRef.current;
+    if (!rail || !activeFolder) return;
+    const measure = () => {
+      const el = rail.querySelector<HTMLElement>(`[data-rail-id="${activeFolder}"]`);
+      if (el) setPill({ left: el.offsetLeft, width: el.offsetWidth });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [activeFolder]);
+
   return (
     <section className="hub-dock" aria-label="پوشه‌های رزومه">
       <div className="glass-icons-stage-wrapper">
@@ -319,7 +335,7 @@ export const GlassFolderHub: React.FC = () => {
               <span className="breadcrumb-root">ALDMC // WORKSPACE</span>
               <span>/</span>
               <span className="breadcrumb-active" style={{ color: currentMeta.hexColor }}>
-                {currentMeta.enTitle}
+                <ScrambleText key={currentMeta.id} text={currentMeta.enTitle} />
               </span>
             </div>
 
@@ -349,7 +365,7 @@ export const GlassFolderHub: React.FC = () => {
 
           {/* Modal Main Scrollable Content */}
           <div className="folder-modal-body">
-            <div className="folder-modal-content-shell">
+            <div className="folder-modal-content-shell" key={activeFolder}>
               {activeFolder === 'about' && <About />}
               {activeFolder === 'projects' && <ProjectsFolderView />}
               {activeFolder === 'experience' && <ExperienceFolderView />}
@@ -363,30 +379,43 @@ export const GlassFolderHub: React.FC = () => {
 
           {/* Modal Bottom Switcher Controls */}
           <div className="folder-modal-bottom-bar font-peyda">
-            <button
-              type="button"
-              className="folder-nav-pill-btn"
-              onClick={goToPrev}
-            >
+            <button type="button" className="folder-nav-pill-btn" onClick={goToPrev} aria-label="پوشه قبلی">
               <ChevronRight size={16} />
-              <span>پوشه قبلی</span>
+              <span>قبلی</span>
             </button>
 
-            <button
-              type="button"
-              className="folder-nav-home-btn"
-              onClick={closeFolder}
-            >
-              <CornerUpLeft size={15} />
-              <span>بازگشت به مرکز پوشه‌ها</span>
-            </button>
+            <div className="folder-rail" ref={railRef} role="tablist" aria-label="پوشه‌ها">
+              {pill && (
+                <span
+                  className="folder-rail-pill"
+                  style={{
+                    left: pill.left,
+                    width: pill.width,
+                    background: `${currentMeta.hexColor}26`,
+                    borderColor: `${currentMeta.hexColor}66`
+                  }}
+                />
+              )}
+              {folders.map(f => (
+                <button
+                  key={f.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={f.id === activeFolder}
+                  data-rail-id={f.id}
+                  className={`folder-rail-chip${f.id === activeFolder ? ' is-active' : ''}`}
+                  style={f.id === activeFolder ? { color: f.hexColor } : undefined}
+                  onClick={() => openFolder(f.id)}
+                  title={f.label}
+                >
+                  <span className="folder-rail-icon">{f.icon}</span>
+                  <span className="folder-rail-label">{f.label}</span>
+                </button>
+              ))}
+            </div>
 
-            <button
-              type="button"
-              className="folder-nav-pill-btn"
-              onClick={goToNext}
-            >
-              <span>پوشه بعدی</span>
+            <button type="button" className="folder-nav-pill-btn" onClick={goToNext} aria-label="پوشه بعدی">
+              <span>بعدی</span>
               <ChevronLeft size={16} />
             </button>
           </div>
