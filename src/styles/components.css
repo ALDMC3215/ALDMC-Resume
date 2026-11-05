@@ -493,7 +493,9 @@
 }
 
 .hero-live-orb {
-  margin-bottom: 4px;
+  position: relative;
+  top: -56px;
+  margin-bottom: -36px;
   pointer-events: auto;
 }
 
@@ -3595,7 +3597,7 @@ html, body {
 .hero-editorial-chapter {
   height: 100dvh;
   padding-top: clamp(28px, 5vh, 56px);
-  padding-bottom: clamp(26px, 4.5vh, 48px);
+  padding-bottom: clamp(48px, 9vh, 96px);
 }
 
 @media (max-width: 1024px) {

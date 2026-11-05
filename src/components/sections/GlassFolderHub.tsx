@@ -77,19 +77,19 @@ export const GlassFolderHub: React.FC = () => {
       if (width < 640) {
         setColumns(4);
         setIconSize(54);
-        setGap(12);
+        setGap(18);
       } else if (width < 1024) {
         setColumns(4);
         setIconSize(68);
-        setGap(26);
+        setGap(34);
       } else if (width < 1280) {
         setColumns(8);
         setIconSize(68);
-        setGap(22);
+        setGap(38);
       } else {
         setColumns(8);
         setIconSize(84);
-        setGap(40);
+        setGap(68);
       }
     };
 
@@ -267,7 +267,6 @@ export const GlassFolderHub: React.FC = () => {
 
   return (
     <section className="hub-dock" aria-label="پوشه‌های رزومه">
-      <p className="hub-dock-hint">برای ورود به هر پرونده، روی پوشه‌ی شیشه‌ای کلیک کنید</p>
       <div className="glass-icons-stage-wrapper">
         <GlassIcons
           items={glassItems}

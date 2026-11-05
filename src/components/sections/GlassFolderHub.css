@@ -84,24 +84,13 @@
 .glass-icons-stage-wrapper {
   position: relative;
   width: 100%;
-  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.1rem 1rem 0.9rem;
-  background: var(--surface, #FFFFFF);
-  border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
-  border-radius: 28px;
-  box-shadow: var(--shadow-lg, 0 16px 36px -6px rgba(0, 0, 0, 0.08));
-  transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-}
-
-[data-theme="dark"] .glass-icons-stage-wrapper {
-  background: rgba(24, 24, 27, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
 }
 
 .stage-glow-ambient {
