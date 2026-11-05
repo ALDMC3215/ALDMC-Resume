@@ -1446,11 +1446,13 @@ export const Lanyard: React.FC<LanyardProps> = ({
 
     applyRef.current = apply;
     resize();
-    try {
-      renderer.compile(scene, camera);
-    } catch {
-      // Safe fallback if compile is not supported
-    }
+    requestAnimationFrame(() => {
+      try {
+        renderer.compile(scene, camera);
+      } catch {
+        // Safe fallback if compile is not supported
+      }
+    });
 
     return () => {
       alive = false;

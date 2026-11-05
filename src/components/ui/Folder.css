@@ -33,6 +33,13 @@
   top: 0;
   left: 0;
   transform-origin: 0 0;
+}
+
+.folder-ground,
+.folder-cast,
+.folder-back,
+.folder-shade,
+.folder-front {
   will-change: transform;
 }
 
@@ -148,6 +155,12 @@
       rgba(0, 0, 0, calc(0.1 + var(--folder-lift, 0) * 0.14));
   outline: none;
   font-family: var(--font-persian, 'Peyda', sans-serif);
+  will-change: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  image-rendering: -webkit-optimize-contrast;
+  transform-style: preserve-3d;
 }
 
 .folder-root[data-open] .folder-item {

@@ -212,7 +212,7 @@ const measureFolder = (
       : tabPosition === 'center'
         ? (w - tabW) / 2
         : w - corners[1] - 5 * scale - shoulder - tabW;
-  const docW = book ? w * 0.8 : w * 0.54;
+  const docW = book ? w * 0.8 : w * 0.62;
   return {
     book,
     scale,
@@ -274,7 +274,7 @@ const renderItem = (item: FolderItem) => {
     if (obj.image) {
       return (
         <div className="folder-photo">
-          <img src={obj.image} alt={obj.alt ?? obj.title ?? ''} draggable={false} />
+          <img src={obj.image} alt={obj.alt ?? obj.title ?? ''} draggable={false} loading="lazy" decoding="async" />
         </div>
       );
     }

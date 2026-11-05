@@ -151,7 +151,7 @@ const DEFAULT_ITEMS: PillNavItem[] = [
   { label: 'مهارت‌ها', href: '#expertise' },
   { label: 'درباره', href: '#about' },
   { label: 'آموزش', href: '#teaching' },
-  { label: 'موزیک', href: '#ai-showcase' },
+  { label: 'تعاملات', href: '#interactive-lab' },
   { label: 'تماس', href: '#contact' }
 ];
 

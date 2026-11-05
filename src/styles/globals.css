@@ -1,9 +1,10 @@
 @import './tokens.css';
 
-/* LOCAL VARIABLE & PEYDA FONTS */
+/* LOCAL VARIABLE & PEYDA FONTS (WOFF2 PRIMARY WITH TTF FALLBACK) */
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-Thin.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-Thin.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -11,7 +12,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/peyda-extralight.ttf') format('truetype');
+  src: url('/fonts/peyda/peyda-extralight.woff2') format('woff2'),
+       url('/fonts/peyda/peyda-extralight.ttf') format('truetype');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -19,7 +21,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/peyda-light.ttf') format('truetype');
+  src: url('/fonts/peyda/peyda-light.woff2') format('woff2'),
+       url('/fonts/peyda/peyda-light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -27,7 +30,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-Regular.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-Regular.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -35,7 +39,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-Medium.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-Medium.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -43,7 +48,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-SemiBold.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-SemiBold.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -51,7 +57,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-Bold.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-Bold.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -59,7 +66,8 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-ExtraBold.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-ExtraBold.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -67,65 +75,20 @@
 
 @font-face {
   font-family: 'Peyda';
-  src: url('/fonts/peyda/Peyda-Black.ttf') format('truetype');
+  src: url('/fonts/peyda/Peyda-Black.woff2') format('woff2'),
+       url('/fonts/peyda/Peyda-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
-/* MANROPE - DEDICATED ALDMC ENGLISH BRAND FONT */
+/* MANROPE - DEDICATED ALDMC ENGLISH BRAND FONT (MODERN VARIABLE WOFF2) */
 @font-face {
   font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Manrope';
-  src: url('/fonts/manrope/Manrope-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
+  src: url('/fonts/manrope/Manrope-Variable.woff2') format('woff2-variations'),
+       url('/fonts/manrope/Manrope-Variable.woff2') format('woff2'),
+       url('/fonts/manrope/Manrope-Variable.ttf') format('truetype');
+  font-weight: 200 800;
   font-style: normal;
   font-display: swap;
 }

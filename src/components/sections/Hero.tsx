@@ -22,14 +22,14 @@ export const Hero: React.FC = () => {
       const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (isReducedMotion) return;
 
-      // Coordinated, high-end opening animation sequence:
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.55 } });
+      // Coordinated, high-end opening animation sequence (text first for near-instant FCP):
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.5 } });
 
-      tl.fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.7 })
-        .fromTo('.hero-headline-name', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
-        .fromTo('.hero-positioning', { opacity: 0, y: 14 }, { opacity: 1, y: 0 }, '-=0.35')
-        .fromTo('.hero-cta-group .btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08 }, '-=0.3')
-        .fromTo('.hero-footer-strip', { opacity: 0, y: 8 }, { opacity: 1, y: 0 }, '-=0.2');
+      tl.fromTo('.hero-headline-name', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 })
+        .fromTo('.hero-positioning', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.35')
+        .fromTo('.hero-cta-group .btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.4 }, '-=0.25')
+        .fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6 }, '-=0.35')
+        .fromTo('.hero-footer-strip', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 }, '-=0.2');
     }, root);
 
     return () => ctx.revert();

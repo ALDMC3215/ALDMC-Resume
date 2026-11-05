@@ -1,5 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Volume1, Volume2 } from 'lucide-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import VolumeHighIcon from '@hugeicons/core-free-icons/VolumeHighIcon';
+import VolumeLowIcon from '@hugeicons/core-free-icons/VolumeLowIcon';
 import './ElasticSlider.css';
 
 const ROOT = 'elastic-slider';
@@ -110,8 +112,8 @@ export const ElasticSlider: React.FC<ElasticSliderProps> = ({
   onChange,
   onChangeEnd,
   orientation = 'horizontal',
-  leftIcon = <Volume1 size={18} strokeWidth={2} />,
-  rightIcon = <Volume2 size={18} strokeWidth={2} />,
+  leftIcon = <HugeiconsIcon icon={VolumeLowIcon} size={20} />,
+  rightIcon = <HugeiconsIcon icon={VolumeHighIcon} size={20} />,
   iconPlacement = 'outside',
   valuePosition = 'top',
   formatValue,

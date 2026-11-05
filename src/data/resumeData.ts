@@ -197,7 +197,7 @@ export const resumeData = {
         'طراحی کامپوننت‌های ماژولار و ریسپانسیو با رعایت استانداردهای دسترسی‌پذیری'
       ],
       tags: ['Figma', 'Three.js', 'AI Workflow', 'Responsive UI', 'RTL'],
-      image: '/brand/mockups/03-origin-social-profiles.png',
+      image: '/brand/mockups/03-origin-social-profiles.webp',
       featured: true,
       link: '#',
     },
@@ -213,7 +213,7 @@ export const resumeData = {
         'سازماندهی واضح کاتالوگ و نمایش شفاف وزن، اجرت و قیمت نهایی محصول'
       ],
       tags: ['UI/UX', 'Mobile First', 'E-Commerce', 'Front-End', 'RTL Layout'],
-      image: '/brand/mockups/04-stationery-brand-system.png',
+      image: '/brand/mockups/04-stationery-brand-system.webp',
       featured: true,
       link: '#',
     },
@@ -229,7 +229,7 @@ export const resumeData = {
         'رابط راست‌چین استاندارد با رعایت فاصله بصری و تراکم اطلاعاتی بهینه'
       ],
       tags: ['RTL UI', 'Dashboard', 'Internal Product', 'UX Architecture'],
-      image: '/brand/mockups/01-creative-ai-workspace.png',
+      image: '/brand/mockups/01-creative-ai-workspace.webp',
       featured: true,
       link: '#',
     },
@@ -245,7 +245,7 @@ export const resumeData = {
         'صداگذاری هماهنگ با زیرنویس‌های خوانا جهت انتشار در پلتفرم‌های اجتماعی'
       ],
       tags: ['Google Flow', 'Veo', 'Storyboard', 'AI Video', 'Generative Art'],
-      image: '/brand/mockups/01-creative-ai-workspace.png',
+      image: '/brand/mockups/01-creative-ai-workspace.webp',
       featured: false,
       link: '#',
     },
@@ -261,7 +261,7 @@ export const resumeData = {
         'کنترل کیفیت دقیق خروجی‌ها در سایزهای مختلف استوری، پست و اسلاید'
       ],
       tags: ['Visual Systems', 'Content Design', 'Brand Identity', 'Social Media'],
-      image: '/brand/mockups/03-origin-social-profiles.png',
+      image: '/brand/mockups/03-origin-social-profiles.webp',
       featured: false,
       link: '#',
     },
@@ -277,7 +277,7 @@ export const resumeData = {
         'ادغام پرامپت‌های آهنگسازی با حس دراماتیک و اتمسفریک مدرن'
       ],
       tags: ['Suno', 'AI Music', 'Cover Art', 'Creative Direction', 'Audio Production'],
-      image: '/brand/mockups/02-music-release.png',
+      image: '/brand/mockups/02-music-release.webp',
       featured: false,
       link: '#',
     },

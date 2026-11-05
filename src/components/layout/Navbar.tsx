@@ -12,7 +12,7 @@ const navItems: PillNavItem[] = [
   { label: 'سوابق کاری', href: '#experience' },
   { label: 'مهارت‌ها', href: '#expertise' },
   { label: 'آموزش', href: '#teaching' },
-  { label: 'موزیک', href: '#ai-showcase' },
+  { label: 'تعاملات', href: '#interactive-lab' },
   { label: 'تماس', href: '#contact' },
 ];
 
@@ -22,7 +22,7 @@ const mobileItems: StaggeredMenuItem[] = [
   { label: 'سوابق کاری', link: '#experience', ariaLabel: 'سوابق کاری' },
   { label: 'مهارت‌ها', link: '#expertise', ariaLabel: 'مهارت‌ها و تخصص' },
   { label: 'آموزش', link: '#teaching', ariaLabel: 'دوره‌های آموزشی' },
-  { label: 'موزیک', link: '#ai-showcase', ariaLabel: 'آزمایشگاه صدا' },
+  { label: 'تعاملات', link: '#interactive-lab', ariaLabel: 'آزمایشگاه کنترل‌های الاستیک' },
   { label: 'تماس', link: '#contact', ariaLabel: 'شروع همکاری' },
 ];
 

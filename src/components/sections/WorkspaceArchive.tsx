@@ -48,7 +48,7 @@ export const WorkspaceArchive: React.FC = () => {
             paperColor="#FFFFFF"
             tabPosition="right"
             layout="spread"
-            size={isMobile ? 0.82 : 1.18}
+            size={isMobile ? 0.88 : 1.24}
             draggable={true}
             zoomOnClick={true}
             peek={true}
@@ -184,7 +184,7 @@ export const WorkspaceArchive: React.FC = () => {
             paperColor="#FFFFFF"
             tabPosition="center"
             layout="spread"
-            size={isMobile ? 0.82 : 1.18}
+            size={isMobile ? 0.88 : 1.24}
             draggable={true}
             zoomOnClick={true}
             peek={true}
@@ -292,7 +292,7 @@ export const WorkspaceArchive: React.FC = () => {
             paperColor="#FFFFFF"
             tabPosition="left"
             layout="spread"
-            size={isMobile ? 0.82 : 1.18}
+            size={isMobile ? 0.88 : 1.24}
             draggable={true}
             zoomOnClick={true}
             peek={true}

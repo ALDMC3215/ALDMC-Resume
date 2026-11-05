@@ -55,7 +55,7 @@ export const projectsData: ProjectItem[] = [
       'پیاده‌سازی انیمیشن‌های دقیق میکرو و جریان بصری متناسب با سرعت بارگذاری بالا'
     ],
     tags: ['Figma', 'Three.js', 'React', 'AI Workflow', 'Responsive UI', 'RTL'],
-    image: '/projects/picofy-live.png',
+    image: '/projects/picofy-live.webp',
     mediaType: 'image',
     featured: true,
     link: 'https://picofy-landing.vercel.app/',
@@ -76,7 +76,7 @@ export const projectsData: ProjectItem[] = [
       'رابط کاربری تیره با گلیچ لترهای برند و رعایت دقیق حریم داده‌های مشتریان'
     ],
     tags: ['React', 'Dashboard', 'Internal Tool', 'UX Architecture', 'RTL Layout'],
-    image: '/projects/call-manager-live.png',
+    image: '/projects/call-manager-live.webp',
     mediaType: 'image',
     featured: true,
     link: 'https://novintech-call-manager.vercel.app/',

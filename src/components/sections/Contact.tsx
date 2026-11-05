@@ -114,6 +114,10 @@ export const Contact: React.FC = () => {
                   src="/brand/avatars/ali-forghani.webp"
                   alt="علی فرقانی"
                   className="creator-avatar-img"
+                  loading="lazy"
+                  decoding="async"
+                  width={64}
+                  height={64}
                 />
                 <span className="creator-status-dot" title="آماده همکاری" />
               </div>
