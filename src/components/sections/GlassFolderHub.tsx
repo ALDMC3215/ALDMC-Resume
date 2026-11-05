@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   UserIcon,
@@ -10,7 +11,7 @@ import {
   SlidersHorizontalIcon,
   Mail01Icon
 } from '@hugeicons/core-free-icons';
-import { ArrowRight, X, ChevronLeft, ChevronRight, Compass, CornerUpLeft } from 'lucide-react';
+import { ArrowRight, X, ChevronLeft, ChevronRight, CornerUpLeft } from 'lucide-react';
 import GlassIcons, { GlassIconsItem } from '../ui/GlassIcons';
 
 // View Components
@@ -74,17 +75,21 @@ export const GlassFolderHub: React.FC = () => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setColumns(2);
-        setIconSize(74);
-        setGap(28);
-      } else if (width < 1024) {
-        setColumns(3);
-        setIconSize(82);
-        setGap(42);
-      } else {
         setColumns(4);
-        setIconSize(88);
-        setGap(56);
+        setIconSize(54);
+        setGap(12);
+      } else if (width < 1024) {
+        setColumns(4);
+        setIconSize(68);
+        setGap(26);
+      } else if (width < 1280) {
+        setColumns(8);
+        setIconSize(68);
+        setGap(22);
+      } else {
+        setColumns(8);
+        setIconSize(84);
+        setGap(40);
       }
     };
 
@@ -184,7 +189,7 @@ export const GlassFolderHub: React.FC = () => {
     setActiveFolder(null);
     document.body.style.overflow = '';
     try {
-      window.history.pushState(null, '', '#workspace');
+      window.history.pushState(null, '', window.location.pathname);
     } catch {
       // Fallback
     }
@@ -261,79 +266,38 @@ export const GlassFolderHub: React.FC = () => {
   }, [folders, activeFolder]);
 
   return (
-    <section className="glass-folder-hub-section" id="workspace">
-      {/* Invisible anchor points for smooth navbar scroll targeting */}
-      <div id="about" className="workspace-anchor-target" />
-      <div id="projects" className="workspace-anchor-target" />
-      <div id="experience" className="workspace-anchor-target" />
-      <div id="teaching" className="workspace-anchor-target" />
-      <div id="expertise" className="workspace-anchor-target" />
-      <div id="tools" className="workspace-anchor-target" />
-      <div id="interactive-lab" className="workspace-anchor-target" />
-      <div id="contact" className="workspace-anchor-target" />
-
-      <div className="hub-container">
-        {/* Hub Header Intro */}
-        <div className="hub-header">
-          <div className="hub-kicker-badge">
-            <span className="hub-kicker-dot" />
-            <span className="font-latin">INTERACTIVE PORTFOLIO DIRECTORY</span>
-          </div>
-          <h2 className="hub-main-title">
-            آرشیو پرونده‌ها و <span className="accent-word">پوشه‌های تجربیات</span> ALDMC
-          </h2>
-          <p className="hub-main-desc">
-            تمام بخش‌ها، سوابق کاری، پروژه‌ها و مهارت‌های من در ۸ پوشه شیشه‌ای با فیزیک زنده سازمان‌دهی شده‌اند. برای مشاهده پرونده کامل، روی هر پوشه کلیک کنید.
-          </p>
-        </div>
-
-        {/* The React Bits GlassIcons Master Interactive Stage */}
-        <div className="glass-icons-stage-wrapper">
-          <div className="stage-glow-ambient" />
-          <GlassIcons
-            items={glassItems}
-            size={iconSize}
-            gap={gap}
-            columns={columns}
-            roundness={0.6}
-            refraction={0.8}
-            bevel={0.6}
-            dispersion={0}
-            frost={0.2}
-            shine={0.85}
-            tint={currentTheme === 'light' ? '#ffffff' : '#dfdfdf'}
-            tintOpacity={currentTheme === 'light' ? 0.35 : 0.2}
-            iconColor="#ffffff"
-            plate="offset"
-            tilt={30}
-            spread={0.5}
-            hover="lift"
-            parallax={1}
-            labels="always"
-            intro={true}
-            theme={currentTheme}
-          />
-        </div>
-
-        {/* Hub Bottom Cue & Quick Metric Badges */}
-        <div className="hub-footer-cue">
-          <div className="hub-cue-instruction">
-            <Compass size={15} className="hub-instruction-icon animate-spin-slow" />
-            <span>برای ورود به هر پرونده، روی آیکون شیشه‌ای کلیک کنید یا از منوی بالای صفحه استفاده نمایید.</span>
-          </div>
-          <div className="hub-metrics-pills font-latin">
-            <span className="metric-pill-item">8 DOSSIERS</span>
-            <span className="metric-pill-item">5 PROJECTS</span>
-            <span className="metric-pill-item">4 ROLES</span>
-            <span className="metric-pill-item">29 AI TOOLS</span>
-          </div>
-        </div>
+    <section className="hub-dock" aria-label="پوشه‌های رزومه">
+      <p className="hub-dock-hint">برای ورود به هر پرونده، روی پوشه‌ی شیشه‌ای کلیک کنید</p>
+      <div className="glass-icons-stage-wrapper">
+        <GlassIcons
+          items={glassItems}
+          size={iconSize}
+          gap={gap}
+          columns={columns}
+          roundness={0.6}
+          refraction={0.8}
+          bevel={0.6}
+          dispersion={0}
+          frost={0.2}
+          shine={0.85}
+          tint={currentTheme === 'light' ? '#ffffff' : '#dfdfdf'}
+          tintOpacity={currentTheme === 'light' ? 0.35 : 0.2}
+          iconColor="#ffffff"
+          plate="offset"
+          tilt={30}
+          spread={0.5}
+          hover="lift"
+          parallax={1}
+          labels="always"
+          intro={true}
+          theme={currentTheme}
+        />
       </div>
 
       {/* ======================================================================
           FULLSCREEN IMMERSIVE DOSSIER MODAL VIEW
           ====================================================================== */}
-      {activeFolder && currentMeta && (
+      {activeFolder && currentMeta && createPortal(
         <div className="folder-fullscreen-overlay" role="dialog" aria-modal="true">
           {/* Top Sticky Navigation Bar */}
           <div className="folder-modal-topbar">
@@ -427,7 +391,8 @@ export const GlassFolderHub: React.FC = () => {
               <ChevronLeft size={16} />
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

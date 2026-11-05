@@ -1,30 +1,21 @@
 import React from 'react';
-import { SmoothScroll } from './components/providers/SmoothScroll';
-import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
-import { GlassFolderHub } from './components/sections/GlassFolderHub';
-import { Footer } from './components/layout/Footer';
+import { ThemeToggle } from './components/ui/ThemeToggle';
 
+/**
+ * Single-screen resume: the hero is the whole site.
+ * All content lives inside the glass folders at the bottom of the hero.
+ */
 export const App: React.FC = () => {
   return (
-    <SmoothScroll>
-      <div className="portfolio-app-root">
-        {/* Floating Spotlight Centred Navbar */}
-        <Navbar />
-
-        {/* Main Content Flow */}
-        <main id="main-content">
-          {/* 1. Arc Portrait Hero */}
-          <Hero />
-
-          {/* 2. Glass Folder Hub: Central Interactive Directory for All Sections & Items */}
-          <GlassFolderHub />
-        </main>
-
-        {/* Rising Wordmark Footer with GSAP LTR Staggered Letters */}
-        <Footer />
+    <div className="portfolio-app-root">
+      <div className="app-theme-toggle">
+        <ThemeToggle />
       </div>
-    </SmoothScroll>
+      <main id="main-content">
+        <Hero />
+      </main>
+    </div>
   );
 };
 

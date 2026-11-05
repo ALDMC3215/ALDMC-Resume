@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowLeft, MessageSquare, MoveDown } from 'lucide-react';
+import { ArrowLeft, MessageSquare } from 'lucide-react';
 import { Lanyard } from '../ui/Lanyard';
 import { LiveOrb } from '../ui/LiveOrb';
+import { GlassFolderHub } from './GlassFolderHub';
 import { resumeData } from '../../data/resumeData';
 
 export const Hero: React.FC = () => {
@@ -30,7 +31,7 @@ export const Hero: React.FC = () => {
         .fromTo('.hero-positioning', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.35')
         .fromTo('.hero-cta-group .btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.4 }, '-=0.25')
         .fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6 }, '-=0.35')
-        .fromTo('.hero-footer-strip', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4 }, '-=0.2');
+        .fromTo('.hero-dock', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.2');
     }, root);
 
     return () => ctx.revert();
@@ -96,26 +97,9 @@ export const Hero: React.FC = () => {
           <div className="hero-visual-spacer" aria-hidden="true" />
         </div>
 
-        {/* Bottom Editorial Footnote & Proof Points */}
-        <div className="hero-footer-strip">
-          <div className="hero-proof-metrics">
-            <span className="proof-item">
-              <strong className="proof-accent">۳+ سال</strong> تجربه طراحی محصول و رابط کاربری
-            </span>
-            <span className="proof-sep">/</span>
-            <span className="proof-item">
-              مدرس مهارت‌های <strong className="proof-accent font-latin">AI</strong> و <strong className="proof-accent font-latin">Design</strong>
-            </span>
-            <span className="proof-sep">/</span>
-            <span className="proof-item">
-              توسعه فرانت‌اند و پروتوتایپینگ زنده با هوش مصنوعی
-            </span>
-          </div>
-
-          <a href="#projects" className="hero-scroll-cue font-latin" aria-label="اسکرول به بخش پروژه‌ها">
-            <span>SCROLL TO EXPLORE</span>
-            <MoveDown size={14} className="cue-icon" />
-          </a>
+        {/* Glass folders: the whole resume lives in this row */}
+        <div className="hero-dock">
+          <GlassFolderHub />
         </div>
       </div>
     </section>
