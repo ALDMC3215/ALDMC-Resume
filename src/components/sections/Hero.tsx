@@ -1,35 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Lanyard } from '../ui/Lanyard';
 import { LiveOrb } from '../ui/LiveOrb';
 import { GlassFolderHub } from './GlassFolderHub';
 import { resumeData } from '../../data/resumeData';
 
+/**
+ * Single-screen editorial hero: oversized first/last name around an
+ * arch-cropped portrait, with the glass folders docked at the bottom.
+ */
 export const Hero: React.FC = () => {
   const root = useRef<HTMLElement | null>(null);
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 1024);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 700);
   const { personalInfo } = resumeData;
+  const [firstName, ...rest] = personalInfo.name.split(' ');
+  const lastName = rest.join(' ');
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 700);
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (isReducedMotion) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      // Coordinated, high-end opening animation sequence (text first for near-instant FCP):
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.5 } });
-
-      tl.fromTo('.hero-headline-name', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 })
-        .fromTo('.hero-positioning', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, '-=0.35')
-        .fromTo('.hero-lanyard-stage', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6 }, '-=0.35')
-        .fromTo('.hero-dock', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.2');
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.7 } });
+      tl.fromTo('.hero-topline', { opacity: 0 }, { opacity: 1, duration: 0.5 })
+        .fromTo('.hero-arch-wrap', { opacity: 0, y: 24, scale: 0.97 }, { opacity: 1, y: 0, scale: 1 }, '-=0.3')
+        .fromTo('.hero-name-first', { opacity: 0, x: 40 }, { opacity: 1, x: 0 }, '-=0.5')
+        .fromTo('.hero-name-last', { opacity: 0, x: -40 }, { opacity: 1, x: 0 }, '<')
+        .fromTo('.hero-role', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.35')
+        .fromTo('.hero-dock', { opacity: 0 }, { opacity: 1, duration: 0.6 }, '-=0.2');
     }, root);
 
     return () => ctx.revert();
@@ -37,56 +39,51 @@ export const Hero: React.FC = () => {
 
   return (
     <section ref={root} className="hero-section hero-editorial-chapter" id="hero">
-      {/* Full-bleed, boundary-free 3D Lanyard Canvas covering the entire Hero section */}
-      <div className="hero-lanyard-stage" aria-label="کارت آویز هویت دیزاین علی فرقانی (تعاملی)">
-        <Lanyard
-          frontImage="/brand/card-front.webp"
-          backImage="/brand/card-back.png"
-          cardColor="#F4F4F5"
-          strapColor="#18181B"
-          strapWidth={0.28}
-          finish="matte"
-          metal="silver"
-          orientation="portrait"
-          cornerRadius={0.28}
-          size={isMobile ? 0.34 : 0.42}
-          anchor={isMobile ? 0.5 : 0.24}
-          strapLength={isMobile ? 0.05 : 0.30}
-          gravity={1}
-          elasticity={0.55}
-          damping={0.48}
-          breeze={0.35}
-          interactive={true}
-          intro={true}
-        />
+      <h1 className="visually-hidden">
+        {personalInfo.name} — {personalInfo.title}
+      </h1>
+
+      <div className="hero-topline font-latin" aria-hidden="true">
+        <span className="hero-topline-brand">{personalInfo.brand}</span>
+        <span className="hero-topline-role">PRODUCT DESIGNER · AI SPECIALIST</span>
+        <span className="hero-topline-place">{personalInfo.locationEn.toUpperCase()}</span>
       </div>
 
-      <div className="container hero-chapter-container">
-        {/* Main 2-Column Editorial Stage — Connected & Intentionally Balanced */}
-        <div className="hero-main-stage">
-          {/* Right Column: Dominant Typographic Anchor */}
-          <div className="hero-text-anchor">
-            {/* The Main Name is the Immediate Visual Focal Point */}
-            <LiveOrb className="hero-live-orb" variant="custom" color="#E76338" eyeColor="#F6F0E7" size={isMobile ? 64 : 120} />
-            <h1 className="hero-headline-name">
-              {personalInfo.name}
-            </h1>
+      <div className="hero-stage">
+        <div className="hero-name-row" aria-hidden="true">
+          <span className="hero-name hero-name-first">{firstName}</span>
 
-            {/* Supporting Professional Positioning */}
-            <p className="hero-positioning">
-              طراح محصول - رابط کاربری مدرن و راهکارهای خلاقانه با AI
-            </p>
+          <div className="hero-arch-wrap">
+            <div className="hero-arch">
+              <img
+                src="/brand/avatars/ali-forghani.webp"
+                alt=""
+                width={800}
+                height={800}
+                decoding="async"
+                fetchPriority="high"
+              />
+            </div>
+            <LiveOrb
+              className="hero-live-orb"
+              variant="custom"
+              color="#E76338"
+              eyeColor="#F6F0E7"
+              size={isMobile ? 56 : 84}
+            />
           </div>
 
-          {/* Left Column Spacer: reserves exact visual balance for the hanging card */}
-          <div className="hero-visual-spacer" aria-hidden="true" />
+          <span className="hero-name hero-name-last">{lastName}</span>
         </div>
 
-        {/* Glass folders: the whole resume lives in this row */}
-        <div className="hero-dock">
-          <GlassFolderHub />
-        </div>
+        <p className="hero-role">طراح محصول · رابط کاربری مدرن و راهکارهای خلاقانه با AI</p>
+      </div>
+
+      <div className="hero-dock">
+        <GlassFolderHub />
       </div>
     </section>
   );
 };
+
+export default Hero;

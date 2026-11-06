@@ -4,8 +4,8 @@
   /* Brand Core Palette */
   --brand-orange: #E76338;
   --brand-orange-hover: #D85429;
-  --brand-charcoal: #111111;
-  --brand-paper: #F4F4F5;
+  --brand-charcoal: #27211D;
+  --brand-paper: #F6F0E7;
   --brand-peach: #F6B393;
   --brand-accent-glow: rgba(231, 99, 56, 0.12);
 
@@ -58,18 +58,18 @@
   --container-gutter-xl: 64px;
 
   /* Light Theme (Default: ORU CODE Light Grey #F4F4F5 + Pure White Cards) */
-  --bg: #F4F4F5;
-  --fg: #111111;
-  --fg-strong: #000000;
+  --bg: #F6F0E7;
+  --fg: #27211D;
+  --fg-strong: #1A1512;
   --surface: #FFFFFF;
-  --surface-hover: #FAFAFA;
+  --surface-hover: #FBF7F1;
   --surface-elevated: #FFFFFF;
-  --muted: #3F3F46;
-  --muted-light: #52525B;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --logo-color: #111111;
+  --muted: #5B5047;
+  --muted-light: #7A6E64;
+  --border: rgba(39, 33, 29, 0.10);
+  --border-subtle: rgba(39, 33, 29, 0.05);
+  --border-strong: rgba(39, 33, 29, 0.18);
+  --logo-color: #27211D;
   --on-accent: #FFFFFF;
   --highlight-badge: rgba(231, 99, 56, 0.08);
   --highlight-badge-border: rgba(231, 99, 56, 0.18);
@@ -77,23 +77,23 @@
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
   --shadow-md: 0 6px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 8px -1px rgba(0, 0, 0, 0.02);
   --shadow-lg: 0 16px 36px -6px rgba(0, 0, 0, 0.08), 0 4px 14px -2px rgba(0, 0, 0, 0.04);
-  --glass-bg: rgba(255, 255, 255, 0.92);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 252, 248, 0.92);
+  --glass-border: rgba(39, 33, 29, 0.10);
 }
 
 /* Dark Theme */
 [data-theme="dark"] {
-  --bg: #0F0F10;
-  --fg: #F4F4F5;
+  --bg: #1B1613;
+  --fg: #F6F0E7;
   --fg-strong: #FFFFFF;
-  --surface: #18181B;
-  --surface-hover: #222226;
-  --surface-elevated: #27272A;
-  --muted: #A1A1AA;
-  --muted-light: #71717A;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  --surface: #251F1B;
+  --surface-hover: #2E2722;
+  --surface-elevated: #342C27;
+  --muted: #BDB1A5;
+  --muted-light: #8F8378;
+  --border: rgba(246, 240, 231, 0.10);
+  --border-subtle: rgba(246, 240, 231, 0.05);
+  --border-strong: rgba(246, 240, 231, 0.18);
   --logo-color: #E76338;
   --on-accent: #FFFFFF;
   --highlight-badge: rgba(231, 99, 56, 0.15);
@@ -102,6 +102,6 @@
   --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 2px 8px -1px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 20px 48px -8px rgba(0, 0, 0, 0.7), 0 6px 16px -2px rgba(0, 0, 0, 0.4);
-  --glass-bg: rgba(24, 24, 27, 0.90);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(37, 31, 27, 0.90);
+  --glass-border: rgba(246, 240, 231, 0.10);
 }

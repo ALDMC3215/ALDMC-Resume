@@ -23,7 +23,7 @@ export const ThemeToggle: React.FC = () => {
   const updateThemeColorMeta = (currentTheme: 'light' | 'dark') => {
     const meta = document.getElementById('theme-color-meta');
     if (meta) {
-      meta.setAttribute('content', currentTheme === 'dark' ? '#0F0F10' : '#F4F4F5');
+      meta.setAttribute('content', currentTheme === 'dark' ? '#1B1613' : '#F6F0E7');
     }
   };
 

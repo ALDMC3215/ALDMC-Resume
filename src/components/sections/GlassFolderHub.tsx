@@ -11,7 +11,7 @@ import {
   SlidersHorizontalIcon,
   Mail01Icon
 } from '@hugeicons/core-free-icons';
-import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ArrowUp, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrambleText } from '../ui/ScrambleText';
 import GlassIcons, { GlassIconsItem } from '../ui/GlassIcons';
 
@@ -53,6 +53,8 @@ export const GlassFolderHub: React.FC = () => {
   const [iconSize, setIconSize] = useState<number>(86);
   const [gap, setGap] = useState<number>(54);
   const railRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const [showTop, setShowTop] = useState(false);
   const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
 
@@ -364,7 +366,11 @@ export const GlassFolderHub: React.FC = () => {
           </div>
 
           {/* Modal Main Scrollable Content */}
-          <div className="folder-modal-body">
+          <div
+            className="folder-modal-body"
+            ref={bodyRef}
+            onScroll={e => setShowTop(e.currentTarget.scrollTop > 320)}
+          >
             <div className="folder-modal-content-shell" key={activeFolder}>
               {activeFolder === 'about' && <About />}
               {activeFolder === 'projects' && <ProjectsFolderView />}
@@ -376,6 +382,15 @@ export const GlassFolderHub: React.FC = () => {
               {activeFolder === 'contact' && <Contact />}
             </div>
           </div>
+
+          <button
+            type="button"
+            className={`folder-top-btn${showTop ? ' is-visible' : ''}`}
+            onClick={() => bodyRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="بازگشت به بالا"
+          >
+            <ArrowUp size={18} />
+          </button>
 
           {/* Modal Bottom Switcher Controls */}
           <div className="folder-modal-bottom-bar font-peyda">

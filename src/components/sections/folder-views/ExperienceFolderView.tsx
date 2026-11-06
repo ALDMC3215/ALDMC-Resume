@@ -105,7 +105,7 @@ export const ExperienceFolderView: React.FC = () => {
             label="سوابق کاری"
             mode="flap"
             variant="matte"
-            color={theme === 'light' ? '#3B4252' : '#18181B'}
+            color={theme === 'light' ? '#27211D' : '#3A312B'}
             paperColor="#FFFFFF"
             tabPosition="center"
             layout="spread"
