@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ExternalLink, Building2, Globe, Layers, PhoneCall, Sparkles, FolderGit2 } from 'lucide-react';
-import { Folder } from '../../ui/Folder';
+import React from 'react';
+import { ExternalLink, Building2, Globe, Layers, PhoneCall, FolderGit2 } from 'lucide-react';
 
 export const ProjectsFolderView: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-    const update = () => {
-      const t = (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light';
-      setTheme(t);
-    };
-    update();
-    const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  }, []);
   const projects = [
     {
       id: 'shiraz-portal',
@@ -92,53 +79,6 @@ export const ProjectsFolderView: React.FC = () => {
         <p className="folder-hero-desc">
           مجموعه‌ای از طراحی‌های محصول، پورتال‌های سازمانی، وبسایت‌های تعاملی و تولیدات هوش مصنوعی
         </p>
-      </div>
-
-      {/* Interactive Physical Folder Preview (Crisp 2.0 version) */}
-      <div className="folder-interactive-preview-strip">
-        <div className="folder-preview-label">
-          <Sparkles size={14} className="text-brand-orange animate-pulse" />
-          <span>پوشه فیزیکی پروژه‌ها (با قابلیت تعامل و کشیدن برگه‌ها):</span>
-        </div>
-        <div className="folder-preview-desk">
-          <Folder
-            label="پروژه‌ها"
-            mode="flap"
-            variant="matte"
-            color="#E76338"
-            paperColor="#FFFFFF"
-            tabPosition="right"
-            layout="spread"
-            size={1.12}
-            draggable={true}
-            zoomOnClick={true}
-            peek={true}
-            intro={false}
-            bounce={0.35}
-            speed={1}
-            theme={theme}
-            className="aldmc-archive-folder"
-          >
-            {projects.map((proj) => (
-              <div key={proj.id} className="folder-dossier-card">
-                <div className="dossier-card-top">
-                  <span className="dossier-badge font-latin">{proj.category}</span>
-                  <div className="dossier-logo-circle bg-orange-glow">
-                    {proj.icon}
-                  </div>
-                </div>
-                <div className="dossier-card-center">
-                  <h4 className="dossier-card-title">{proj.title}</h4>
-                  <p className="dossier-card-desc">{proj.description}</p>
-                </div>
-                <div className="dossier-card-bottom">
-                  <span className="dossier-meta font-latin">{proj.techStack[0]}</span>
-                  <span className="dossier-tag-pill font-latin">{proj.badge}</span>
-                </div>
-              </div>
-            ))}
-          </Folder>
-        </div>
       </div>
 
       {/* Expanded Detailed Project Cards Grid */}

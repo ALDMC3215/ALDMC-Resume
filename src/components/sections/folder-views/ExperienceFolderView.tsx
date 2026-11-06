@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Briefcase, MonitorCheck, Calendar, Sparkles } from 'lucide-react';
-import { Folder } from '../../ui/Folder';
+import React from 'react';
+import { Briefcase, Calendar } from 'lucide-react';
 
 export const ExperienceFolderView: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-    const update = () => {
-      const t = (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light';
-      setTheme(t);
-    };
-    update();
-    const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  }, []);
   const experiences = [
     {
       id: 'novin-tech',
@@ -92,54 +79,6 @@ export const ExperienceFolderView: React.FC = () => {
         <p className="folder-hero-desc">
           تجربه هدایت طراحی، تدریس دانشگاهی و کارگاهی، ساخت محصولات تجاری و خلق هویت‌های ماندگار
         </p>
-      </div>
-
-      {/* Interactive Physical Folder Preview */}
-      <div className="folder-interactive-preview-strip">
-        <div className="folder-preview-label">
-          <Sparkles size={14} className="text-brand-orange animate-pulse" />
-          <span>پوشه فیزیکی سوابق کاری (با قابلیت باز کردن و مرور پرونده‌ها):</span>
-        </div>
-        <div className="folder-preview-desk">
-          <Folder
-            label="سوابق کاری"
-            mode="flap"
-            variant="matte"
-            color={theme === 'light' ? '#27211D' : '#3A312B'}
-            paperColor="#FFFFFF"
-            tabPosition="center"
-            layout="spread"
-            size={1.12}
-            draggable={true}
-            zoomOnClick={true}
-            peek={true}
-            intro={false}
-            bounce={0.35}
-            speed={1}
-            theme={theme}
-            className="aldmc-archive-folder"
-          >
-            {experiences.map((exp) => (
-              <div key={exp.id} className="folder-dossier-card">
-                <div className="dossier-card-top">
-                  <span className="dossier-badge font-latin">{exp.period}</span>
-                  <div className="dossier-logo-circle bg-dark-glow">
-                    <MonitorCheck size={13} className="text-brand-orange" />
-                  </div>
-                </div>
-                <div className="dossier-card-center">
-                  <h4 className="dossier-card-title">{exp.company}</h4>
-                  <p className="dossier-card-role text-brand-orange">{exp.role}</p>
-                  <p className="dossier-card-desc">{exp.description}</p>
-                </div>
-                <div className="dossier-card-bottom">
-                  <span className="dossier-meta font-latin">{exp.location}</span>
-                  <span className="dossier-tag-pill font-latin">{exp.tags[0]}</span>
-                </div>
-              </div>
-            ))}
-          </Folder>
-        </div>
       </div>
 
       {/* Expanded Career Timeline Cards */}

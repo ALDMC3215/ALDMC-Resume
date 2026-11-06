@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { GraduationCap, BookOpen, MonitorCheck, Building2, Sparkles, Award, Clock } from 'lucide-react';
-import { Folder } from '../../ui/Folder';
+import React from 'react';
+import { GraduationCap, BookOpen, MonitorCheck, Building2, Award, Clock } from 'lucide-react';
 
 export const TeachingFolderView: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-    const update = () => {
-      const t = (document.documentElement.getAttribute('data-theme') as 'light' | 'dark') || 'light';
-      setTheme(t);
-    };
-    update();
-    const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => obs.disconnect();
-  }, []);
   const credentials = [
     {
       id: 'figma-masterclass',
@@ -83,53 +70,6 @@ export const TeachingFolderView: React.FC = () => {
         <p className="folder-hero-desc">
           انتقال دانش طراحی به نسل جدید طراحان، برگزاری کارگاه‌های تخصصی و پشتوانه آکادمیک مهندسی
         </p>
-      </div>
-
-      {/* Interactive Physical Folder Preview */}
-      <div className="folder-interactive-preview-strip">
-        <div className="folder-preview-label">
-          <Sparkles size={14} className="text-brand-orange animate-pulse" />
-          <span>پوشه فیزیکی دوره‌ها و تحصیلات (با قابلیت مرور برگه‌ها):</span>
-        </div>
-        <div className="folder-preview-desk">
-          <Folder
-            label="آموزش و تحصیلات"
-            mode="flap"
-            variant="matte"
-            color={theme === 'light' ? '#4A4036' : '#2E2A27'}
-            paperColor="#FFFFFF"
-            tabPosition="left"
-            layout="spread"
-            size={1.12}
-            draggable={true}
-            zoomOnClick={true}
-            peek={true}
-            intro={false}
-            bounce={0.35}
-            speed={1}
-            theme={theme}
-            className="aldmc-archive-folder"
-          >
-            {credentials.map((cred) => (
-              <div key={cred.id} className="folder-dossier-card">
-                <div className="dossier-card-top">
-                  <span className="dossier-badge font-latin">{cred.type}</span>
-                  <div className="dossier-logo-circle bg-orange-glow">
-                    {cred.icon}
-                  </div>
-                </div>
-                <div className="dossier-card-center">
-                  <h4 className="dossier-card-title">{cred.title}</h4>
-                  <p className="dossier-card-desc">{cred.description}</p>
-                </div>
-                <div className="dossier-card-bottom">
-                  <span className="dossier-meta font-latin">{cred.duration}</span>
-                  <span className="dossier-tag-pill font-latin">{cred.badge}</span>
-                </div>
-              </div>
-            ))}
-          </Folder>
-        </div>
       </div>
 
       {/* Detailed Education Cards */}
