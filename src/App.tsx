@@ -13,15 +13,15 @@ import { ThemeToggle } from './components/ui/ThemeToggle';
 
 /** Sections in reading order. `id` is the wrapper id the side navigation scrolls to. */
 const SECTIONS: (SideNavItem & { node: React.ReactNode })[] = [
-  { id: 'hero', label: 'خانه', node: null },
-  { id: 'sec-about', label: 'درباره من', node: <About /> },
-  { id: 'sec-projects', label: 'پروژه‌های منتخب', node: <ProjectsFolderView /> },
-  { id: 'sec-experience', label: 'سوابق کاری', node: <ExperienceFolderView /> },
-  { id: 'sec-teaching', label: 'آموزش و تدریس', node: <TeachingFolderView /> },
-  { id: 'sec-skills', label: 'مهارت‌ها', node: <Expertise /> },
-  { id: 'sec-tools', label: 'جعبه‌ابزار AI', node: <Tools /> },
-  { id: 'sec-lab', label: 'آزمایشگاه تعامل', node: <ElasticSliderShowcase /> },
-  { id: 'sec-contact', label: 'تماس و همکاری', node: <Contact /> }
+  { id: 'hero', label: 'Home', node: null },
+  { id: 'sec-about', label: 'About', node: <About /> },
+  { id: 'sec-projects', label: 'Projects', node: <ProjectsFolderView /> },
+  { id: 'sec-experience', label: 'Experience', node: <ExperienceFolderView /> },
+  { id: 'sec-teaching', label: 'Teaching', node: <TeachingFolderView /> },
+  { id: 'sec-skills', label: 'Skills', node: <Expertise /> },
+  { id: 'sec-tools', label: 'AI Tools', node: <Tools /> },
+  { id: 'sec-lab', label: 'Lab', node: <ElasticSliderShowcase /> },
+  { id: 'sec-contact', label: 'Contact', node: <Contact /> }
 ];
 
 const NAV_ITEMS: SideNavItem[] = SECTIONS.map(({ id, label }) => ({ id, label }));

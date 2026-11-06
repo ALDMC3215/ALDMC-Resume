@@ -67,7 +67,7 @@ export const SideNav: React.FC<SideNavProps> = ({ items }) => {
 
   return (
     <>
-      <aside className="site-sidenav" aria-label="فهرست بخش‌ها">
+      <aside className="site-sidenav" aria-label="Sections">
         <LineSidebar
           items={labels}
           activeIndex={active}
@@ -80,6 +80,7 @@ export const SideNav: React.FC<SideNavProps> = ({ items }) => {
           fontSize={0.9375}
           itemGap={18}
           onItemClick={go}
+          side="right"
         />
       </aside>
 
@@ -87,14 +88,14 @@ export const SideNav: React.FC<SideNavProps> = ({ items }) => {
         type="button"
         className="site-sidenav-toggle"
         aria-expanded={open}
-        aria-label={open ? 'بستن فهرست' : 'باز کردن فهرست بخش‌ها'}
+        aria-label={open ? 'Close menu' : 'Open section menu'}
         onClick={() => setOpen(o => !o)}
       >
         {open ? <X size={20} /> : <List size={20} />}
       </button>
 
       {open && (
-        <div className="site-sidenav-sheet" role="dialog" aria-label="فهرست بخش‌ها" onClick={() => setOpen(false)}>
+        <div className="site-sidenav-sheet" role="dialog" aria-label="Sections" onClick={() => setOpen(false)}>
           <div className="site-sidenav-sheet__panel" onClick={e => e.stopPropagation()}>
             <LineSidebar
               items={labels}
@@ -107,6 +108,7 @@ export const SideNav: React.FC<SideNavProps> = ({ items }) => {
               markerLength={16}
               fontSize={1}
               itemGap={14}
+              side="right"
               onItemClick={go}
             />
           </div>

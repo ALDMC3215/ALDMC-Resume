@@ -70,13 +70,13 @@ p {
 .site-sidenav {
   display: none;
   position: fixed;
-  left: clamp(14px, 1.8vw, 32px);
+  right: clamp(44px, 3.2vw, 64px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 40;
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1360px) {
   .site-sidenav {
     display: block;
   }
@@ -126,7 +126,7 @@ p {
   width: 100%;
   max-height: 80dvh;
   overflow-y: auto;
-  padding: 18px 28px 28px 52px;
+  padding: 20px 56px 28px 28px;
   background: var(--bg);
   border-radius: 24px 24px 0 0;
   border-top: 1px solid var(--border-strong);
@@ -598,4 +598,296 @@ p {
   gap: 8px;
   align-items: center;
   justify-content: center;
+}
+
+/* ==========================================================================
+   POLISH PASS: quiet, hairline, ink-first (after Beautiful UI / Rare UI / Transitions)
+   ========================================================================== */
+.site-section {
+  --ink-soft: var(--muted);
+  --hair: var(--border);
+  --card-radius: 20px;
+  --card-pad: clamp(22px, 2.6vw, 34px);
+}
+
+/* header: eyebrow with hairlines, ink title, accent word */
+.site-section :is(.folder-pill-badge, .section-kicker) {
+  gap: 14px;
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.24em;
+  margin-bottom: 18px;
+}
+.site-section :is(.folder-pill-badge, .section-kicker)::before,
+.site-section :is(.folder-pill-badge, .section-kicker)::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  border-radius: 0;
+  background: currentColor;
+  opacity: 0.45;
+}
+.site-section .folder-pill-badge svg { display: none; }
+
+.site-section :is(.folder-hero-title, .section-title) {
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  font-weight: 300;
+  color: var(--fg-strong);
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+.site-section :is(.folder-hero-title, .section-title) .accent-word {
+  color: var(--brand-orange);
+  font-weight: 500;
+}
+.site-section :is(.folder-hero-desc, .section-desc) {
+  font-size: var(--fs-base);
+  max-width: 52ch;
+}
+
+/* cards: consistent stack, equal heights in a row */
+.site-section :is(.project-detail-card, .teaching-detail-card, .skills-bento-card, .tools-panel) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.site-section .skills-bento-card::before,
+.site-section .skills-bento-card::after { display: none; }
+
+/* icon tiles: fixed square, never stretched */
+.site-section :is(.proj-icon-box, .teach-icon-wrap, .skills-icon-wrap, .tools-panel-icon-box) {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--hair);
+  background: var(--surface-hover);
+}
+
+/* card header stack */
+.site-section :is(.proj-card-top, .teach-card-header, .skills-card-header, .tools-panel-header) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.site-section :is(.proj-meta-group, .teach-meta-info) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.site-section :is(.proj-index, .teach-type-badge) {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+.site-section :is(.proj-category, .teach-org-name) {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+.site-section :is(.proj-badge-pill, .teach-badge-pill) {
+  padding: 3px 12px;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  border-radius: 999px;
+  background: transparent;
+}
+.site-section .proj-role-text,
+.site-section .teach-duration-line {
+  margin: 4px 0 12px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--brand-orange);
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+}
+.site-section :is(.proj-card-title, .teach-card-title, .exp-company-title) {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+.site-section :is(.proj-card-desc, .teach-card-desc, .exp-description-text) {
+  margin: 0 0 18px;
+  max-width: 62ch;
+}
+
+/* tag chips: quiet by default, persimmon only on hover */
+.site-section :is(.proj-tech-chip, .exp-tag-pill, .tag-badge, .teach-tag-chip, .foundation-chip) {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--surface-hover);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  color: var(--fg);
+}
+.site-section :is(.proj-tech-chip, .exp-tag-pill, .tag-badge, .teach-tag-chip):hover {
+  border-color: rgba(231, 99, 56, 0.6);
+  background: rgba(231, 99, 56, 0.07);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+.site-section :is(.proj-tech-tags, .exp-tags-row, .skills-tags-row, .teach-tags-bar, .foundations-chips-row) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* actions */
+.site-section .proj-card-action { margin-top: 20px; width: 100%; display: flex; justify-content: center; }
+.site-section .proj-visit-btn {
+  padding: 9px 18px;
+  border: 1px solid rgba(231, 99, 56, 0.5);
+  border-radius: 999px;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--brand-orange);
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.site-section .proj-visit-btn:hover { background: var(--brand-orange); color: #fff; }
+
+/* lists inside cards: centered lines separated by hairlines, no bullets */
+.site-section :is(.exp-achieve-list, .teach-high-list) {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 18px;
+  max-width: 62ch;
+}
+.site-section :is(.exp-achieve-item, .teach-high-item) {
+  display: block;
+  padding: 9px 0;
+  font-size: var(--fs-base);
+  line-height: 1.8;
+  color: var(--muted);
+  border-top: 1px solid var(--hair);
+  text-align: center;
+}
+.site-section :is(.exp-achieve-item, .teach-high-item):first-child { border-top: 0; }
+.site-section :is(.bullet-point, .teach-bullet) { display: none; }
+.site-section :is(.exp-achieve-label, .teach-high-label) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 8px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+}
+.site-section :is(.exp-achievements-block, .teach-highlights-section) { text-align: center; width: 100%; }
+
+/* experience rows */
+.site-section .exp-entry-body { text-align: center; }
+.site-section .exp-role-title { margin: 6px 0 0; font-size: var(--fs-sm); font-weight: 600; }
+.site-section .exp-meta-badge {
+  padding: 3px 12px;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: transparent;
+}
+.site-section .exp-entry-header { margin-bottom: 16px; }
+
+/* equal-height rows in grids */
+.site-section :is(.projects-detailed-grid, .teaching-cards-grid) { align-items: stretch; }
+
+/* skills cards */
+.site-section .skills-num {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+}
+.site-section .skills-card-sub { font-size: var(--fs-xs); color: var(--ink-soft); letter-spacing: 0.04em; margin: 4px 0 14px; }
+.site-section .skills-card-content { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+/* tools */
+.site-section .tools-panel-title { font-size: var(--fs-md); line-height: 1.5; }
+.site-section .tools-panel-sub { font-size: var(--fs-xs); color: var(--ink-soft); margin-top: 2px; }
+.site-section .tools-cards-stack { display: grid; gap: 10px; width: 100%; }
+.site-section .tool-item-card {
+  padding: 14px 16px;
+  background: var(--surface-hover);
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+  text-align: center;
+}
+
+/* lab: same title system as every other section (accent follows the brand, not the preset) */
+.site-section .section-title .accent-word {
+  color: var(--brand-orange) !important;
+}
+.site-section .interactive-lab-section .section-title {
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  color: var(--fg-strong);
+}
+
+/* contact: creator card hugs its content, channels stack beside it */
+.site-section .contact-creator-card {
+  align-self: start;
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.site-section .creator-profile-header { flex-direction: column; align-items: center; gap: 12px; }
+.site-section .creator-inquiry-box { margin-top: 0; }
+
+/* about: centered sub-sections */
+.site-section .about-section-subtitle-wrap {
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.site-section .about-section-heading { font-size: var(--fs-md); font-weight: 700; }
+.site-section .about-editorial-divider { margin: 36px auto; max-width: 120px; }
+.site-section .about-mindset-lead {
+  border: 0;
+  padding: 0;
+  max-width: 62ch;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+.site-section .principle-editorial-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.site-section .principle-content-wrap { text-align: center; }
+.site-section .about-editorial-headline,
+.site-section .about-editorial-card h3 { text-align: center; }
+.site-section .about-process-editorial-timeline { justify-content: center; }
+.site-section .process-timeline-head { flex-direction: column; align-items: center; gap: 10px; }
+.site-section .process-titles-group { align-items: center; text-align: center; }
+
+/* contact grid must never be wider than the viewport */
+.site-section .contact-rich-grid > * { min-width: 0; }
+@media (max-width: 900px) {
+  .site-section .contact-rich-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-section .contact-creator-card { position: static; }
 }

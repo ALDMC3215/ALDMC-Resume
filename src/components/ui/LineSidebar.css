@@ -102,3 +102,33 @@
   transform-origin: left center;
   transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.6));
 }
+
+/* ---- mirrored variant: rail attached to the right edge ---- */
+.line-sidebar--right {
+  justify-content: flex-end;
+}
+.line-sidebar--right.line-sidebar--markers {
+  padding-left: 0;
+  padding-right: calc(var(--marker-length) + var(--marker-gap));
+}
+.line-sidebar--right .line-sidebar__list {
+  align-items: flex-end;
+}
+.line-sidebar--right .line-sidebar__button {
+  flex-direction: row-reverse;
+  text-align: right;
+  transform: translateX(calc(var(--effect, 0) * var(--max-shift) * -1));
+}
+.line-sidebar--right .line-sidebar__marker {
+  left: auto;
+  right: calc(-1 * var(--marker-length) - var(--marker-gap));
+  transform-origin: right center;
+}
+.line-sidebar--right.line-sidebar--markers .line-sidebar__item:not(:last-child)::after {
+  left: auto;
+  right: calc(-1 * var(--marker-length) - var(--marker-gap));
+  transform-origin: right center;
+}
+.line-sidebar--right .line-sidebar__item::before {
+  inset: -6px -48px;
+}

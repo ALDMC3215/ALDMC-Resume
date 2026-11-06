@@ -38,6 +38,8 @@ export interface LineSidebarProps {
   onItemClick?: (index: number, label: string) => void;
   className?: string;
   ariaLabel?: string;
+  /** Which screen edge the rail is attached to. */
+  side?: 'left' | 'right';
 }
 
 export const LineSidebar: React.FC<LineSidebarProps> = ({
@@ -60,7 +62,8 @@ export const LineSidebar: React.FC<LineSidebarProps> = ({
   smoothing = 160,
   onItemClick,
   className = '',
-  ariaLabel = 'Sections'
+  ariaLabel = 'Sections',
+  side = 'left'
 }) => {
   const listRef = useRef<HTMLUListElement | null>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -186,7 +189,7 @@ export const LineSidebar: React.FC<LineSidebarProps> = ({
     <nav
       aria-label={ariaLabel}
       dir="ltr"
-      className={`line-sidebar${showMarker ? ' line-sidebar--markers' : ''}${scaleTick ? ' line-sidebar--scale-tick' : ''}${className ? ` ${className}` : ''}`}
+      className={`line-sidebar line-sidebar--${side}${showMarker ? ' line-sidebar--markers' : ''}${scaleTick ? ' line-sidebar--scale-tick' : ''}${className ? ` ${className}` : ''}`}
       style={style}
     >
       <ul ref={listRef} className="line-sidebar__list" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
