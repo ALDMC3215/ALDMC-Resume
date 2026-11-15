@@ -87,9 +87,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-three': ['three'],
-          'vendor-gsap': ['gsap'],
-          'vendor-motion': ['framer-motion', 'lenis'],
           'vendor-icons': ['lucide-react']
         }
       }

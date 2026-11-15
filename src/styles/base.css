@@ -1,0 +1,164 @@
+/* ==========================================================================
+   BASE: tokens (from the Figma "Personal website | Portfolio" design),
+   fonts (Peyda for Persian, Manrope for Latin), reset, buttons, headings.
+   ========================================================================== */
+
+/* ---- Fonts: Peyda covers Persian/Arabic glyphs only, Manrope everything else ---- */
+@font-face { font-family: 'Peyda'; font-weight: 100; font-display: swap; src: url('/fonts/peyda/Peyda-Thin.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 200; font-display: swap; src: url('/fonts/peyda/peyda-extralight.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 300; font-display: swap; src: url('/fonts/peyda/peyda-light.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 400; font-display: swap; src: url('/fonts/peyda/Peyda-Regular.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 500; font-display: swap; src: url('/fonts/peyda/Peyda-Medium.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 600; font-display: swap; src: url('/fonts/peyda/Peyda-SemiBold.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 700; font-display: swap; src: url('/fonts/peyda/Peyda-Bold.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 800; font-display: swap; src: url('/fonts/peyda/Peyda-ExtraBold.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Peyda'; font-weight: 900; font-display: swap; src: url('/fonts/peyda/Peyda-Black.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F; }
+@font-face { font-family: 'Manrope'; font-weight: 200 800; font-display: swap; src: url('/fonts/manrope/Manrope-Variable.woff2') format('woff2'); }
+
+:root {
+  /* Colours: the design's foundation styles with the ALDMC brand persimmon as the accent */
+  --bg: #121212;
+  --card: rgba(255, 255, 255, 0.04);
+  --chip: rgba(255, 255, 255, 0.08);
+  --orange: #e76338;
+  --orange-deep: #d85429;
+  --red: #e60026;
+  --white: #fefefe;          /* White/Light */
+  --white-1: #dfdfdf;        /* Normal :hover */
+  --white-2: #c6c6c6;        /* Normal :active */
+  --white-3: #bababa;
+  --grey-1: #959595;         /* Dark :hover */
+  --grey-2: #707070;         /* Dark :active */
+  --grey-3: #575757;         /* Darker */
+  /* Body copy that must stay readable (>= 4.5:1 on the card surface) */
+  --text: #959595;
+  --text-soft: #8a8a8a;
+
+  --grad-btn: linear-gradient(104deg, #e76338 3.1%, #d85429 94.5%);
+  --grad-title: linear-gradient(93deg, #8f3a1c 0.3%, #e76338 42%, #c24f2b 90.3%);
+  --grad-logo: linear-gradient(90deg, #e76338, #d85429);
+
+  --radius: 8px;
+  --radius-card: 24px;
+  --radius-media: 28px;
+
+  --font: 'Manrope', 'Peyda', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --gutter: clamp(20px, 5.55vw, 80px);
+  --max: 1440px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  background: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.8;
+  direction: rtl;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
+
+.lt { direction: ltr; unicode-bidi: isolate; letter-spacing: 0.03em; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(56px, 7vw, 75px);
+  scroll-margin-top: 72px;
+}
+
+/* ---- Buttons: gradient primary, outlined secondary (from the design) ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 40px;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.btn--primary { background-image: var(--grad-btn); color: #fff; }
+.btn--primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn--outline { border-color: var(--grey-1); color: var(--grey-1); }
+.btn--outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+.btn--sm { font-size: 1rem; padding: 10px 28px; min-height: 44px; }
+.btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+/* ---- Section heading: 40px title + grey subtitle, centred ---- */
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: clamp(32px, 4.5vw, 64px);
+  text-align: center;
+}
+
+.heading__title {
+  font-size: clamp(2rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+.heading__sub {
+  max-width: 62ch;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+/* ---- Chips ---- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  background: var(--chip);
+  color: var(--white-2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.4;
+}

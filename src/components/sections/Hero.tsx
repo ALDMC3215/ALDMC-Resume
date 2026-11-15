@@ -1,58 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ArrowDown } from 'lucide-react';
-import { resumeData } from '../../data/resumeData';
+import React from 'react';
+import { Socials } from '../ui/Socials';
+import { site } from '../../data/site';
 
-/**
- * Centered editorial hero: oversized light first/last name around a
- * rounded portrait, role and a short intro underneath.
- */
-export const Hero: React.FC = () => {
-  const root = useRef<HTMLElement | null>(null);
-  const { personalInfo } = resumeData;
-  const [firstName, ...rest] = personalInfo.name.split(' ');
-  const lastName = rest.join(' ');
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
-      tl.fromTo('.site-hero__kicker', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 })
-        .fromTo('.site-hero__photo', { opacity: 0, y: 28, scale: 0.97 }, { opacity: 1, y: 0, scale: 1 }, '-=0.25')
-        .fromTo('.site-hero__first', { opacity: 0, x: 40 }, { opacity: 1, x: 0 }, '-=0.55')
-        .fromTo('.site-hero__last', { opacity: 0, x: -40 }, { opacity: 1, x: 0 }, '<')
-        .fromTo('.site-hero__role, .site-hero__intro, .site-hero__cue', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, '-=0.4');
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={root} className="site-hero" id="hero">
-      <h1 className="visually-hidden">
-        {personalInfo.name} — {personalInfo.title}
-      </h1>
-
-      <p className="site-hero__kicker font-latin" aria-hidden="true">
-        {personalInfo.brand} · PORTFOLIO &amp; RESUME · {personalInfo.locationEn.toUpperCase()}
-      </p>
-
-      <div className="site-hero__row" aria-hidden="true">
-        <span className="site-hero__name site-hero__first">{firstName}</span>
-        <div className="site-hero__photo">
-          <img src="/brand/avatars/ali-forghani.webp" alt="" width={800} height={800} decoding="async" fetchPriority="high" />
+export const Hero: React.FC = () => (
+  <section id="home" className="hero" aria-labelledby="hero-name">
+    <div className="hero__glow" aria-hidden="true" />
+    <div className="container hero__grid">
+      <div className="hero__text">
+        <div className="hero__hi">
+          <p className="hero__greet">سلام، من</p>
+          <h1 className="hero__name" id="hero-name">
+            {site.name}
+          </h1>
         </div>
-        <span className="site-hero__name site-hero__last">{lastName}</span>
+
+        <p className="hero__headline">
+          طراح محصول و <span className="lt">UI/UX</span>
+        </p>
+        <p className="hero__lead">{site.title}</p>
+
+        <Socials />
+
+        <div className="hero__actions">
+          <a href="#contact" className="btn btn--primary">
+            شروع همکاری
+          </a>
+          <a href="#portfolio" className="btn btn--outline">
+            مشاهده نمونه‌کارها
+          </a>
+        </div>
+
+        <dl className="hero__stats">
+          {site.stats.map(s => (
+            <div key={s.label} className="hero__stat">
+              <dd>{s.value}</dd>
+              <dt>{s.label}</dt>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      <p className="site-hero__role">طراح محصول · رابط کاربری مدرن و راهکارهای خلاقانه با AI</p>
-      <p className="site-hero__intro">{personalInfo.intro}</p>
-
-      <a href="#sec-about" className="site-hero__cue font-latin" aria-label="ادامه">
-        <span>SCROLL</span>
-        <ArrowDown size={14} />
-      </a>
-    </section>
-  );
-};
+      <div className="hero__photo">
+        <span className="hero__circle" aria-hidden="true" />
+        <div className="hero__oval">
+          <img src={site.portrait.src} alt={`${site.name}، ${site.title}`} width={800} height={800} fetchPriority="high" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default Hero;
