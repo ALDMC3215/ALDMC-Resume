@@ -1,0 +1,170 @@
+/* ==========================================================================
+   BASE: tokens (from the Figma "Personal website | Portfolio" design),
+   fonts (Peyda for Persian, Manrope for Latin), reset, buttons, headings.
+   ========================================================================== */
+
+/* ---- Fonts: Peyda covers Persian/Arabic glyphs only, Manrope everything else ---- */
+@each $weight, $file in (
+  100: "Peyda-Thin", 200: "peyda-extralight", 300: "peyda-light",
+  400: "Peyda-Regular", 500: "Peyda-Medium", 600: "Peyda-SemiBold",
+  700: "Peyda-Bold", 800: "Peyda-ExtraBold", 900: "Peyda-Black"
+) {
+  @font-face {
+    font-family: 'Peyda';
+    font-weight: $weight;
+    font-display: swap;
+    src: url('/fonts/peyda/#{$file}.woff2') format('woff2');
+    unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200D, U+060C, U+061B, U+061F;
+  }
+}
+@font-face { font-family: 'Manrope'; font-weight: 200 800; font-display: swap; src: url('/fonts/manrope/Manrope-Variable.woff2') format('woff2'); }
+
+:root {
+  /* Warm Sand & Clay Architectural Palette derived from hero photograph */
+  --bg: #EAE0D5;              /* Base warm studio sand */
+  --bg-gradient: linear-gradient(180deg, #EFE6DC 0%, #EAE0D5 40%, #E4D8CB 100%);
+  --surface: #F5EFEB;         /* Clean elevated surface */
+  --surface-card: rgba(255, 255, 255, 0.65);
+  --surface-hover: #FAF6F2;
+  --card: rgba(255, 255, 255, 0.55);
+  --chip: rgba(30, 26, 23, 0.06);
+
+  /* Signature Accents */
+  --orange: #D45B32;          /* Rich warm persimmon */
+  --orange-deep: #B84720;
+  --orange-light: #E77A53;
+  --red: #C53B27;
+
+  /* Typography Colors (High contrast & readable on warm sand) */
+  --heading: #1C1815;         /* Deep studio charcoal */
+  --text: #3D352E;            /* Warm charcoal body text */
+  --text-soft: #63584E;       /* Soft readable secondary text */
+  --white: #1C1815;           /* For light-theme inverted tokens */
+  --white-1: #2B231D;
+  --white-2: #4A3E34;
+  --white-3: #63584E;
+  --grey-1: #5E5247;
+  --grey-2: #857567;
+  --grey-3: #B3A191;
+
+  --border: rgba(60, 48, 38, 0.12);
+  --border-subtle: rgba(60, 48, 38, 0.06);
+  --border-glow: rgba(212, 91, 50, 0.25);
+
+  --grad-btn: linear-gradient(104deg, #D45B32 3.1%, #B84720 94.5%);
+  --grad-title: linear-gradient(93deg, #A83C1A 0%, #D45B32 50%, #C44E27 100%);
+  --grad-logo: linear-gradient(90deg, #D45B32, #B84720);
+
+  --radius: 10px;
+  --radius-card: 22px;
+  --radius-media: 24px;
+  --radius-pill: 9999px;
+
+  --font: 'Manrope', 'Peyda', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* One fluid unit; successive steps grow by the golden ratio. */
+  --phi: 1.618;
+  --space-unit: clamp(0.875rem, 0.73rem + 0.55vw, 1.25rem);
+  --space-tight: calc(var(--space-unit) / var(--phi));
+  --space-group: calc(var(--space-unit) * var(--phi));
+  --space-block: calc(var(--space-group) * var(--phi));
+  --space-section: calc(var(--space-block) * var(--phi));
+  --gutter: clamp(1rem, 4.2vw, var(--space-section));
+  --max: 1440px;
+}
+
+@media #{$compact-landscape} {
+  :root {
+    --space-unit: clamp(.8125rem, 2vh, 1rem);
+    --gutter: clamp(1.5rem, 3.5vw, var(--space-section));
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  background: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.8;
+  direction: rtl;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
+
+.lt { direction: ltr; unicode-bidi: isolate; letter-spacing: 0.03em; }
+.sr-only { @include visually-hidden(); }
+
+.container-fluid { @include make-container(calc(2 * var(--gutter))); max-width: var(--max); }
+
+.section {
+  padding-block: var(--space-section) 0;
+  scroll-margin-top: 72px;
+}
+
+/* ---- Buttons: gradient primary, outlined secondary (from the design) ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; }
+.btn-primary { background-image: var(--grad-btn); color: #fff; box-shadow: 0 4px 14px rgba(212,91,50,.3); }
+.btn-outline-primary {
+  --bs-btn-color: var(--heading);
+  --bs-btn-border-color: rgba(60, 48, 38, .25);
+  --bs-btn-hover-color: var(--orange);
+  --bs-btn-hover-bg: rgba(255, 255, 255, .7);
+  --bs-btn-bg: rgba(255, 255, 255, .4);
+  backdrop-filter: blur(8px);
+}
+.btn-sm { min-height: 44px; }
+
+/* ---- Section heading: 40px title + grey subtitle, centred ---- */
+.heading {
+  margin-bottom: var(--space-block);
+}
+
+.heading__title {
+  font-size: clamp(2rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--white);
+}
+
+.heading__sub {
+  max-width: 62ch;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+/* ---- Chips ---- */
+.chip {
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  background: var(--chip);
+  color: var(--white-2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.4;
+}

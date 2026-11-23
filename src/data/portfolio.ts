@@ -102,6 +102,17 @@ export const portfolio: PortfolioItem[] = [
     image: '/social/picofy/picofy-sample-2-claude-chatgpt.jpg'
   },
   {
+    id: 'aldmc-design-system',
+    title: 'سیستم جامع طراحی و دیزاین سیستم ALDMC',
+    category: 'brand',
+    label: 'Design System · Persimmon V6',
+    role: 'معمار دیزاین سیستم و طراح ارشد هویت بصری',
+    summary: 'معماری و تدوین جامع دیزاین سیستم برند شخصی ALDMC در دو حالت تیره (#27211D Charcoal) و روشن (#F6F0E7 Paper)؛ با پالت اختصاصی رنگ خرمالویی (Persimmon #E76338)، تایپوگرافی دوزبانه و کتابخانه کامل کامپوننت‌های تعاملی UI.',
+    extra: 'تدوین اتم‌ها، مولکول‌ها و ارگانیسم‌های UI در فیگما؛ شامل دکمه‌ها، فیلدهای ورودی، منوها، کارت‌ها، فیلترها و کامپوننت‌های رسانه‌ای با رعایت کامل کنتراست دسترسی‌پذیری WCAG AAA و گریدبندی واکنش‌گرا.',
+    tags: ['DESIGN SYSTEM', 'PERSIMMON V6', 'FIGMA', 'UI TOKENS', 'WCAG AAA'],
+    image: '/brand/design-system/components-dark.svg'
+  },
+  {
     id: 'aldmc-brand',
     title: 'هویت بصری ALDMC (نسخه ۶ خرمالویی)',
     category: 'brand',

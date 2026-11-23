@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import { Menu, X, ArrowUpLeft } from 'lucide-react';
 import { Logo } from '../ui/Logo';
 import { nav } from '../../data/site';
 
-/** Sticky top navigation (logo, links, CTA). Below 960px it becomes a hamburger menu. */
+/**
+ * Floating modular Dashboard-style segmented Navigation.
+ * Positioned high and compact so it leaves the portrait completely unobstructed.
+ */
 export const Nav: React.FC = () => {
   const [active, setActive] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -48,7 +53,7 @@ export const Nav: React.FC = () => {
     <li key={n.id}>
       <a
         href={`#${n.id}`}
-        className={`nav__link${active === n.id ? ' is-active' : ''}`}
+        className={`d-inline-flex align-items-center dash-nav__pill${active === n.id ? ' is-active' : ''}`}
         aria-current={active === n.id ? 'true' : undefined}
         onClick={() => setOpen(false)}
       >
@@ -58,37 +63,49 @@ export const Nav: React.FC = () => {
   ));
 
   return (
-    <header className={`nav${scrolled || open ? ' is-solid' : ''}`}>
-      <div className="container nav__bar">
-        <a href="#home" className="nav__logo" aria-label="ALDMC، بازگشت به بالای صفحه">
-          <Logo width={104} />
-        </a>
+    <header className={`position-fixed dash-header${scrolled ? ' is-scrolled' : ''}`}>
+      <Container fluid className="d-flex align-items-center justify-content-between gap-3 dash-header__bar">
+        {/* Start Group (Right in RTL): Brand Logo + Nav Pills */}
+        <div className="d-flex align-items-center dash-header__start">
+          <div className="d-inline-flex align-items-center dash-module dash-module--brand">
+            <a href="#home" className="d-inline-flex align-items-center dash-logo" aria-label="ALDMC، بازگشت به بالای صفحه">
+              <Logo width={92} />
+            </a>
+          </div>
 
-        <nav className="nav__links" aria-label="بخش‌های سایت">
-          <ul>{links}</ul>
-        </nav>
+          <nav className="d-inline-flex align-items-center dash-module dash-module--links" aria-label="بخش‌های سایت">
+            <ul className="d-flex align-items-center gap-1 dash-nav__list">{links}</ul>
+          </nav>
+        </div>
 
-        <a href="#contact" className="btn btn--primary btn--sm nav__cta">
+        {/* End Group (Left in RTL): Action Button + Mobile Burger */}
+        <div className="d-flex align-items-center dash-header__end">
+          <div className="d-inline-flex align-items-center dash-module dash-module--action">
+            <Button href="#contact" size="sm" className="dash-cta">
+              <span>شروع همکاری</span>
+              <ArrowUpLeft size={16} aria-hidden="true" />
+            </Button>
+
+            <button
+              type="button"
+              className="dash-burger"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? 'بستن منو' : 'باز کردن منو'}
+              onClick={() => setOpen(o => !o)}
+            >
+              {open ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+      </Container>
+
+      {/* Mobile Drawer */}
+      <nav id="mobile-menu" className={`position-fixed dash-drawer${open ? ' is-open' : ''}`} aria-label="منوی موبایل" hidden={!open}>
+        <ul className="d-flex flex-column gap-1 dash-drawer__list">{links}</ul>
+        <Button href="#contact"  onClick={() => setOpen(false)}>
           شروع همکاری
-        </a>
-
-        <button
-          type="button"
-          className="nav__burger"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'بستن منو' : 'باز کردن منو'}
-          onClick={() => setOpen(o => !o)}
-        >
-          {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-        </button>
-      </div>
-
-      <nav id="mobile-menu" className={`nav__drawer${open ? ' is-open' : ''}`} aria-label="منوی موبایل" hidden={!open}>
-        <ul>{links}</ul>
-        <a href="#contact" className="btn btn--primary" onClick={() => setOpen(false)}>
-          شروع همکاری
-        </a>
+        </Button>
       </nav>
     </header>
   );

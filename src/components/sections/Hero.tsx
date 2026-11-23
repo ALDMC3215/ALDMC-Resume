@@ -1,53 +1,78 @@
-import React from 'react';
-import { Socials } from '../ui/Socials';
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
+import { ArrowDown, ArrowUpLeft, MapPin } from 'lucide-react';
 import { site } from '../../data/site';
+import { BrandIntro } from '../ui/BrandIntro';
+import { Logo } from '../ui/Logo';
 
-export const Hero: React.FC = () => (
-  <section id="home" className="hero" aria-labelledby="hero-name">
-    <div className="hero__glow" aria-hidden="true" />
-    <div className="container hero__grid">
-      <div className="hero__text">
-        <div className="hero__hi">
-          <p className="hero__greet">سلام، من</p>
-          <h1 className="hero__name" id="hero-name">
-            {site.name}
-          </h1>
+type PortraitState = 'loading' | 'ready' | 'unavailable';
+
+export function Hero() {
+  const [portrait, setPortrait] = useState<PortraitState>('loading');
+
+  return (
+    <section id="home" className="hero" aria-labelledby="hero-name">
+      <Container fluid className="hero__layout">
+        <div className="hero__intro">
+          <h1 id="hero-name">{site.name}</h1>
+          <p className="hero__role">طراح محصول و <bdi dir="ltr">UI/UX</bdi></p>
+          <p className="hero__lead">طراحی تجربه‌های دیجیتال و ساخت نمونه‌های تعاملی با هوش مصنوعی.</p>
+          <div className="hero__actions d-flex flex-wrap gap-tight">
+            <Button href="#portfolio" size="sm">
+              مشاهده نمونه‌کارها <ArrowDown size={17} aria-hidden="true" />
+            </Button>
+            <Button href="#contact" size="sm" variant="outline-primary">
+              شروع همکاری <ArrowUpLeft size={17} aria-hidden="true" />
+            </Button>
+          </div>
         </div>
 
-        <p className="hero__headline">
-          طراح محصول و <span className="lt">UI/UX</span>
-        </p>
-        <p className="hero__lead">{site.title}</p>
-
-        <Socials />
-
-        <div className="hero__actions">
-          <a href="#contact" className="btn btn--primary">
-            شروع همکاری
-          </a>
-          <a href="#portfolio" className="btn btn--outline">
-            مشاهده نمونه‌کارها
-          </a>
-        </div>
+        <figure className="hero__portrait">
+          <div className="hero__frame" data-state={portrait}>
+            {portrait !== 'unavailable' && (
+              <img
+                src="/brand/hero-mobile-enhanced.webp"
+                alt="پرترهٔ علی فرقانی"
+                width={1882}
+                height={3344}
+                fetchPriority="high"
+                onLoad={() => setPortrait('ready')}
+                onError={() => setPortrait('unavailable')}
+              />
+            )}
+            {portrait === 'loading' && (
+              <div className="hero__placeholder" role="status">
+                <Spinner animation="border" size="sm" aria-hidden="true" />
+                <span>در حال بارگذاری پرتره</span>
+              </div>
+            )}
+            {portrait === 'unavailable' && (
+              <div className="hero__placeholder"><Logo width={114} /></div>
+            )}
+          </div>
+          <figcaption>
+            <Logo width={86} />
+            <span className="d-inline-flex align-items-center gap-2">
+              <MapPin size={15} aria-hidden="true" /> شیراز، ایران
+            </span>
+          </figcaption>
+        </figure>
 
         <dl className="hero__stats">
-          {site.stats.map(s => (
-            <div key={s.label} className="hero__stat">
-              <dd>{s.value}</dd>
-              <dt>{s.label}</dt>
+          {site.stats.map(({ label, value }) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
             </div>
           ))}
         </dl>
-      </div>
+      </Container>
 
-      <div className="hero__photo">
-        <span className="hero__circle" aria-hidden="true" />
-        <div className="hero__oval">
-          <img src={site.portrait.src} alt={`${site.name}، ${site.title}`} width={800} height={800} fetchPriority="high" decoding="async" />
-        </div>
-      </div>
-    </div>
-  </section>
-);
+      <BrandIntro />
+    </section>
+  );
+}
 
 export default Hero;

@@ -77,6 +77,15 @@ const aldmcIdentityPlugin: Plugin = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), aldmcIdentityPlugin],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+        // Bootstrap 5's Sass entry points still use @import.
+        silenceDeprecations: ['import']
+      }
+    }
+  },
   resolve: {
     dedupe: ['react', 'react-dom']
   },

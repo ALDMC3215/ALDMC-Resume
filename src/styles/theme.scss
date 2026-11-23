@@ -1,0 +1,60 @@
+@use "sass:map";
+
+$compact-landscape: "(761px <= width <= 1600px) and (orientation: landscape), (width > 1600px) and (height <= 820px)";
+
+// Bootstrap is compiled locally with the resume's RTL layout and spacing scale.
+@import "bootstrap/scss/functions";
+
+$primary: #d45b32;
+$theme-colors: ("primary": $primary);
+$grid-breakpoints: (xs: 0, sm: 561px, md: 641px, lg: 861px, xl: 961px, xxl: 1101px);
+$enable-dark-mode: false;
+$enable-important-utilities: false;
+$enable-rfs: false;
+$btn-padding-y: .75rem;
+$btn-padding-x: 2.5rem;
+$btn-padding-y-sm: .625rem;
+$btn-padding-x-sm: 1.75rem;
+$btn-font-size: 1.25rem;
+$btn-font-size-sm: 1rem;
+$btn-font-weight: 700;
+$btn-line-height: 1.3;
+$btn-border-width: 2px;
+$btn-border-radius: .625rem;
+$btn-border-radius-sm: .625rem;
+$btn-white-space: nowrap;
+
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/spinners";
+
+// Only generate the row counts and utilities used by the React components.
+.row {
+  @include make-row(var(--space-group));
+  --bs-gutter-y: var(--space-group);
+  > * { @include make-col-ready(); }
+}
+@each $breakpoint, $counts in (xs: (1,), sm: (2,), md: (2,), lg: (2,), xl: (3,), xxl: (3, 4)) {
+  @include media-breakpoint-up($breakpoint) {
+    @each $count in $counts {
+      .row-cols#{breakpoint-infix($breakpoint, $grid-breakpoints)}-#{$count} { @include row-cols($count); }
+    }
+  }
+}
+.resume-grid > li > * { width: 100%; }
+
+$spacers: map.merge($spacers, (unit: var(--space-unit), tight: var(--space-tight), group: var(--space-group)));
+@import "bootstrap/scss/utilities";
+@each $key in ("display", "position", "flex-direction", "flex-wrap", "align-items", "justify-content", "overflow", "gap", "width", "height") {
+  @include generate-utility(map.get($utilities, $key), "");
+}
+.text-center { text-align: center; }
+
+@import "base";
+@import "site";
+@import "hero";
+@import "effects";

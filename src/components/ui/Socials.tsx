@@ -12,10 +12,10 @@ export const Socials: React.FC<{ className?: string }> = ({ className = '' }) =>
     { label: 'WhatsApp', href: contact.whatsapp, icon: <MessageCircle size={22} /> }
   ];
   return (
-    <ul className={`socials ${className}`}>
+    <ul className={`d-flex flex-wrap justify-content-center gap-tight socials ${className}`}>
       {items.map(i => (
         <li key={i.label}>
-          <a href={i.href} target="_blank" rel="noopener noreferrer" aria-label={i.label} className="socials__link">
+          <a href={i.href} target="_blank" rel="noopener noreferrer" aria-label={i.label} className="d-grid socials__link">
             {i.icon}
           </a>
         </li>

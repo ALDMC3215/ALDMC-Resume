@@ -1,0 +1,50 @@
+.hero__curtain {
+  position: fixed;
+  z-index: 95;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #100e0d;
+  pointer-events: none;
+  animation: intro-fade .46s ease-in 1.59s both;
+}
+
+body:has(:focus-visible) .hero__curtain { visibility: hidden; }
+.hero__intro-logo {
+  width: min(80vw, 37.5rem);
+  height: auto;
+  overflow: visible;
+  transform-origin: center;
+  animation: intro-zoom .8s cubic-bezier(.68, .03, .84, .47) 1.25s both;
+}
+
+.hero__intro-logo path {
+  transform-box: fill-box;
+  animation: intro-letter .56s cubic-bezier(.18, .74, .26, 1) both;
+}
+
+@for $letter from 1 through 5 {
+  .hero__intro-logo path:nth-child(#{$letter}) {
+    animation-delay: 90ms + ($letter - 1) * 120ms;
+  }
+}
+
+@keyframes intro-letter {
+  from { opacity: 0; transform: translateY(115%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intro-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(16); }
+}
+
+@keyframes intro-fade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__curtain { visibility: hidden; }
+}

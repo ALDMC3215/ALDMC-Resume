@@ -1,7 +1,8 @@
 import React from 'react';
 import { GraduationCap, Layout, Music2, Palette, Sparkles, Video } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { Heading } from '../ui/Heading';
+import { CardGrid } from '../ui/CardGrid';
+import { ResumeSection } from '../ui/ResumeSection';
 import { resumeData } from '../../data/resumeData';
 
 const icons: Record<string, LucideIcon> = {
@@ -14,29 +15,26 @@ const icons: Record<string, LucideIcon> = {
 };
 
 export const Services: React.FC = () => (
-  <section id="services" className="section" aria-labelledby="services-title">
-    <div className="container">
-      <Heading
-        id="services-title"
-        title="خدمات"
-        sub="ترکیب دیزاین محصول، متدهای نوین مهندسی با هوش مصنوعی و هدایت خلاقانه پروژه‌ها"
-      />
-      <ul className="services">
-        {resumeData.capabilities.map(c => {
-          const Icon = icons[c.id] ?? Layout;
-          return (
-            <li key={c.id} className="service">
-              <span className="service__icon">
-                <Icon size={70} strokeWidth={1.2} aria-hidden="true" />
-              </span>
-              <h3 className="service__title">{c.title}</h3>
-              <p className="service__text">{c.description}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  </section>
+  <ResumeSection
+    id="services"
+    title="خدمات"
+    sub="ترکیب دیزاین محصول، متدهای نوین مهندسی با هوش مصنوعی و هدایت خلاقانه پروژه‌ها"
+  >
+    <CardGrid xs={1} md={2} xxl={3}>
+      {resumeData.capabilities.map(c => {
+        const Icon = icons[c.id] ?? Layout;
+        return (
+          <article key={c.id} className="d-flex flex-column align-items-start gap-3 service">
+            <span className="d-grid service__icon">
+              <Icon size={30} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+            <h3 className="service__title">{c.title}</h3>
+            <p className="service__text">{c.description}</p>
+          </article>
+        );
+      })}
+    </CardGrid>
+  </ResumeSection>
 );
 
 export default Services;
