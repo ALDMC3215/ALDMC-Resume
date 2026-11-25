@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BrandIntro } from '../components/ui/BrandIntro';
 import { credentials } from '../data/education';
-import { site } from '../data/site';
 import { toFa } from '../utils/fa';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
-import { ArrowUp, AudioLines, Code2, Github, Globe2, Instagram, Layers3, Link2, Mail, MessageCircle, Phone, Play, Radio, Send, Sparkles, X } from 'lucide-react';
+import { ArrowLeft, AudioLines, Code2, Globe2, Layers3, Play, Radio, Sparkles, X } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import './retro.scss';
 import { categoryLabels, sections } from './content.js';
 import { getPortfolio } from './database';
 import { reveal } from './motion';
 import { AboutNotebook } from './AboutNotebook';
+import { ContactFooter } from './ContactFooter';
 
 const serviceIcons = { design:Sparkles, web:Code2, media:Play, teaching:Radio };
 
@@ -28,15 +28,16 @@ function Hero({ profile }) {
           <h1 lang="en" dir="ltr" className="hero-title" id="hero-title">
             Building things<br /> I wish existed
           </h1>
-          <p className="hero-name">{profile.name} <span aria-hidden="true">/</span> {profile.role}</p>
-          <p className="hero-note">{profile.studioLine}</p>
+          <p className="hero-subtitle">{profile.name} <span aria-hidden="true">|</span> {profile.role}</p>
+          <div className="hero-actions">
+            <Button className="action action-ink" href="#portfolio">
+              دیدن نمونه‌کارها <ArrowLeft size={18} aria-hidden="true" />
+            </Button>
+            <Button className="action action-outline" href="#experience">رزومه‌ی من</Button>
+          </div>
         </div>
       </Container>
       <div className="hero-collage">
-        <div className="hero-actions">
-          <Button className="action action-ink hero-action--work" href="#portfolio">دیدن نمونه‌کارها</Button>
-          <Button className="action action-outline hero-action--resume" href="#experience">رزومه‌ی من</Button>
-        </div>
         <figure className="hero-visual" aria-hidden="true">
           {heroArtwork.map(piece => (
             <img key={piece} className={`hero-art hero-art--${piece}`}
@@ -82,9 +83,9 @@ function ProjectArtwork({ project }) {
 function Work({ projects }) {
   const [selected, setSelected] = useState(null);
   const trigger = useRef(null);
-  return <section className="section work" id="portfolio" aria-labelledby="work-title" data-scene>
+  return <section className="section work paper-edge" id="portfolio" aria-labelledby="work-title" data-scene>
     <Container className="frame">
-      <SectionHead id="work-title" title="نمونه‌کارهای منتخب" english="SELECTED WORK" copy="طراحی محصول، وب تعاملی و پروژه‌های خلاقانه." />
+      <h2 id="work-title" className="script-title" lang="en" dir="ltr" data-reveal>Selected Works</h2>
 
 
       <Row xs={1} sm={2} lg={3} className="gx-3 gy-4 project-grid">
@@ -119,7 +120,7 @@ function Work({ projects }) {
 
 function Resume({ profile, experience, services }) {
   return <>
-    <section className="section about" id="about" aria-labelledby="about-title" data-scene>
+    <section className="section about paper-edge" id="about" aria-labelledby="about-title" data-scene>
       <Container className="frame">
         <AboutNotebook name={profile.name} />
         <h3 id="services-title" className="services-title">زمینه‌های همکاری</h3>
@@ -131,9 +132,9 @@ function Resume({ profile, experience, services }) {
         </Row>
       </Container>
     </section>
-    <section className="section experience" id="experience" aria-labelledby="resume-title" data-scene>
+    <section className="section experience paper-edge" id="experience" aria-labelledby="resume-title" data-scene>
       <Container className="frame">
-        <SectionHead id="resume-title" title="سوابق و آموزش" english="RÉSUMÉ" />
+        <h2 id="resume-title" className="script-title" lang="en" dir="ltr" data-reveal>Résumé</h2>
 
         <div className="resume-columns">
           <section aria-labelledby="career-title">
@@ -176,7 +177,7 @@ function Music({ tracks }) {
     }
     element.play().catch(error => { if (error.name !== 'AbortError') setFailed(true); });
   }
-  return <section className="section music" id="music" aria-labelledby="music-title" data-scene>
+  return <section className="section music paper-edge" id="music" aria-labelledby="music-title" data-scene>
     <Container className="frame">
       <SectionHead id="music-title" title="موسیقی ALDMC" english="MUSIC LAB" copy="قطعه‌هایی که با ابزارهای هوش مصنوعی ساختم." />
       <Row className="gy-3 align-items-stretch">
@@ -201,44 +202,6 @@ function Music({ tracks }) {
   </section>;
 }
 
-function contactIcon(href) {
-  if (href.startsWith('mailto:')) return Mail;
-  if (href.startsWith('tel:')) return Phone;
-  const host = URL.canParse(href) ? new URL(href).hostname.replace(/^www\./, '') : '';
-  return { 't.me': Send, 'wa.me': MessageCircle, 'instagram.com': Instagram, 'github.com': Github }[host] ?? Link2;
-}
-
-function Contact({ profile }) {
-  const channels = [...profile.contact, { label: 'تماس تلفنی', href: site.contact.phoneTel }];
-  return <footer className="contact" id="contact">
-    <Container className="frame">
-      <div className="contact-grid">
-        <div>
-          <h2>برای همکاری</h2>
-          <p>برای طراحی محصول، وب یا یه پروژه‌ی خلاقانه، بهم پیام بده.</p>
-          <div className="contact-links">
-            {channels.map(({ href, label }, index) => {
-              const Icon = contactIcon(href);
-              return (
-                <a className={'action ' + (index === 0 ? 'action-ink' : 'action-outline')} key={href} href={href}>
-                  <Icon size={17} aria-hidden="true" /><bdi>{label}</bdi>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-        <span className="contact-print" dir="ltr" lang="en" aria-hidden="true">LET’S<br />TALK.</span>
-      </div>
-      <div className="bottom-line">
-        <span>{profile.name} · ALDMC</span>
-        <a href="#home" className="back-to-top" aria-label="برگشت به بالا">
-          <ArrowUp size={21} aria-hidden="true" />
-        </a>
-      </div>
-    </Container>
-  </footer>;
-}
-
 export function RetroApp() {
   const [content, setContent] = useState(sections);
   const root = useRef(null);
@@ -252,7 +215,7 @@ export function RetroApp() {
   return <div ref={root}>
     <a className="skip-link" href="#main">رفتن به محتوا</a>
     <main id="main"><Hero profile={profile} /><Work projects={content.projects} /><Resume profile={profile} experience={content.experience} services={content.services} /><Music tracks={content.music} /></main>
-    <Contact profile={profile} />
+    <ContactFooter />
     <BrandIntro />
   </div>;
 }

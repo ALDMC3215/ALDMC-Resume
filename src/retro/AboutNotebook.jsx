@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import HTMLFlipBook from 'react-pageflip';
 import { toFa } from '../utils/fa';
 
 const pages = [
@@ -33,48 +34,87 @@ const pages = [
   }
 ];
 
-export function AboutNotebook({ name }) {
-  const [{ index, direction }, setPage] = useState({ index: 0, direction: 'next' });
-  const page = pages[index];
+// The flip engine reads left-to-right, so supply the physical sheets in reverse order.
+const sheets = [...pages].reverse();
+const frontCover = pages.length + 1;
 
-  function turn(step) {
-    setPage(current => {
-      const next = Math.max(0, Math.min(pages.length - 1, current.index + step));
-      return { index: next, direction: step > 0 ? 'next' : 'previous' };
-    });
+export function AboutNotebook({ name }) {
+  const book = useRef(null);
+  const [view, setView] = useState(null);
+
+  function syncView({ object }) {
+    setView({ index: object.getCurrentPageIndex(), spread: object.getOrientation() === 'landscape' });
+  }
+
+  function turn(forward) {
+    const engine = book.current?.pageFlip();
+    if (!engine) return;
+    const index = engine.getCurrentPageIndex();
+    if (forward ? index === 0 : index === frontCover) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (forward) engine.turnToPrevPage();
+      else engine.turnToNextPage();
+    } else if (forward) {
+      engine.flipPrev('bottom');
+    } else {
+      engine.flipNext('bottom');
+    }
+  }
+
+  let status = '';
+  if (view) {
+    if (view.index === frontCover) status = 'جلد دفتر';
+    else if (view.index === 0) status = 'پشت جلد';
+    else {
+      const pageNumber = frontCover - view.index;
+      const first = view.spread ? Math.max(1, pageNumber - 1) : pageNumber;
+      const label = first === pageNumber ? toFa(first) : `${toFa(first)} تا ${toFa(pageNumber)}`;
+      status = `صفحهٔ ${label} از ${toFa(pages.length)}`;
+    }
   }
 
   return (
     <article className="letter-paper" data-reveal>
-      <header className="letter-head">
-        <h2 id="about-title">درباره‌ی من</h2>
-        <img src="/brand/aldmc.svg" alt="" width="105" height="28" />
-      </header>
+      <h2 id="about-title" className="script-title" lang="en" dir="ltr">About Me</h2>
       <div className="letter-body">
         <figure className="portrait">
           <img src="/brand/portrait.webp" alt={name} loading="lazy" width="640" height="640" />
           <figcaption>{name}</figcaption>
         </figure>
         <div className="notebook">
-          <div className="notebook__sheet" id="about-page" aria-labelledby="about-page-title">
-            <div className={'notebook__copy notebook__copy--' + direction} key={index}>
-              <h3 id="about-page-title">{page.title}</h3>
-              <div className="notebook__ruled">
-                {page.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+          <div id="about-book" dir="ltr">
+            <HTMLFlipBook ref={book} className="notebook__flip"
+              width={340} height={570} size="stretch" minWidth={260} maxWidth={410}
+              minHeight={440} maxHeight={680} startPage={pages.length} showCover
+              renderOnlyPageLengthChange mobileScrollSupport flippingTime={520}
+              onInit={syncView} onFlip={syncView} onChangeOrientation={syncView}>
+              <div className="notebook__page notebook__page--cover" data-density="hard">
+                <img src="/brand/aldmc.svg" alt="ALDMC" width="105" height="28" draggable="false" />
               </div>
-            </div>
+              {sheets.map((page, index) => (
+                <div key={page.title} className="notebook__page">
+                  <div className="notebook__copy" lang="fa" dir="rtl">
+                    <h3>{page.title}</h3>
+                    {page.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                    <span className="notebook__number">{toFa(pages.length - index)}</span>
+                  </div>
+                </div>
+              ))}
+              <div className="notebook__page notebook__page--cover" data-density="hard">
+                <img src="/brand/aldmc.svg" alt="ALDMC" width="105" height="28" draggable="false" />
+                <strong lang="en">About Me</strong>
+              </div>
+            </HTMLFlipBook>
           </div>
           <div className="notebook__controls" role="group" aria-label="ورق زدن دفتر">
-            <button type="button" onClick={() => turn(-1)} disabled={index === 0}
-              aria-label="صفحهٔ قبلی" aria-controls="about-page">
+            <button type="button" onClick={() => turn(false)} disabled={!view || view.index === frontCover}
+              aria-label="ورق قبلی" aria-controls="about-book">
               <ChevronRight size={20} aria-hidden="true" />
             </button>
-            <span role="status" aria-live="polite">
-              {toFa(index + 1)} از {toFa(pages.length)}
-              <span className="visually-hidden">، {page.title}</span>
-            </span>
-            <button type="button" onClick={() => turn(1)} disabled={index === pages.length - 1}
-              aria-label="صفحهٔ بعدی" aria-controls="about-page">
+            <span role="status" aria-live="polite">{status}</span>
+            <button type="button" onClick={() => turn(true)} disabled={!view || view.index === 0}
+              aria-label="ورق بعدی" aria-controls="about-book">
               <ChevronLeft size={20} aria-hidden="true" />
             </button>
           </div>
