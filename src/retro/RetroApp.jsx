@@ -50,13 +50,12 @@ function Hero({ profile }) {
   );
 }
 
-function SectionHead({ id, title, copy, english }) {
-  return <div className="section-head" data-reveal>
-    <div><h2 id={id}>{title}</h2>{copy && <p>{copy}</p>}</div>
-    <span className="section-en" dir="ltr" lang="en" aria-hidden="true">{english}</span>
-  </div>;
-}
-
+const experienceTitles = new Map([
+  ['novin-tech', 'نوین تک | موسسه آموزشی کامپیوتر'],
+  ['picofy', 'پیکوفای | شرکت طراحی و برنامه نویسی'],
+  ['habisa', 'هابیسا | مشاوره خرید تدارکات تهویه ساختمان'],
+  ['aldmc', 'پروژه های شخصی'],
+]);
 
 const illustratedProjects = new Set([
   'shiraz-portal', 'picofy-landing', 'call-manager', 'nader-gold', 'habisa-ai',
@@ -118,11 +117,11 @@ function Work({ projects }) {
   </section>;
 }
 
-function Resume({ profile, experience, services }) {
+function Resume({ experience, services }) {
   return <>
     <section className="section about paper-edge" id="about" aria-labelledby="about-title" data-scene>
       <Container className="frame">
-        <AboutNotebook name={profile.name} />
+        <AboutNotebook />
         <h3 id="services-title" className="services-title">زمینه‌های همکاری</h3>
         <Row xs={1} sm={2} className="gy-3 service-grid" id="services" aria-labelledby="services-title">
           {services.map(service => {
@@ -141,7 +140,7 @@ function Resume({ profile, experience, services }) {
             <h3 id="career-title">سوابق کاری</h3>
             {experience.filter(job => job.id !== 'education').map(job => (
               <details className="job" key={job.id}>
-                <summary><strong>{job.title}</strong><span>{job.role}</span></summary>
+                <summary><strong>{experienceTitles.get(job.id) ?? job.title}</strong><span>{job.role}</span></summary>
                 <p>{job.copy}</p>
               </details>
             ))}
@@ -179,7 +178,7 @@ function Music({ tracks }) {
   }
   return <section className="section music paper-edge" id="music" aria-labelledby="music-title" data-scene>
     <Container className="frame">
-      <SectionHead id="music-title" title="موسیقی ALDMC" english="MUSIC LAB" copy="قطعه‌هایی که با ابزارهای هوش مصنوعی ساختم." />
+      <h2 id="music-title" className="script-title" lang="en" dir="ltr" data-reveal>Music Lab</h2>
       <Row className="gy-3 align-items-stretch">
         <Col lg={4} data-reveal>
           <figure className={'record-panel ' + (playing ? 'spinning' : '')}>
@@ -214,7 +213,7 @@ export function RetroApp() {
   const profile = content.profile[0];
   return <div ref={root}>
     <a className="skip-link" href="#main">رفتن به محتوا</a>
-    <main id="main"><Hero profile={profile} /><Work projects={content.projects} /><Resume profile={profile} experience={content.experience} services={content.services} /><Music tracks={content.music} /></main>
+    <main id="main"><Hero profile={profile} /><Work projects={content.projects} /><Resume experience={content.experience} services={content.services} /><Music tracks={content.music} /></main>
     <ContactFooter />
     <BrandIntro />
   </div>;

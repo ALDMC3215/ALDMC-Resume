@@ -13,7 +13,7 @@ export interface Credential {
 export const credentials: Credential[] = [
   {
     id: 'figma-masterclass',
-    title: 'دوره‌های تخصصی Figma و طراحی سیستم‌های UI/UX',
+    title: 'تدریس دوره طراحی UI/UX',
     type: 'COURSE // WORKSHOP',
     badge: '+100 ساعت تدریس',
     duration: 'بیش از ۱۰۰ ساعت کارگاه عملی',
@@ -28,7 +28,7 @@ export const credentials: Credential[] = [
   },
   {
     id: 'vibe-coding-ai',
-    title: 'مهندسی هوش مصنوعی و Vibe Coding',
+    title: 'تدریس کار با ابزار های هوش مصنوعی و برنامه نویسی',
     type: 'MASTERCLASS // AI WORKFLOW',
     badge: 'متدولوژی نوین',
     duration: 'کارگاه‌های جامع توسعه ایجنتیک',
@@ -47,7 +47,7 @@ export const credentials: Credential[] = [
     type: 'ACADEMIC // UNIVERSITY',
     badge: 'پایه آکادمیک',
     duration: 'ورودی ۱۴۰۰ (پیش‌تر مهندسی برق از ۱۳۹۸)',
-    organization: 'دانشگاه دولتی / سراسری',
+    organization: 'دانشگاه آزاد شیراز',
     description: 'تحصیلات آکادمیک در مهندسی کامپیوتر با تمرکز بر ساختمان داده‌ها، معماری نرم‌افزار و طراحی تعامل انسان و کامپیوتر (HCI)؛ ایجاد درک عمیق از محدودیت‌ها و توانمندی‌های کد در خدمت دیزاین.',
     highlights: [
       'درک اصول مهندسی نرم‌افزار، الگوریتم‌ها و بهینه‌سازی',

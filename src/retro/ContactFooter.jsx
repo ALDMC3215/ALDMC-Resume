@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUp, Instagram, Mail, Phone } from 'lucide-react';
+import { ArrowUp, Instagram, Mail, Phone } from 'lucide-react';
 import { site } from '../data/site';
 import './contact-footer.scss';
 
@@ -21,18 +21,10 @@ export function ContactFooter() {
   return (
     <footer className="site-footer paper-edge" id="contact" dir="ltr" lang="en">
       <div className="site-footer__inner">
-        <div className="site-footer__grid">
-          <section className="site-footer__cta" aria-labelledby="footer-cta-title">
-            <h2 id="footer-cta-title">
-              <img className="site-footer__wordmark" src="/brand/footer-lets-talk.png"
-                alt="LET’S TALK." width={800} height={486} decoding="async" />
-            </h2>
-            <a className="site-footer__primary" href={mailto}>
-              Get in Touch <ArrowRight size={17} aria-hidden="true" />
-            </a>
-          </section>
-          <h2 className="site-footer__invitation" dir="rtl" lang="fa">بیا با هم کار کنیم</h2>
-        </div>
+        <h2>
+          <img className="site-footer__wordmark" src="/brand/footer-lets-talk.png"
+            alt="LET’S TALK." width={800} height={486} decoding="async" />
+        </h2>
 
         <ul className="site-footer__channels" dir="rtl" lang="fa" aria-label="راه‌های ارتباطی">
           {channels.map(({ label, href, icon: Icon }) => (
@@ -45,13 +37,13 @@ export function ContactFooter() {
         </ul>
 
         <div className="site-footer__bottom">
-          <a className="site-footer__back" href="#home">
-            Back to top <ArrowUp size={16} aria-hidden="true" />
-          </a>
           <div className="site-footer__copyright">
             <p lang="en">© 2026 ALDMC - Ali Forghani. All rights reserved.</p>
             <p lang="fa" dir="rtl">طراحی و توسعه توسط علی فرقانی</p>
           </div>
+          <a className="site-footer__back" href="#home" aria-label="Back to top" title="Back to top">
+            <ArrowUp size={22} aria-hidden="true" />
+          </a>
         </div>
       </div>
     </footer>

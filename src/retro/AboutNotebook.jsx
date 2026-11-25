@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { toFa } from '../utils/fa';
 
@@ -36,21 +35,17 @@ const pages = [
 
 // The flip engine reads left-to-right, so supply the physical sheets in reverse order.
 const sheets = [...pages].reverse();
-const frontCover = pages.length + 1;
-
-export function AboutNotebook({ name }) {
+export function AboutNotebook() {
   const book = useRef(null);
-  const [view, setView] = useState(null);
+  const touchStart = useRef(null);
 
-  function syncView({ object }) {
-    setView({ index: object.getCurrentPageIndex(), spread: object.getOrientation() === 'landscape' });
-  }
-
-  function turn(forward) {
+  function turnPage(forward) {
     const engine = book.current?.pageFlip();
-    if (!engine) return;
+    if (!engine || engine.getState() === 'flipping') return;
+
+    const lastSpreadStart = sheets.length - (engine.getOrientation() === 'landscape' ? 2 : 1);
     const index = engine.getCurrentPageIndex();
-    if (forward ? index === 0 : index === frontCover) return;
+    if (forward ? index === 0 : index >= lastSpreadStart) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       if (forward) engine.turnToPrevPage();
@@ -62,62 +57,52 @@ export function AboutNotebook({ name }) {
     }
   }
 
-  let status = '';
-  if (view) {
-    if (view.index === frontCover) status = 'جلد دفتر';
-    else if (view.index === 0) status = 'پشت جلد';
-    else {
-      const pageNumber = frontCover - view.index;
-      const first = view.spread ? Math.max(1, pageNumber - 1) : pageNumber;
-      const label = first === pageNumber ? toFa(first) : `${toFa(first)} تا ${toFa(pageNumber)}`;
-      status = `صفحهٔ ${label} از ${toFa(pages.length)}`;
-    }
+  function handleBookKey(event) {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    turnPage(event.key === 'ArrowLeft');
+  }
+
+  function startSwipe(event) {
+    // Keep vertical scrolling native and let PageFlip handle mouse dragging.
+    event.stopPropagation();
+    const finger = event.touches.length === 1 ? event.touches[0] : null;
+    touchStart.current = finger ? { x: finger.clientX, y: finger.clientY } : null;
+  }
+
+  function finishSwipe(event) {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    event.stopPropagation();
+    const finger = event.changedTouches[0];
+    const dx = finger.clientX - start.x;
+    const dy = finger.clientY - start.y;
+    if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.25) turnPage(dx > 0);
   }
 
   return (
     <article className="letter-paper" data-reveal>
       <h2 id="about-title" className="script-title" lang="en" dir="ltr">About Me</h2>
-      <div className="letter-body">
-        <figure className="portrait">
-          <img src="/brand/portrait.webp" alt={name} loading="lazy" width="640" height="640" />
-          <figcaption>{name}</figcaption>
-        </figure>
-        <div className="notebook">
-          <div id="about-book" dir="ltr">
-            <HTMLFlipBook ref={book} className="notebook__flip"
-              width={340} height={570} size="stretch" minWidth={260} maxWidth={410}
-              minHeight={440} maxHeight={680} startPage={pages.length} showCover
-              renderOnlyPageLengthChange mobileScrollSupport flippingTime={520}
-              onInit={syncView} onFlip={syncView} onChangeOrientation={syncView}>
-              <div className="notebook__page notebook__page--cover" data-density="hard">
-                <img src="/brand/aldmc.svg" alt="ALDMC" width="105" height="28" draggable="false" />
-              </div>
-              {sheets.map((page, index) => (
-                <div key={page.title} className="notebook__page">
-                  <div className="notebook__copy" lang="fa" dir="rtl">
-                    <h3>{page.title}</h3>
-                    {page.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-                    <span className="notebook__number">{toFa(pages.length - index)}</span>
-                  </div>
+      <p id="about-book-hint" className="visually-hidden">برای ورق زدن، صفحه را بکشید یا کلید چپ و راست را بزنید.</p>
+      <div className="notebook" role="region" aria-labelledby="about-title"
+        aria-describedby="about-book-hint" tabIndex={0} onKeyDown={handleBookKey}>
+        <div id="about-book" dir="ltr" onTouchStartCapture={startSwipe}
+          onTouchEndCapture={finishSwipe} onTouchCancel={() => { touchStart.current = null; }}>
+          <HTMLFlipBook ref={book} className="notebook__flip"
+            width={340} height={570} size="stretch" minWidth={260} maxWidth={410}
+            minHeight={440} maxHeight={680} startPage={sheets.length - 1}
+            renderOnlyPageLengthChange mobileScrollSupport flippingTime={520}>
+            {sheets.map((page, index) => (
+              <div key={page.title} className="notebook__page">
+                <div className="notebook__copy" lang="fa" dir="rtl">
+                  <h3>{page.title}</h3>
+                  {page.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                  <span className="notebook__number">{toFa(sheets.length - index)}</span>
                 </div>
-              ))}
-              <div className="notebook__page notebook__page--cover" data-density="hard">
-                <img src="/brand/aldmc.svg" alt="ALDMC" width="105" height="28" draggable="false" />
-                <strong lang="en">About Me</strong>
               </div>
-            </HTMLFlipBook>
-          </div>
-          <div className="notebook__controls" role="group" aria-label="ورق زدن دفتر">
-            <button type="button" onClick={() => turn(false)} disabled={!view || view.index === frontCover}
-              aria-label="ورق قبلی" aria-controls="about-book">
-              <ChevronRight size={20} aria-hidden="true" />
-            </button>
-            <span role="status" aria-live="polite">{status}</span>
-            <button type="button" onClick={() => turn(true)} disabled={!view || view.index === 0}
-              aria-label="ورق بعدی" aria-controls="about-book">
-              <ChevronLeft size={20} aria-hidden="true" />
-            </button>
-          </div>
+            ))}
+          </HTMLFlipBook>
         </div>
       </div>
     </article>
