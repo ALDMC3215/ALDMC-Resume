@@ -19,22 +19,30 @@ const channels = [
 
 export function ContactFooter() {
   return (
-    <footer className="site-footer paper-edge" id="contact" dir="ltr" lang="en">
+    <footer className="site-footer paper-edge" id="contact" dir="ltr" lang="en" tabIndex={-1}>
       <div className="site-footer__inner">
-        <h2>
-          <img className="site-footer__wordmark" src="/brand/footer-lets-talk.png"
-            alt="LET’S TALK." width={800} height={486} decoding="async" />
-        </h2>
+        <div className="site-footer__collage">
+          <img className="site-footer__art site-footer__art--telephone" src="/brand/footer-telephone.webp"
+            width={720} height={462} loading="lazy" alt="" />
+          <div className="site-footer__contact">
+            <h2>
+              <img className="site-footer__wordmark" src="/brand/footer-lets-talk.png"
+                alt="LET’S TALK." width={800} height={486} decoding="async" />
+            </h2>
 
-        <ul className="site-footer__channels" dir="rtl" lang="fa" aria-label="راه‌های ارتباطی">
-          {channels.map(({ label, href, icon: Icon }) => (
-            <li key={label}>
-              <a className="site-footer__channel" href={href} title={label} aria-label={label}>
-                <Icon width={19} height={19} aria-hidden="true" />
-              </a>
-            </li>
-          ))}
-        </ul>
+            <ul className="site-footer__channels" dir="rtl" lang="fa" aria-label="راه‌های ارتباطی">
+              {channels.map(({ label, href, icon: Icon }) => (
+                <li key={label}>
+                  <a className="site-footer__channel" href={href} title={label} aria-label={label}>
+                    <Icon width={19} height={19} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <img className="site-footer__art site-footer__art--postcards" src="/brand/footer-postcards.webp"
+            width={720} height={532} loading="lazy" alt="" />
+        </div>
 
         <div className="site-footer__bottom">
           <div className="site-footer__copyright">

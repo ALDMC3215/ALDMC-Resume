@@ -1,0 +1,272 @@
+[
+  {
+    "id": "001",
+    "title": "Find Me Trying",
+    "genre": "Acoustic Indie",
+    "year": "2026",
+    "audioUrl": "/music/studio/001.mp3",
+    "coverImage": "/music/studio/001.webp",
+    "durationSeconds": 179.0
+  },
+  {
+    "id": "002",
+    "title": "A Gentleman, More or Less",
+    "genre": "Music Hall",
+    "year": "2026",
+    "audioUrl": "/music/studio/002.mp3",
+    "coverImage": "/music/studio/002.webp",
+    "durationSeconds": 189.0
+  },
+  {
+    "id": "003",
+    "title": "Sin Contarle a Nadie (Without Telling Anyone)",
+    "genre": "Bolero Sierreño",
+    "year": "2026",
+    "audioUrl": "/music/studio/003.mp3",
+    "coverImage": "/music/studio/003.webp",
+    "durationSeconds": 219.0
+  },
+  {
+    "id": "004",
+    "title": "Vocal Kinetic",
+    "genre": "Beatbox",
+    "year": "2026",
+    "audioUrl": "/music/studio/004.mp3",
+    "coverImage": "/music/studio/004.webp",
+    "durationSeconds": 134.0
+  },
+  {
+    "id": "005",
+    "title": "System Override",
+    "genre": "Darksynth",
+    "year": "2026",
+    "audioUrl": "/music/studio/005.mp3",
+    "coverImage": "/music/studio/005.webp",
+    "durationSeconds": 238.0
+  },
+  {
+    "id": "006",
+    "title": "Blood of the Mountain",
+    "genre": "Nordic Folk",
+    "year": "2026",
+    "audioUrl": "/music/studio/006.mp3",
+    "coverImage": "/music/studio/006.webp",
+    "durationSeconds": 249.0
+  },
+  {
+    "id": "007",
+    "title": "The Shadow and the Sun",
+    "genre": "Ambient Electronica",
+    "year": "2026",
+    "audioUrl": "/music/studio/007.mp3",
+    "coverImage": "/music/studio/007.webp",
+    "durationSeconds": 244.0
+  },
+  {
+    "id": "008",
+    "title": "Falling Slow",
+    "genre": "Progressive House",
+    "year": "2026",
+    "audioUrl": "/music/studio/008.mp3",
+    "coverImage": "/music/studio/008.webp",
+    "durationSeconds": 254.0
+  },
+  {
+    "id": "009",
+    "title": "The Flow of Light",
+    "genre": "Progressive House",
+    "year": "2026",
+    "audioUrl": "/music/studio/009.mp3",
+    "coverImage": "/music/studio/009.webp",
+    "durationSeconds": 279.0
+  },
+  {
+    "id": "010",
+    "title": "Take Me Home",
+    "genre": "Progressive House",
+    "year": "2026",
+    "audioUrl": "/music/studio/010.mp3",
+    "coverImage": "/music/studio/010.webp",
+    "durationSeconds": 264.0
+  },
+  {
+    "id": "011",
+    "title": "No Walls",
+    "genre": "World Music",
+    "year": "2026",
+    "audioUrl": "/music/studio/011.mp3",
+    "coverImage": "/music/studio/011.webp",
+    "durationSeconds": 215.0
+  },
+  {
+    "id": "012",
+    "title": "Never Felt the Rain",
+    "genre": "Indie Folk",
+    "year": "2026",
+    "audioUrl": "/music/studio/012.mp3",
+    "coverImage": "/music/studio/012.webp",
+    "durationSeconds": 183.0
+  },
+  {
+    "id": "013",
+    "title": "Smartest in the Land",
+    "genre": "Alternative Pop-Rock",
+    "year": "2026",
+    "audioUrl": "/music/studio/013.mp3",
+    "coverImage": "/music/studio/013.webp",
+    "durationSeconds": 198.0
+  },
+  {
+    "id": "014",
+    "title": "Please and Thank You",
+    "genre": "Pop-Rock",
+    "year": "2026",
+    "audioUrl": "/music/studio/014.mp3",
+    "coverImage": "/music/studio/014.webp",
+    "durationSeconds": 202.0
+  },
+  {
+    "id": "015",
+    "title": "Do It Now",
+    "genre": "Trap",
+    "year": "2026",
+    "audioUrl": "/music/studio/015.mp3",
+    "coverImage": "/music/studio/015.webp",
+    "durationSeconds": 131.0
+  },
+  {
+    "id": "016",
+    "title": "Shut Up, Brain",
+    "genre": "Trap",
+    "year": "2026",
+    "audioUrl": "/music/studio/016.mp3",
+    "coverImage": "/music/studio/016.webp",
+    "durationSeconds": 154.0
+  },
+  {
+    "id": "017",
+    "title": "Sunday at Grandma's",
+    "genre": "Boom Bap",
+    "year": "2026",
+    "audioUrl": "/music/studio/017.mp3",
+    "coverImage": "/music/studio/017.webp",
+    "durationSeconds": 191.0
+  },
+  {
+    "id": "018",
+    "title": "My Cat's the Boss",
+    "genre": "Bubblegum Trap",
+    "year": "2026",
+    "audioUrl": "/music/studio/018.mp3",
+    "coverImage": "/music/studio/018.webp",
+    "durationSeconds": 131.0
+  },
+  {
+    "id": "019",
+    "title": "Almost Fine",
+    "genre": "Dance-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/019.mp3",
+    "coverImage": "/music/studio/019.webp",
+    "durationSeconds": 167.0
+  },
+  {
+    "id": "020",
+    "title": "I Need Token",
+    "genre": "Cinematic Folk-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/020.mp3",
+    "coverImage": "/music/studio/020.webp",
+    "durationSeconds": 237.0
+  },
+  {
+    "id": "021",
+    "title": "Little Room For Me",
+    "genre": "Melancholic Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/021.mp3",
+    "coverImage": "/music/studio/021.webp",
+    "durationSeconds": 259.0
+  },
+  {
+    "id": "022",
+    "title": "Step By Step",
+    "genre": "Melancholic Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/022.mp3",
+    "coverImage": "/music/studio/022.webp",
+    "durationSeconds": 197.0
+  },
+  {
+    "id": "023",
+    "title": "Passing Through",
+    "genre": "Cinematic Neo-Soul",
+    "year": "2026",
+    "audioUrl": "/music/studio/023.mp3",
+    "coverImage": "/music/studio/023.webp",
+    "durationSeconds": 199.0
+  },
+  {
+    "id": "024",
+    "title": "Quiet Fire",
+    "genre": "Latin Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/024.mp3",
+    "coverImage": "/music/studio/024.webp",
+    "durationSeconds": 153.0
+  },
+  {
+    "id": "025",
+    "title": "Back to Myself",
+    "genre": "Melodic Afro-House",
+    "year": "2026",
+    "audioUrl": "/music/studio/025.mp3",
+    "coverImage": "/music/studio/025.webp",
+    "durationSeconds": 217.0
+  },
+  {
+    "id": "026",
+    "title": "Saving You Some Sky",
+    "genre": "Cinematic Folk-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/026.mp3",
+    "coverImage": "/music/studio/026.webp",
+    "durationSeconds": 196.0
+  },
+  {
+    "id": "027",
+    "title": "Quiet Don't Mean Empty",
+    "genre": "Indie Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/027.mp3",
+    "coverImage": "/music/studio/027.webp",
+    "durationSeconds": 179.0
+  },
+  {
+    "id": "028",
+    "title": "Open to Change",
+    "genre": "Cinematic Chamber-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/028.mp3",
+    "coverImage": "/music/studio/028.webp",
+    "durationSeconds": 244.0
+  },
+  {
+    "id": "029",
+    "title": "Open to Change (Instrumental Remix)",
+    "genre": "Cinematic Chamber-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/029.mp3",
+    "coverImage": "/music/studio/029.webp",
+    "durationSeconds": 239.0
+  },
+  {
+    "id": "030",
+    "title": "Stay With Me In Between",
+    "genre": "Alt-Pop",
+    "year": "2026",
+    "audioUrl": "/music/studio/030.mp3",
+    "coverImage": "/music/studio/030.webp",
+    "durationSeconds": 173.0
+  }
+]

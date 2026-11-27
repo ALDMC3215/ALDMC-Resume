@@ -7,45 +7,47 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
-import { ArrowLeft, AudioLines, Code2, Globe2, Layers3, Play, Radio, Sparkles, X } from 'lucide-react';
+import { ArrowDownRight, AudioLines, Code2, Globe2, Layers3, Play, Radio, Sparkles, X } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import './retro.scss';
+import './landing.scss';
 import { categoryLabels, sections } from './content.js';
 import { getPortfolio } from './database';
 import { reveal } from './motion';
 import { AboutNotebook } from './AboutNotebook';
 import { ContactFooter } from './ContactFooter';
+import { MusicLab } from './MusicLab';
+import { Masthead } from './Masthead';
+import { Interests } from './Interests';
 
 const serviceIcons = { design:Sparkles, web:Code2, media:Play, teaching:Radio };
 
-const heroArtwork = ['terminal', 'film', 'lamp', 'plant', 'notebook'];
-
-function Hero({ profile }) {
+function Hero() {
   return (
-    <section className="hero" id="home" aria-labelledby="hero-title">
+    <section className="hero" id="home" aria-labelledby="hero-title" tabIndex={-1} lang="en" dir="ltr">
       <Container className="frame hero-layout">
-        <div className="hero-copy" data-intro>
-          <h1 lang="en" dir="ltr" className="hero-title" id="hero-title">
-            Building things<br /> I wish existed
+        <div className="hero-copy">
+          <h1 className="hero-title" id="hero-title">
+            <img src="/brand/space-welcome.png" width={1280} height={464} alt="Welcome to my space."
+              decoding="async" fetchPriority="high" />
           </h1>
-          <p className="hero-subtitle">{profile.name} <span aria-hidden="true">|</span> {profile.role}</p>
+          <p className="hero-subtitle">
+            <strong>Ali Forghani</strong>
+            <span>Digital Product Designer · UI/UX · AI</span>
+          </p>
           <div className="hero-actions">
             <Button className="action action-ink" href="#portfolio">
-              دیدن نمونه‌کارها <ArrowLeft size={18} aria-hidden="true" />
+              Explore my work <ArrowDownRight size={18} aria-hidden="true" />
             </Button>
-            <Button className="action action-outline" href="#experience">رزومه‌ی من</Button>
+            <Button className="action action-outline" href="#experience">Résumé</Button>
           </div>
         </div>
-      </Container>
-      <div className="hero-collage">
         <figure className="hero-visual" aria-hidden="true">
-          {heroArtwork.map(piece => (
-            <img key={piece} className={`hero-art hero-art--${piece}`}
-              src={`/brand/hero-cutouts/${piece}.png`} alt=""
-              fetchPriority={piece === 'terminal' ? 'high' : undefined} />
-          ))}
+          <img src="/brand/space-studio-1440.webp" srcSet="/brand/space-studio-720.webp 720w, /brand/space-studio-1440.webp 1440w"
+            sizes="(max-height: 520px) and (min-width: 540px) 50vw, (max-width: 600px) 90vw, (max-width: 860px) 560px, (max-width: 1600px) 52vw, 940px"
+            width={1440} height={960} decoding="async" fetchPriority="high" alt="" />
         </figure>
-      </div>
+      </Container>
     </section>
   );
 }
@@ -82,13 +84,14 @@ function ProjectArtwork({ project }) {
 function Work({ projects }) {
   const [selected, setSelected] = useState(null);
   const trigger = useRef(null);
-  return <section className="section work paper-edge" id="portfolio" aria-labelledby="work-title" data-scene>
+  return <section className="section work paper-edge" id="portfolio" aria-labelledby="work-title" tabIndex={-1} data-scene>
+    <div className="paper-edge__runout" aria-hidden="true" />
     <Container className="frame">
       <h2 id="work-title" className="script-title" lang="en" dir="ltr" data-reveal>Selected Works</h2>
 
 
       <Row xs={1} sm={2} lg={3} className="gx-3 gy-4 project-grid">
-        {projects.map(project => <Col key={project.id} data-reveal>
+        {projects.map(project => <Col key={project.id} id={`work-${project.id}`} data-reveal>
           <button className="project-card" type="button" aria-haspopup="dialog" onClick={event => { trigger.current = event.currentTarget; setSelected(project); }}>
             <ProjectArtwork project={project} />
             <div className="project-meta">
@@ -119,7 +122,7 @@ function Work({ projects }) {
 
 function Resume({ experience, services }) {
   return <>
-    <section className="section about paper-edge" id="about" aria-labelledby="about-title" data-scene>
+    <section className="section about paper-edge" id="about" aria-labelledby="about-title" tabIndex={-1} data-scene>
       <Container className="frame">
         <AboutNotebook />
         <h3 id="services-title" className="services-title">زمینه‌های همکاری</h3>
@@ -131,7 +134,7 @@ function Resume({ experience, services }) {
         </Row>
       </Container>
     </section>
-    <section className="section experience paper-edge" id="experience" aria-labelledby="resume-title" data-scene>
+    <section className="section experience paper-edge" id="experience" aria-labelledby="resume-title" tabIndex={-1} data-scene>
       <Container className="frame">
         <h2 id="resume-title" className="script-title" lang="en" dir="ltr" data-reveal>Résumé</h2>
 
@@ -161,46 +164,6 @@ function Resume({ experience, services }) {
   </>;
 }
 
-function Music({ tracks }) {
-  const audio = useRef(null);
-  const [active, setActive] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
-  function choose(track) {
-    const element = audio.current;
-    setFailed(false);
-    if (active?.id === track.id && !element.paused) { element.pause(); return; }
-    if (active?.id !== track.id) {
-      setActive(track);
-      element.src = track.audioUrl;
-    }
-    element.play().catch(error => { if (error.name !== 'AbortError') setFailed(true); });
-  }
-  return <section className="section music paper-edge" id="music" aria-labelledby="music-title" data-scene>
-    <Container className="frame">
-      <h2 id="music-title" className="script-title" lang="en" dir="ltr" data-reveal>Music Lab</h2>
-      <Row className="gy-3 align-items-stretch">
-        <Col lg={4} data-reveal>
-          <figure className={'record-panel ' + (playing ? 'spinning' : '')}>
-            <div className="record" aria-hidden="true"><span>{active?.coverImage && <img src={active.coverImage} alt="" />}</span></div>
-            <figcaption><AudioLines size={18} aria-hidden="true" /><bdi>{active?.title || 'ALDMC MUSIC LAB'}</bdi></figcaption>
-          </figure>
-        </Col>
-        <Col lg={8}>
-          <div className="tracklist" dir="ltr" lang="en">
-            {tracks.map(track => <button key={track.id} type="button" className="track" data-reveal aria-pressed={active?.id === track.id && playing} onClick={() => choose(track)}>
-              {track.coverImage ? <img src={track.coverImage} width="54" height="54" alt="" loading="lazy" /> : <Radio size={25} aria-hidden="true" />}
-              <span><strong>{track.title}</strong><small>{track.genre}</small></span><span className="track-icon" aria-hidden="true">{active?.id === track.id && playing ? 'Ⅱ' : '▶'}</span>
-            </button>)}
-          </div>
-          <audio className={active ? 'audio-player' : 'audio-player d-none'} ref={audio} controls preload="none" aria-label={active ? 'پخش ' + active.title : 'پخش موسیقی'} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} onError={() => { setPlaying(false); setFailed(true); }} />
-          {failed && <p className="playback-error" role="status">پخش قطعه الان ممکن نیست. دوباره امتحان کن.</p>}
-        </Col>
-      </Row>
-    </Container>
-  </section>;
-}
-
 export function RetroApp() {
   const [content, setContent] = useState(sections);
   const root = useRef(null);
@@ -210,10 +173,16 @@ export function RetroApp() {
     getPortfolio(controller.signal).then(next => { if (!controller.signal.aborted) setContent(next); }).catch(() => {});
     return () => controller.abort();
   }, []);
-  const profile = content.profile[0];
   return <div ref={root}>
     <a className="skip-link" href="#main">رفتن به محتوا</a>
-    <main id="main"><Hero profile={profile} /><Work projects={content.projects} /><Resume experience={content.experience} services={content.services} /><Music tracks={content.music} /></main>
+    <Masthead />
+    <main id="main" tabIndex={-1}>
+      <Hero />
+      <Work projects={content.projects} />
+      <Resume experience={content.experience} services={content.services} />
+      <Interests />
+      <MusicLab tracks={content.music} />
+    </main>
     <ContactFooter />
     <BrandIntro />
   </div>;

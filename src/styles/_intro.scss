@@ -7,7 +7,7 @@
   overflow: hidden;
   background: #100e0d;
   pointer-events: none;
-  animation: intro-fade .46s ease-in 1.59s both;
+  animation: intro-fade .31s ease-in .78s both;
 }
 
 body:has(:focus-visible) .hero__curtain { visibility: hidden; }
@@ -16,17 +16,17 @@ body:has(:focus-visible) .hero__curtain { visibility: hidden; }
   height: auto;
   overflow: visible;
   transform-origin: center;
-  animation: intro-zoom .8s cubic-bezier(.68, .03, .84, .47) 1.25s both;
+  animation: intro-zoom .48s cubic-bezier(.68, .03, .84, .47) .62s both;
 }
 
 .hero__intro-logo path {
   transform-box: fill-box;
-  animation: intro-letter .56s cubic-bezier(.18, .74, .26, 1) both;
+  animation: intro-letter .37s cubic-bezier(.18, .74, .26, 1) both;
 }
 
 @for $letter from 1 through 5 {
   .hero__intro-logo path:nth-child(#{$letter}) {
-    animation-delay: 90ms + ($letter - 1) * 120ms;
+    animation-delay: 55ms + ($letter - 1) * 70ms;
   }
 }
 

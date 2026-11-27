@@ -1,3 +1,5 @@
+import studioMusic from './studio-music.json';
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -37,6 +39,7 @@ export interface MusicTrackItem {
   genre: string;
   year: string;
   audioUrl: string;
+  durationSeconds: number;
   coverImage?: string;
   description?: string;
 }
@@ -140,41 +143,4 @@ export const digitalContentExperience: DigitalContentItem[] = [
   }
 ];
 
-export const musicTracksData: MusicTrackItem[] = [
-  {
-    id: 'gentleman',
-    title: 'A Gentleman, More or Less',
-    genre: 'Music Hall · Dramatic',
-    year: '2026',
-    audioUrl: '/music/gentleman.mp3',
-    coverImage: '/music/gentleman-cover.jpg',
-    description: 'موزیک‌هال کلاسیک بریتانیا با حس و حال معاصر و دراماتیک.'
-  },
-  {
-    id: 'flow-of-light',
-    title: 'Flow of Light',
-    genre: 'Ambient · Atmospheric',
-    year: '2026',
-    audioUrl: '/music/flow-of-light.mp3',
-    coverImage: '/music/flow-of-light-cover.jpg',
-    description: 'سفر صوتی آرام و فضاساز با هارمونی‌های عمیق الکترونیک.'
-  },
-  {
-    id: 'no-walls',
-    title: 'No Walls',
-    genre: 'Cinematic · Electronic',
-    year: '2026',
-    audioUrl: '/music/no-walls.mp3',
-    coverImage: '/music/no-walls-cover.jpg',
-    description: 'ارکستراسیون سینمایی با بیس‌های قدرتمند آنالوگ برای عبور از مرزها.'
-  },
-  {
-    id: 'please-and-thank-you',
-    title: 'Please and Thank You',
-    genre: 'Indie Chamber · Soulful',
-    year: '2026',
-    audioUrl: '/music/please-and-thank-you.mp3',
-    coverImage: '/music/please-and-thank-you-cover.jpg',
-    description: 'ملودی پیانو و آواز چمبر دلنشین پیرامون مهربانی‌های روزمره.'
-  }
-];
+export const musicTracksData: MusicTrackItem[] = studioMusic;

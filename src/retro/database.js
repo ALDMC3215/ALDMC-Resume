@@ -12,5 +12,5 @@ export async function getPortfolio(signal) {
   for (const { section, content } of entries) {
     if (Object.hasOwn(grouped, section) && content?.id) grouped[section].push(content);
   }
-  return grouped.profile.length ? grouped : sections;
+  return grouped.profile.length ? { ...grouped, music: sections.music } : sections;
 }
